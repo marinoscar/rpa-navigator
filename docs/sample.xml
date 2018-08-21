@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bpr:release xmlns:bpr="http://www.blueprism.co.uk/product/release">
+  <bpr:name>Tool-Release-v4</bpr:name>
+  <bpr:release-notes />
+  <bpr:created>2018-08-21 02:55:38Z</bpr:created>
+  <bpr:package-id>1016</bpr:package-id>
+  <bpr:package-name>Tool Package</bpr:package-name>
+  <bpr:user-created-by>oscar.marin</bpr:user-created-by>
+  <bpr:contents count="2">
+    <process id="77b1e346-2dd2-49f6-b76e-997c6a81dced" name="Tool Process" xmlns="http://www.blueprism.co.uk/product/process">
+      <process name="Tool Process" version="1.0" bpversion="6.2.1.4272" narrative="" byrefcollection="true">
+        <view>
+          <camerax>0</camerax>
+          <cameray>0</cameray>
+          <zoom version="2">1.25</zoom>
+        </view>
+        <preconditions />
+        <endpoint narrative="" />
+        <subsheet subsheetid="cc61e72e-10ce-4176-818a-b44cee3ac3f7" type="Normal" published="False">
+          <name>My Page</name>
+          <view>
+            <camerax>0</camerax>
+            <cameray>0</cameray>
+            <zoom version="2">1.25</zoom>
+          </view>
+        </subsheet>
+        <stage stageid="a1b06fd0-87b1-44fe-9eca-b0ec89611a09" name="Start" type="Start">
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>ba8a5d23-88ba-44a5-904a-f51e0d7b07e3</onsuccess>
+        </stage>
+        <stage stageid="46270899-5841-4564-9c7a-e7890f688647" name="End" type="End">
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>90</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="d770f4a9-77d3-463f-80d1-5348be21377f" name="Stage1" type="ProcessInfo">
+          <narrative></narrative>
+          <displayx>-195</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>90</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="d1fe2973-32cc-40e1-83b3-b632c9de5a0d" name="My Page" type="SubSheetInfo">
+          <subsheetid>cc61e72e-10ce-4176-818a-b44cee3ac3f7</subsheetid>
+          <narrative></narrative>
+          <displayx>-195</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>90</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="ce48b6f3-1b5a-4d19-a364-389a0b91d91c" name="Start" type="Start">
+          <subsheetid>cc61e72e-10ce-4176-818a-b44cee3ac3f7</subsheetid>
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>b2754ecc-f360-45ce-b638-731f7d5b7dda</onsuccess>
+        </stage>
+        <stage stageid="560609d8-1be1-46cb-aa60-e0405f4efe1b" name="End" type="End">
+          <subsheetid>cc61e72e-10ce-4176-818a-b44cee3ac3f7</subsheetid>
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>90</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="ba8a5d23-88ba-44a5-904a-f51e0d7b07e3" name="My Page" type="SubSheet">
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-30</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>46270899-5841-4564-9c7a-e7890f688647</onsuccess>
+          <processid>cc61e72e-10ce-4176-818a-b44cee3ac3f7</processid>
+        </stage>
+        <stage stageid="b2754ecc-f360-45ce-b638-731f7d5b7dda" name="My Tool Object Action" type="Action">
+          <subsheetid>cc61e72e-10ce-4176-818a-b44cee3ac3f7</subsheetid>
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-15</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>560609d8-1be1-46cb-aa60-e0405f4efe1b</onsuccess>
+          <resource object="Tool Object" action="My Action" />
+        </stage>
+      </process>
+    </process>
+    <object id="934efa24-0c63-4992-8b3d-d9a4fbc304b8" name="Tool Object" xmlns="http://www.blueprism.co.uk/product/process">
+      <process name="Tool Object" version="1.0" bpversion="6.2.1.4272" narrative="" byrefcollection="true" type="object" runmode="Exclusive">
+        <appdef>
+          <element name="Application Root">
+            <id>68c296ec-5547-4318-9f4b-9237ef6d51da</id>
+            <type>Application</type>
+            <basetype>Application</basetype>
+            <datatype>unknown</datatype>
+            <diagnose>False</diagnose>
+          </element>
+        </appdef>
+        <view>
+          <camerax>0</camerax>
+          <cameray>0</cameray>
+          <zoom version="2">1.25</zoom>
+        </view>
+        <preconditions />
+        <endpoint narrative="" />
+        <subsheet subsheetid="6420353c-53f8-447f-9161-ac324b9225f7" type="CleanUp" published="True">
+          <name>Clean Up</name>
+          <view>
+            <camerax>0</camerax>
+            <cameray>0</cameray>
+            <zoom version="2">1.25</zoom>
+          </view>
+        </subsheet>
+        <subsheet subsheetid="171d166a-5b46-4ca9-9a42-f3fcfb6994bc" type="Normal" published="True">
+          <name>My Action</name>
+          <view>
+            <camerax>0</camerax>
+            <cameray>-7</cameray>
+            <zoom version="2">1.25</zoom>
+          </view>
+        </subsheet>
+        <subsheet subsheetid="eea14f5a-972e-42ae-ac3b-e545d41904b3" type="Normal" published="False">
+          <name>Another action</name>
+          <view>
+            <camerax>0</camerax>
+            <cameray>0</cameray>
+            <zoom version="2">1.25</zoom>
+          </view>
+        </subsheet>
+        <stage stageid="939c0e86-21da-4800-b3c7-eea3e8e23cf3" name="Start" type="Start">
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>dbab8a84-c599-42b0-aeab-bf4a10d22c6f</onsuccess>
+        </stage>
+        <stage stageid="dbab8a84-c599-42b0-aeab-bf4a10d22c6f" name="End" type="End">
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>90</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="0150e63c-e3d0-4e65-b905-e16a148dc02e" name="Stage1" type="ProcessInfo">
+          <narrative></narrative>
+          <displayx>-195</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>90</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <references>
+            <reference>System.dll</reference>
+            <reference>System.Data.dll</reference>
+            <reference>System.Xml.dll</reference>
+            <reference>System.Drawing.dll</reference>
+          </references>
+          <imports>
+            <import>System</import>
+            <import>System.Drawing</import>
+            <import>System.Data</import>
+          </imports>
+          <language>visualbasic</language>
+          <globalcode><![CDATA[]]></globalcode>
+          <code><![CDATA[]]></code>
+        </stage>
+        <stage stageid="e707380d-249a-4139-9b0d-00783824566d" name="Clean Up" type="SubSheetInfo">
+          <subsheetid>6420353c-53f8-447f-9161-ac324b9225f7</subsheetid>
+          <narrative></narrative>
+          <displayx>-195</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>90</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="7792e6e1-01a7-4d4c-bcca-c5e85d79b94a" name="Start" type="Start">
+          <subsheetid>6420353c-53f8-447f-9161-ac324b9225f7</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>07b6351e-52c3-4b0c-bf21-dd2ecca63c42</onsuccess>
+        </stage>
+        <stage stageid="07b6351e-52c3-4b0c-bf21-dd2ecca63c42" name="End" type="End">
+          <subsheetid>6420353c-53f8-447f-9161-ac324b9225f7</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>90</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="482296d5-2ee9-4f9f-8b39-c37956b807a4" name="My Action" type="SubSheetInfo">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <narrative></narrative>
+          <displayx>-195</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>90</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="1b813e70-5fe9-47f1-a7ce-407fc4a698f7" name="Action Page Start" type="Start">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>80f10db1-0ee8-4395-89af-1929dba0ef0f</onsuccess>
+        </stage>
+        <stage stageid="c60c069e-ca70-4a9f-bd30-2a836763cccc" name="Action Page End" type="End">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>90</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="b833d611-eecc-4204-842f-cf4b9f38eb24" name="Note1" type="Note">
+          <subsheetid>6420353c-53f8-447f-9161-ac324b9225f7</subsheetid>
+          <narrative>
+            Clean Up Page
+
+            This is an optional page where you might choose to perform some finalisation (or "cleanup") tasks as your business object is closed down.
+
+            The cleanup action will be called automatically immediately after closing your business object at the end of a business process.
+
+            You will not be able to call this action from a business process, nor will it be called at any other time than before the disposal of the business object.
+          </narrative>
+          <displayx>-180</displayx>
+          <displayy>60</displayy>
+          <displaywidth>180</displaywidth>
+          <displayheight>230</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="19b11016-3eeb-4050-b497-e1e1a1700fa7" name="Note2" type="Note">
+          <narrative>
+            Initialise Page
+
+            This is an optional page where you might choose to perform some initialisation tasks after your business object is loaded.
+
+            The initialise action will be called automatically immediately after loading your business object.
+
+            You will not be able to call this action from a business process, nor will it be called at any other time than after the creation of the object.
+          </narrative>
+          <displayx>-180</displayx>
+          <displayy>60</displayy>
+          <displaywidth>180</displaywidth>
+          <displayheight>230</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="80f10db1-0ee8-4395-89af-1929dba0ef0f" name="File Action" type="Action">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-45</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <inputs>
+            <input type="text" name="File Name" narrative="The name of the file to check" expr="&quot;FilePath&quot;" />
+          </inputs>
+          <outputs>
+            <output type="flag" name="Exists" narrative="True if the file exists" stage="" />
+          </outputs>
+          <onsuccess>79f60cdc-6a46-4006-97a1-4a9f1af7fd0a</onsuccess>
+          <resource object="Utility - File Management" action="File Exists" />
+        </stage>
+        <stage stageid="79f60cdc-6a46-4006-97a1-4a9f1af7fd0a" name="Empty Code" type="Code">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>15</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>c60c069e-ca70-4a9f-bd30-2a836763cccc</onsuccess>
+          <code><![CDATA[]]></code>
+        </stage>
+        <stage stageid="f210e1bd-acea-4aa8-9451-e1cf2fa5b56f" name="Variable" type="Block">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>-255</displayx>
+          <displayy>-30</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>105</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="FF99CC" />
+        </stage>
+        <stage stageid="af36a508-09fc-4fee-82e9-f52e50618622" name="Variable" type="Data">
+          <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>-180</displayx>
+          <displayy>15</displayy>
+          <displaywidth>120</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <datatype>text</datatype>
+          <initialvalue xml:space="preserve">"Initial Value"</initialvalue>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="e2e0fb93-027c-40a0-9ba4-ab9d96e94dd3" name="Another action" type="SubSheetInfo">
+          <subsheetid>eea14f5a-972e-42ae-ac3b-e545d41904b3</subsheetid>
+          <narrative></narrative>
+          <displayx>-195</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>150</displaywidth>
+          <displayheight>90</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="c939119b-1e08-474a-a97b-1b25f8f7e591" name="Start" type="Start">
+          <subsheetid>eea14f5a-972e-42ae-ac3b-e545d41904b3</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-105</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <onsuccess>6b103498-2eaf-45e5-9fe3-cec380d40304</onsuccess>
+        </stage>
+        <stage stageid="f04b3517-7b36-41ff-b8f4-5df787f2b021" name="End" type="End">
+          <subsheetid>eea14f5a-972e-42ae-ac3b-e545d41904b3</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>90</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+        </stage>
+        <stage stageid="6b103498-2eaf-45e5-9fe3-cec380d40304" name="Execute Something" type="Action">
+          <subsheetid>eea14f5a-972e-42ae-ac3b-e545d41904b3</subsheetid>
+          <loginhibit />
+          <narrative></narrative>
+          <displayx>15</displayx>
+          <displayy>-15</displayy>
+          <displaywidth>60</displaywidth>
+          <displayheight>30</displayheight>
+          <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <inputs>
+            <input type="text" name="File Name" narrative="The name of the file to check" expr="&quot;value&quot;" />
+          </inputs>
+          <outputs>
+            <output type="flag" name="Exists" narrative="True if the file exists" stage="" />
+          </outputs>
+          <onsuccess>f04b3517-7b36-41ff-b8f4-5df787f2b021</onsuccess>
+          <resource object="Utility - File Management" action="File Exists" />
+        </stage>
+      </process>
+    </object>
+  </bpr:contents>
+</bpr:release>
