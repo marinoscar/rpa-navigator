@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace luval.rpa.common
 {
-    public class StageExtractor
+    public class StageExtractor : ExtractorBase
     {
         private XElement _xmlDOM;
         private string _id;
@@ -43,16 +44,50 @@ namespace luval.rpa.common
             return res;
         }
 
-        private Stage CreateStage(XElement obj)
+        private Stage CreateStage(XElement xml)
         {
-            var stage = new Stage()
+            if (xml.Elements().Any(i => i.Name.LocalName == "inputs" || i.Name.LocalName == "outputs"))
+                return CreateStageWithParam(xml);
+            return new Stage(xml);
+        }
+
+        private StageWithParameters CreateStageWithParam(XElement obj)
+        {
+            var newStage = new StageWithParameters(obj);
+            newStage.Parameters = new List<Parameter>();
+            newStage.Parameters.AddRange(GetInputs(obj));
+            newStage.Parameters.AddRange(GetOutputs(obj));
+            return newStage;
+        }
+
+        private IEnumerable<Parameter> GetInputs(XElement obj)
+        {
+            return GetParameters(obj, "inputs", false);
+        }
+
+        private IEnumerable<Parameter> GetOutputs(XElement obj)
+        {
+            return GetParameters(obj, "outputs", false);
+        }
+
+        private IEnumerable<Parameter> GetParameters(XElement obj, string node, bool isOutput)
+        {
+            var res = new List<Parameter>();
+            var inputNode = obj.Elements().Where(i => i.Name.LocalName == node).FirstOrDefault();
+            if (inputNode == null) return res;
+            var inputs = inputNode.Elements().ToList();
+            foreach(var input in inputs)
             {
-                Id = obj.Attribute("stageid").Value,
-                Name = obj.Attribute("name").Value,
-                Type = obj.Attribute("type").Value,
-                Xml = obj
-            };
-            return stage;
+                res.Add(new Parameter() {
+                    Name = GetAttributeText(input, "name"),
+                    Description = GetAttributeText(input, "narrative"),
+                    IsOutput = isOutput,
+                    Type =  GetAttributeText( input,"type"),
+                    Stage = GetAttributeText(input, "stage"),
+                    Expression = GetAttributeText(input,"expr")
+                });
+            }
+            return res;
         }
     }
 }
