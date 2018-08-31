@@ -79,9 +79,7 @@ namespace luval.rpa.common
         private ApplicationDefinition GetDefinition(XElement obj)
         {
             var res = new ApplicationDefinition();
-            var process = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().FirstOrDefault();
-            if (process == null) return res;
-            var appDef = process.Elements().FirstOrDefault(i => i.Name.LocalName == "appdef");
+            var appDef = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().FirstOrDefault();
             if (appDef == null) return res;
             res.Elements = GetElements(appDef);
             return res;
@@ -131,17 +129,19 @@ namespace luval.rpa.common
         private List<ElementAttribute> GetAttributes(XElement el)
         {
             var res = new List<ElementAttribute>();
-            var atts = el.Elements().Where(i => i.Name.LocalName == "attributes").ToList();
-            foreach(var att in atts)
+            var node = el.Elements().Where(i => i.Name.LocalName == "attributes").FirstOrDefault();
+            if (node == null) return res;
+            var attributes = node.Elements().Where(i => i.Name.LocalName == "attribute").ToList();
+            foreach(var att in attributes)
             {
                 var val = att.Elements().FirstOrDefault(i => i.Name.LocalName == "ProcessValue");
-                var item = new ElementAttribute()
+                res.Add(new ElementAttribute()
                 {
                     Name = GetAttributeText(att, "name"),
                     DataType = GetAttributeText(val, "datatype"),
                     Value = GetAttributeText(val, "value"),
                     InUse = GetInUse(GetAttributeText(att, "inuse"))
-                };
+                });
             }
             return res;
         }
