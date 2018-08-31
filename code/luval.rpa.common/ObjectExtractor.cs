@@ -26,7 +26,7 @@ namespace luval.rpa.common
 
         public void Load()
         {
-
+            Objects = GetObjects().ToList();
         }
 
         private IEnumerable<ObjectStage> GetObjects()
