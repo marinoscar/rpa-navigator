@@ -27,14 +27,21 @@ namespace luval.rpa.common
         private IEnumerable<ObjectStage> GetObjects()
         {
             var root = _xmlDOM.Elements().ToList();
+            var res = new List<ObjectStage>();
             var objects = _xmlDOM.Elements()
                 .Where(i => i.Name.LocalName == "contents").Elements()
                 .Where(i => i.Name.LocalName == "object").ToList();
             foreach(var obj in objects)
             {
-                var actions = GetActions(obj);
+                res.Add(new ObjectStage()
+                {
+                    Id = obj.Attribute("id").Value,
+                    Name = obj.Attribute("name").Value,
+                    Type = "Object",
+                    Actions = new List<ActionStage>(GetActions(obj))
+                });
             }
-            return new List<ObjectStage>();
+            return res;
         }
 
         private IEnumerable<ActionStage> GetActions(XElement obj)
@@ -44,37 +51,14 @@ namespace luval.rpa.common
             var subsheets = elements.Where(i => i.Name.LocalName == "subsheet").ToList();
             foreach(var sheet in subsheets)
             {
-                res.Add(CreateActionStage( sheet,GetStages(obj, sheet.Attribute("subsheetid").Value)));
-            }
-            return new List<ActionStage>();
-        }
-
-        private IEnumerable<Stage> GetStages(XElement obj, string id)
-        {
-            var res = new List<Stage>();
-            var elements = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().ToList();
-            foreach(var el in elements)
-            {
-                if(el.Elements().Any(i => i.Name.LocalName == "subsheetid") && el.Attribute("type").Value != "SubSheetInfo")
-                {
-                    var sId = el.Elements().Single(i => i.Name.LocalName == "subsheetid").Value;
-                    if (sId == id)
-                        res.Add(CreateStage(el));
-                }
+                var stageExtractor = new StageExtractor(obj, sheet.Attribute("subsheetid").Value);
+                stageExtractor.Load();
+                res.Add(CreateActionStage( sheet, stageExtractor.Stages));
             }
             return res;
         }
 
-        private Stage CreateStage(XElement obj)
-        {
-            var stage = new Stage()
-            {
-                Id = obj.Attribute("stageid").Value,
-                Name = obj.Attribute("name").Value,
-                Type = obj.Attribute("type").Value
-            };
-            return stage;
-        }
+        
 
         private ActionStage CreateActionStage(XElement obj, IEnumerable<Stage> stages)
         {
