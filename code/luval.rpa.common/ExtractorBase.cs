@@ -20,5 +20,12 @@ namespace luval.rpa.common
             var attr = el.Attribute(name);
             return attr == null || string.IsNullOrWhiteSpace(attr.Value) ? string.Empty : Decode(attr.Value); 
         }
+
+        public string GetElementValue(XElement el, string name)
+        {
+            var element = el.Elements().FirstOrDefault(i => i.Name.LocalName == name);
+            if (element == null) return string.Empty;
+            return Decode(element.Value);
+        }
     }
 }

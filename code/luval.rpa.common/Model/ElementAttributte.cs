@@ -11,6 +11,6 @@ namespace luval.rpa.common.Model
         public string Name { get; set; }
         public string DataType { get; set; }
         public string Value { get; set; }
-        public bool InUse { get;set }
+        public bool InUse { get; set; }
     }
 }

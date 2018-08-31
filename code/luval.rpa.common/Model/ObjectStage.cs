@@ -13,5 +13,6 @@ namespace luval.rpa.common.Model
             Actions = new List<ActionStage>();
         }
         public List<ActionStage> Actions { get; set; }
+        public ApplicationDefinition ApplicationDefinition { get; set; }
     }
 }
