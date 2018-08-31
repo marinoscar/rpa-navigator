@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <bpr:release xmlns:bpr="http://www.blueprism.co.uk/product/release">
-  <bpr:name>Tool-Release-v4</bpr:name>
+  <bpr:name>Tool-Release-v6</bpr:name>
   <bpr:release-notes />
-  <bpr:created>2018-08-21 02:55:38Z</bpr:created>
+  <bpr:created>2018-08-31 03:04:10Z</bpr:created>
   <bpr:package-id>1016</bpr:package-id>
   <bpr:package-name>Tool Package</bpr:package-name>
   <bpr:user-created-by>oscar.marin</bpr:user-created-by>
@@ -103,13 +103,328 @@
     <object id="934efa24-0c63-4992-8b3d-d9a4fbc304b8" name="Tool Object" xmlns="http://www.blueprism.co.uk/product/process">
       <process name="Tool Object" version="1.0" bpversion="6.2.1.4272" narrative="" byrefcollection="true" type="object" runmode="Exclusive">
         <appdef>
-          <element name="Application Root">
-            <id>68c296ec-5547-4318-9f4b-9237ef6d51da</id>
+          <element name="MarinCR">
+            <id>b03609e1-72e8-4256-b7c0-ec1b0658cde3</id>
+            <group name="Main Page">
+              <id>4295e703-7219-442e-90dc-2be2cdad717d</id>
+              <element name="Txt - User">
+                <id>9105bf83-17f9-4198-96db-110da8a9d1a5</id>
+                <type>HTMLEdit</type>
+                <basetype>HTMLEdit</basetype>
+                <datatype>text</datatype>
+                <diagnose>False</diagnose>
+                <attributes>
+                  <attribute name="X">
+                    <ProcessValue datatype="number" value="639" />
+                  </attribute>
+                  <attribute name="Y">
+                    <ProcessValue datatype="number" value="51" />
+                  </attribute>
+                  <attribute name="Width">
+                    <ProcessValue datatype="number" value="332" />
+                  </attribute>
+                  <attribute name="Height">
+                    <ProcessValue datatype="number" value="46" />
+                  </attribute>
+                  <attribute name="Path" inuse="True">
+                    <ProcessValue datatype="text" value="/HTML/BODY(1)/DIV(4)/DIV(1)/DIV(1)/DIV(1)/DIV(2)/DIV(1)/FORM(1)/DL(1)/DD(1)/auto-check(1)/INPUT(1)" />
+                  </attribute>
+                  <attribute name="TagName" inuse="True">
+                    <ProcessValue datatype="text" value="INPUT" />
+                  </attribute>
+                  <attribute name="ClassName" inuse="True">
+                    <ProcessValue datatype="text" value="form-control form-control-lg input-block" />
+                  </attribute>
+                  <attribute name="ID" inuse="True">
+                    <ProcessValue datatype="text" value="user[login]" />
+                  </attribute>
+                  <attribute name="Title" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Link" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="InputType" inuse="True">
+                    <ProcessValue datatype="text" value="text" />
+                  </attribute>
+                  <attribute name="InputIdentifier2" inuse="True">
+                    <ProcessValue datatype="text" value="user[login]" />
+                  </attribute>
+                  <attribute name="AncestorCount">
+                    <ProcessValue datatype="number" value="12" />
+                  </attribute>
+                  <attribute name="Value">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Enabled" inuse="True">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                  <attribute name="Checked">
+                    <ProcessValue datatype="flag" value="False" />
+                  </attribute>
+                  <attribute name="pURL" inuse="True">
+                    <ProcessValue datatype="text" value="https://github.com/" />
+                  </attribute>
+                  <attribute name="ScreenBounds">
+                    <ProcessValue datatype="text" value="RECT:893,304,350,1225" />
+                  </attribute>
+                  <attribute name="MatchIndex">
+                    <ProcessValue datatype="number" value="1" />
+                  </attribute>
+                  <attribute name="MatchReverse">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                </attributes>
+              </element>
+              <element name="Txt - Email">
+                <id>dc8d47c2-de23-4d81-b9c2-34c57bd87149</id>
+                <type>HTMLEdit</type>
+                <basetype>HTMLEdit</basetype>
+                <datatype>text</datatype>
+                <diagnose>False</diagnose>
+                <attributes>
+                  <attribute name="X">
+                    <ProcessValue datatype="number" value="639" />
+                  </attribute>
+                  <attribute name="Y">
+                    <ProcessValue datatype="number" value="139" />
+                  </attribute>
+                  <attribute name="Width">
+                    <ProcessValue datatype="number" value="332" />
+                  </attribute>
+                  <attribute name="Height">
+                    <ProcessValue datatype="number" value="46" />
+                  </attribute>
+                  <attribute name="Path" inuse="True">
+                    <ProcessValue datatype="text" value="/HTML/BODY(1)/DIV(4)/DIV(1)/DIV(1)/DIV(1)/DIV(2)/DIV(1)/FORM(1)/DL(2)/DD(1)/auto-check(1)/INPUT(1)" />
+                  </attribute>
+                  <attribute name="TagName" inuse="True">
+                    <ProcessValue datatype="text" value="INPUT" />
+                  </attribute>
+                  <attribute name="ClassName" inuse="True">
+                    <ProcessValue datatype="text" value="form-control form-control-lg input-block js-email-notice-trigger" />
+                  </attribute>
+                  <attribute name="ID" inuse="True">
+                    <ProcessValue datatype="text" value="user[email]" />
+                  </attribute>
+                  <attribute name="Title" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Link" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="InputType" inuse="True">
+                    <ProcessValue datatype="text" value="text" />
+                  </attribute>
+                  <attribute name="InputIdentifier2" inuse="True">
+                    <ProcessValue datatype="text" value="user[email]" />
+                  </attribute>
+                  <attribute name="AncestorCount">
+                    <ProcessValue datatype="number" value="12" />
+                  </attribute>
+                  <attribute name="Value">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Enabled" inuse="True">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                  <attribute name="Checked">
+                    <ProcessValue datatype="flag" value="False" />
+                  </attribute>
+                  <attribute name="pURL" inuse="True">
+                    <ProcessValue datatype="text" value="https://github.com/" />
+                  </attribute>
+                  <attribute name="ScreenBounds">
+                    <ProcessValue datatype="text" value="RECT:893,392,438,1225" />
+                  </attribute>
+                  <attribute name="MatchIndex">
+                    <ProcessValue datatype="number" value="1" />
+                  </attribute>
+                  <attribute name="MatchReverse">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                </attributes>
+              </element>
+              <element name="Txt - Password">
+                <id>45352114-c88a-4815-83f7-55797f8178b1</id>
+                <type>HTML</type>
+                <basetype>HTML</basetype>
+                <datatype>text</datatype>
+                <diagnose>False</diagnose>
+                <attributes>
+                  <attribute name="X">
+                    <ProcessValue datatype="number" value="639" />
+                  </attribute>
+                  <attribute name="Y">
+                    <ProcessValue datatype="number" value="227" />
+                  </attribute>
+                  <attribute name="Width">
+                    <ProcessValue datatype="number" value="332" />
+                  </attribute>
+                  <attribute name="Height">
+                    <ProcessValue datatype="number" value="46" />
+                  </attribute>
+                  <attribute name="Path" inuse="True">
+                    <ProcessValue datatype="text" value="/HTML/BODY(1)/DIV(4)/DIV(1)/DIV(1)/DIV(1)/DIV(2)/DIV(1)/FORM(1)/DL(3)/DD(1)/INPUT(1)" />
+                  </attribute>
+                  <attribute name="TagName" inuse="True">
+                    <ProcessValue datatype="text" value="INPUT" />
+                  </attribute>
+                  <attribute name="ClassName" inuse="True">
+                    <ProcessValue datatype="text" value="form-control form-control-lg input-block" />
+                  </attribute>
+                  <attribute name="ID" inuse="True">
+                    <ProcessValue datatype="text" value="user[password]" />
+                  </attribute>
+                  <attribute name="Title" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Link" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="InputType" inuse="True">
+                    <ProcessValue datatype="text" value="password" />
+                  </attribute>
+                  <attribute name="InputIdentifier2" inuse="True">
+                    <ProcessValue datatype="text" value="user[password]" />
+                  </attribute>
+                  <attribute name="AncestorCount">
+                    <ProcessValue datatype="number" value="11" />
+                  </attribute>
+                  <attribute name="Value">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Enabled" inuse="True">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                  <attribute name="Checked">
+                    <ProcessValue datatype="flag" value="False" />
+                  </attribute>
+                  <attribute name="pURL" inuse="True">
+                    <ProcessValue datatype="text" value="https://github.com/" />
+                  </attribute>
+                  <attribute name="ScreenBounds">
+                    <ProcessValue datatype="text" value="RECT:893,480,526,1225" />
+                  </attribute>
+                  <attribute name="MatchIndex">
+                    <ProcessValue datatype="number" value="1" />
+                  </attribute>
+                  <attribute name="MatchReverse">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                </attributes>
+              </element>
+            </group>
+            <group name="Submit Element">
+              <id>b6868c75-df6f-48d8-99b1-86b8003a1bd8</id>
+              <element name="Btn - Sign-Up">
+                <id>1dcc7278-3adc-4fa0-9d17-dfd64129cdee</id>
+                <type>HTML</type>
+                <basetype>HTML</basetype>
+                <datatype>text</datatype>
+                <diagnose>False</diagnose>
+                <attributes>
+                  <attribute name="X">
+                    <ProcessValue datatype="number" value="639" />
+                  </attribute>
+                  <attribute name="Y">
+                    <ProcessValue datatype="number" value="311" />
+                  </attribute>
+                  <attribute name="Width">
+                    <ProcessValue datatype="number" value="332" />
+                  </attribute>
+                  <attribute name="Height">
+                    <ProcessValue datatype="number" value="64" />
+                  </attribute>
+                  <attribute name="Path" inuse="True">
+                    <ProcessValue datatype="text" value="/HTML/BODY(1)/DIV(4)/DIV(1)/DIV(1)/DIV(1)/DIV(2)/DIV(1)/FORM(1)/BUTTON(1)" />
+                  </attribute>
+                  <attribute name="TagName" inuse="True">
+                    <ProcessValue datatype="text" value="BUTTON" />
+                  </attribute>
+                  <attribute name="ClassName" inuse="True">
+                    <ProcessValue datatype="text" value="btn-mktg btn-primary-mktg btn-large-mktg f4 btn-block" />
+                  </attribute>
+                  <attribute name="ID" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Title" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="Link" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="InputType" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="InputIdentifier2" inuse="True">
+                    <ProcessValue datatype="text" value="" />
+                  </attribute>
+                  <attribute name="AncestorCount">
+                    <ProcessValue datatype="number" value="9" />
+                  </attribute>
+                  <attribute name="Value">
+                    <ProcessValue datatype="text" value="Sign up for GitHub" />
+                  </attribute>
+                  <attribute name="Enabled" inuse="True">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                  <attribute name="Checked">
+                    <ProcessValue datatype="flag" value="False" />
+                  </attribute>
+                  <attribute name="pURL" inuse="True">
+                    <ProcessValue datatype="text" value="https://github.com/" />
+                  </attribute>
+                  <attribute name="ScreenBounds">
+                    <ProcessValue datatype="text" value="RECT:893,564,628,1225" />
+                  </attribute>
+                  <attribute name="MatchIndex">
+                    <ProcessValue datatype="number" value="1" />
+                  </attribute>
+                  <attribute name="MatchReverse">
+                    <ProcessValue datatype="flag" value="True" />
+                  </attribute>
+                </attributes>
+              </element>
+            </group>
             <type>Application</type>
             <basetype>Application</basetype>
             <datatype>unknown</datatype>
             <diagnose>False</diagnose>
           </element>
+          <apptypeinfo>
+            <id>HTMLLaunch</id>
+            <parameters>
+              <parameter>
+                <name>Path</name>
+                <value>C:\Program Files\Internet Explorer\iexplore.exe</value>
+              </parameter>
+              <parameter>
+                <name>CommandLineParams</name>
+                <value>https://marin.cr</value>
+              </parameter>
+              <parameter>
+                <name>ActiveTabOnly</name>
+                <value>True</value>
+              </parameter>
+              <parameter>
+                <name>UseJavaInBrowser</name>
+                <value>False</value>
+              </parameter>
+              <parameter>
+                <name>ExcludeHTC</name>
+                <value>True</value>
+              </parameter>
+              <parameter>
+                <name>ProcessMode</name>
+                <value>Internal</value>
+              </parameter>
+              <parameter>
+                <name>ExternalProcessTimeout</name>
+                <value>0</value>
+              </parameter>
+            </parameters>
+          </apptypeinfo>
         </appdef>
         <view>
           <camerax>0</camerax>
@@ -231,17 +546,23 @@
           <displaywidth>60</displaywidth>
           <displayheight>30</displayheight>
           <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <inputs>
+            <input type="text" name="InputSample" narrative="My input sample" stage="Variable" />
+          </inputs>
           <onsuccess>80f10db1-0ee8-4395-89af-1929dba0ef0f</onsuccess>
         </stage>
         <stage stageid="c60c069e-ca70-4a9f-bd30-2a836763cccc" name="Action Page End" type="End">
           <subsheetid>171d166a-5b46-4ca9-9a42-f3fcfb6994bc</subsheetid>
           <loginhibit />
-          <narrative></narrative>
+          <narrative>Description Value</narrative>
           <displayx>15</displayx>
           <displayy>90</displayy>
           <displaywidth>60</displaywidth>
           <displayheight>30</displayheight>
           <font family="Segoe UI" size="10" style="Regular" color="000000" />
+          <outputs>
+            <output type="text" name="OutputValue" narrative="Desciption of the output value" stage="Variable" />
+          </outputs>
         </stage>
         <stage stageid="b833d611-eecc-4204-842f-cf4b9f38eb24" name="Note1" type="Note">
           <subsheetid>6420353c-53f8-447f-9161-ac324b9225f7</subsheetid>
