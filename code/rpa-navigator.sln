@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{A049F4E4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.commands", "luval.rpa.commands\luval.rpa.commands.csproj", "{9BF97338-BF5F-49F0-A9C7-5D22B9F58D9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.navigator", "luval.rpa.navigator\luval.rpa.navigator.csproj", "{78C5144D-D7E8-4591-982F-846DAF9CBE2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{9BF97338-BF5F-49F0-A9C7-5D22B9F58D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF97338-BF5F-49F0-A9C7-5D22B9F58D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF97338-BF5F-49F0-A9C7-5D22B9F58D9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

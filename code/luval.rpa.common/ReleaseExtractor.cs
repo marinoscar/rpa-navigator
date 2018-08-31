@@ -17,6 +17,8 @@ namespace luval.rpa.common
             _xmlDOM = XElement.Parse(xml);
         }
 
+        public Release Release { get; private set; }
+
         public List<ObjectStage> Objects { get; private set; }
 
         public void Load()
@@ -24,6 +26,10 @@ namespace luval.rpa.common
             var objectExtractor = new ObjectExtractor(_xmlDOM);
             objectExtractor.Load();
             Objects = new List<ObjectStage>(objectExtractor.Objects);
+            Release = new Release()
+            {
+                Objects = Objects
+            };
         }
 
              

@@ -50,6 +50,7 @@
     <Compile Include="Model\ObjectStage.cs" />
     <Compile Include="Model\Parameter.cs" />
     <Compile Include="Model\ProcessStage.cs" />
+    <Compile Include="Model\Release.cs" />
     <Compile Include="Model\Stage.cs" />
     <Compile Include="Model\StageWithParameters.cs" />
     <Compile Include="ObjectExtractor.cs" />
