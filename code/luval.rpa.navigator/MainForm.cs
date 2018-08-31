@@ -59,9 +59,30 @@ namespace luval.rpa.navigator
                 var actionsNode = new TreeNode("Actions");
                 objectNode.Nodes.Add(actionsNode);
                 LoadActions(actionsNode, obj.Actions);
+                LoadAppModel(objectNode, obj);
             }
         }
 
+        private void LoadAppModel(TreeNode parent, ObjectStage obj)
+        {
+            var root = new TreeNode("App Definition");
+            parent.Nodes.Add(root);
+            if (obj.ApplicationDefinition == null) return;
+            var app = new TreeNode(string.Format("{0} - {1}", obj.ApplicationDefinition.Name, obj.ApplicationDefinition.Type)) { Tag = obj.ApplicationDefinition };
+            root.Nodes.Add(app);
+            foreach(var el in obj.ApplicationDefinition.Elements)
+            {
+                var elNode = new TreeNode(string.Format("{0} - {1}", el.Name, el.Type)) { Tag = el };
+                app.Nodes.Add(elNode);
+                var attNode = new TreeNode("Attributes");
+                elNode.Nodes.Add(attNode);
+                foreach(var att in el.Attributes.OrderByDescending(i => i.InUse))
+                {
+                    var aNode = new TreeNode(string.Format("{0} InUse: {1}", att.Name, att.InUse)) { Tag = att };
+                    attNode.Nodes.Add(aNode);
+                }
+            }
+        }
         private void LoadActions(TreeNode parent, IEnumerable<ActionStage> actions)
         {
             foreach(var action in actions)
