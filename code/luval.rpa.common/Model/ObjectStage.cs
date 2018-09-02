@@ -14,13 +14,13 @@ namespace luval.rpa.common.Model
 
         public ObjectStage(XElement el) : base(el)
         {
-            Actions = new List<ActionStage>();
+            Actions = new List<ActionPage>();
             IdName = "id";
             _processXml = GetElement("process");
         }
 
         public List<Stage> InitializeAction { get; set; }
-        public List<ActionStage> Actions { get; set; }
+        public List<ActionPage> Actions { get; set; }
         public ApplicationDefinition ApplicationDefinition { get; set; }
 
         public string BpVersion

@@ -7,13 +7,13 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common.Model
 {
-    public class StageWithParameters : Stage
+    public class EndStage : ParameterBasedStage
     {
-        public StageWithParameters(XElement el):base(el)
+        public EndStage(XElement xml) : base(xml)
         {
-            Parameters = new List<Parameter>();
+            Outputs = InitParams("outputs");
         }
 
-        public List<Parameter> Parameters { get; set; }
+        public List<Parameter> Outputs { get; private set; }
     }
 }

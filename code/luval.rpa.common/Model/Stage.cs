@@ -33,5 +33,17 @@ namespace luval.rpa.common.Model
             get { return GetAttributeValue("type"); }
             set { TrySetAttValue("type", value); }
         }
+
+        public virtual string PageId
+        {
+            get { return GetElementValue("subsheetid"); }
+            set { TrySetElValue("subsheetid", value); }
+        }
+
+        public virtual string Description
+        {
+            get { return GetElementValue("narrative"); }
+            set { TrySetElValue("narrative", value); }
+        }
     }
 }

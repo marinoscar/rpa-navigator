@@ -42,20 +42,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtractorBase.cs" />
-    <Compile Include="Model\Action.cs" />
+    <Compile Include="Model\ActionPage.cs" />
+    <Compile Include="Model\ActionStage.cs" />
     <Compile Include="Model\ApplicationDefinition.cs" />
     <Compile Include="Model\ApplicationElement.cs" />
     <Compile Include="Model\Choice.cs" />
+    <Compile Include="Model\CodeStage.cs" />
+    <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\ElementAttributte.cs" />
+    <Compile Include="Model\EndStage.cs" />
     <Compile Include="Model\ExceptionStage.cs" />
     <Compile Include="Model\ExceptionStageDetail.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ObjectStage.cs" />
     <Compile Include="Model\Parameter.cs" />
+    <Compile Include="Model\ParameterBasedStage.cs" />
     <Compile Include="Model\ProcessStage.cs" />
     <Compile Include="Model\Release.cs" />
+    <Compile Include="Model\Resource.cs" />
     <Compile Include="Model\Stage.cs" />
-    <Compile Include="Model\StageWithParameters.cs" />
+    <Compile Include="Model\StartStage.cs" />
     <Compile Include="Model\WaitStage.cs" />
     <Compile Include="ObjectExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

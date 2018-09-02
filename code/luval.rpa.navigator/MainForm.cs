@@ -83,7 +83,7 @@ namespace luval.rpa.navigator
                 }
             }
         }
-        private void LoadActions(TreeNode parent, IEnumerable<ActionStage> actions)
+        private void LoadActions(TreeNode parent, IEnumerable<ActionPage> actions)
         {
             foreach(var action in actions)
             {
