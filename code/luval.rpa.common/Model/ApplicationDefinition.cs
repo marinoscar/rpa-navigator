@@ -10,13 +10,12 @@ namespace luval.rpa.common.Model
     public class ApplicationDefinition : Item
     {
 
-        public ApplicationDefinition()
+        public ApplicationDefinition(XElement el) : base(el)
         {
             Elements = new List<ApplicationElement>();
         }
 
         public string Type { get; set; }
-        public XElement Xml { get; set; }
 
         public List<ApplicationElement> Elements { get; set; }
     }

@@ -9,14 +9,9 @@ namespace luval.rpa.common.Model
 {
     public class StageWithParameters : Stage
     {
-        public StageWithParameters()
+        public StageWithParameters(XElement el):base(el)
         {
             Parameters = new List<Parameter>();
-        }
-
-        public StageWithParameters(XElement xml): base(xml)
-        {
-
         }
 
         public List<Parameter> Parameters { get; set; }

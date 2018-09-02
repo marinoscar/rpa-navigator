@@ -9,22 +9,26 @@ namespace luval.rpa.common.Model
 {
     public class Stage : Item
     {
-
-        public Stage()
+        public Stage(XElement xml) : base(xml)
         {
-
         }
 
-        public Stage(XElement xml)
+        public string Id
         {
-            Id = xml.Attribute("stageid").Value;
-            Name = xml.Attribute("name").Value;
-            Type = xml.Attribute("type").Value;
-            Xml = xml;
+            get { return GetAttributeValue("stageid"); }
+            set { TrySetAttValue("stageid", value); }
         }
 
-        public string Type { get; set; }
-        public string Description { get; set; }
-        public XElement Xml { get; set; }
+        public string Name
+        {
+            get { return GetAttributeValue("name"); }
+            set { TrySetAttValue("name", value); }
+        }
+
+        public string Type
+        {
+            get { return GetAttributeValue("type"); }
+            set { TrySetAttValue("type", value); }
+        }
     }
 }
