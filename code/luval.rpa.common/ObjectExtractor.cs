@@ -39,11 +39,8 @@ namespace luval.rpa.common
                 .Where(i => i.Name.LocalName == "object").ToList();
             foreach (var obj in objects)
             {
-                res.Add(new ObjectStage()
+                res.Add(new ObjectStage(obj)
                 {
-                    Id = obj.Attribute("id").Value,
-                    Name = obj.Attribute("name").Value,
-                    Type = "Object",
                     Actions = new List<ActionStage>(GetActions(obj)),
                     ApplicationDefinition = GetDefinition(obj)
                 });
@@ -67,10 +64,8 @@ namespace luval.rpa.common
 
         private ActionStage CreateActionStage(XElement obj, IEnumerable<Stage> stages)
         {
-            var actionStage = new ActionStage()
+            var actionStage = new ActionStage(obj)
             {
-                Id = obj.Attribute("subsheetid").Value,
-                Type = obj.Attribute("type").Value,
                 Stages = stages.ToList()
             };
             actionStage.Name = obj.Elements().Single(i => i.Name.LocalName == "name").Value;
@@ -79,7 +74,7 @@ namespace luval.rpa.common
 
         private ApplicationDefinition GetDefinition(XElement obj)
         {
-            var res = new ApplicationDefinition();
+            var res = new ApplicationDefinition(obj);
             var appDef = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().FirstOrDefault();
             if (appDef == null) return res;
             res.Elements = GetElements(appDef);
@@ -117,7 +112,7 @@ namespace luval.rpa.common
 
         private ApplicationElement GetElement(XElement el)
         {
-            var res = new ApplicationElement() {
+            var res = new ApplicationElement(el) {
                 Name = GetAttributeText(el, "name"),
                 Id = GetElementValue(el, "id"),
                 DataType = GetElementValue(el, "datatype"),

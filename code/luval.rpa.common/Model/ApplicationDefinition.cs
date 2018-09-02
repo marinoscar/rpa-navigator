@@ -7,15 +7,13 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common.Model
 {
-    public class ApplicationDefinition : Item
+    public class ApplicationDefinition : Stage
     {
 
         public ApplicationDefinition(XElement el) : base(el)
         {
             Elements = new List<ApplicationElement>();
         }
-
-        public string Type { get; set; }
 
         public List<ApplicationElement> Elements { get; set; }
     }

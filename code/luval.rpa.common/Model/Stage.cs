@@ -11,12 +11,15 @@ namespace luval.rpa.common.Model
     {
         public Stage(XElement xml) : base(xml)
         {
+            IdName = "stageid";
         }
 
-        public string Id
+        protected string IdName { get; set; }
+
+        public virtual string Id
         {
-            get { return GetAttributeValue("stageid"); }
-            set { TrySetAttValue("stageid", value); }
+            get { return GetAttributeValue(IdName); }
+            set { TrySetAttValue(IdName, value); }
         }
 
         public string Name

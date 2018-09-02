@@ -12,6 +12,7 @@ namespace luval.rpa.common.Model
         public ActionStage(XElement el): base(el)
         {
             Stages = new List<Stage>();
+            IdName = "subsheetid";
         }
         public List<Stage> Stages { get; set; }
     }
