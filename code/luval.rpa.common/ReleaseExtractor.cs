@@ -26,7 +26,7 @@ namespace luval.rpa.common
             var objectExtractor = new ObjectExtractor(_xmlDOM);
             objectExtractor.Load();
             Objects = new List<ObjectStage>(objectExtractor.Objects);
-            Release = new Release()
+            Release = new Release(_xmlDOM)
             {
                 Objects = Objects
             };
