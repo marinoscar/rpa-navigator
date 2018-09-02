@@ -12,7 +12,7 @@ namespace luval.rpa.commands
     {
         static void Main(string[] args)
         {
-            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\Tool-Release-v7.bprelease");
+            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\Tool-Release-v8.bprelease");
             var release = new ReleaseExtractor(xml);
             release.Load();
         }
