@@ -22,13 +22,13 @@ namespace luval.rpa.common.Model
             set { TrySetAttValue(IdName, value); }
         }
 
-        public string Name
+        public virtual string Name
         {
             get { return GetAttributeValue("name"); }
             set { TrySetAttValue("name", value); }
         }
 
-        public string Type
+        public virtual string Type
         {
             get { return GetAttributeValue("type"); }
             set { TrySetAttValue("type", value); }

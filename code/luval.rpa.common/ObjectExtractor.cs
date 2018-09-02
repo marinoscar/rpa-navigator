@@ -13,7 +13,7 @@ namespace luval.rpa.common
     {
         private XElement _xmlDOM;
 
-        public ObjectExtractor(string xml): this(XElement.Parse(xml))
+        public ObjectExtractor(string xml) : this(XElement.Parse(xml))
         {
         }
 
@@ -39,8 +39,11 @@ namespace luval.rpa.common
                 .Where(i => i.Name.LocalName == "object").ToList();
             foreach (var obj in objects)
             {
+                var extractors = new StageExtractor(obj, default(string));
+                extractors.Load();
                 res.Add(new ObjectStage(obj)
                 {
+                    InitializeAction = extractors.Stages,
                     Actions = new List<ActionStage>(GetActions(obj)),
                     ApplicationDefinition = GetDefinition(obj)
                 });
@@ -57,19 +60,9 @@ namespace luval.rpa.common
             {
                 var stageExtractor = new StageExtractor(obj, sheet.Attribute("subsheetid").Value);
                 stageExtractor.Load();
-                res.Add(CreateActionStage(sheet, stageExtractor.Stages));
+                res.Add(new ActionStage(obj) { Stages = stageExtractor.Stages });
             }
             return res;
-        }
-
-        private ActionStage CreateActionStage(XElement obj, IEnumerable<Stage> stages)
-        {
-            var actionStage = new ActionStage(obj)
-            {
-                Stages = stages.ToList()
-            };
-            actionStage.Name = obj.Elements().Single(i => i.Name.LocalName == "name").Value;
-            return actionStage;
         }
 
         private ApplicationDefinition GetDefinition(XElement obj)
@@ -85,7 +78,7 @@ namespace luval.rpa.common
         {
             var res = new List<ApplicationElement>();
             var xmlEls = xml.Elements().Where(i => i.Name.LocalName == "element").ToList();
-            foreach(var el in xmlEls)
+            foreach (var el in xmlEls)
             {
                 res.Add(GetElement(el));
                 var elementsFromGroup = GetElementsFromGroup(el);
@@ -100,7 +93,7 @@ namespace luval.rpa.common
         {
             var res = new List<ApplicationElement>();
             var groups = xml.Elements().Where(i => i.Name.LocalName == "group").ToList();
-            foreach(var group in groups)
+            foreach (var group in groups)
             {
                 var elements = GetElements(group);
                 res.AddRange(elements);
@@ -112,7 +105,8 @@ namespace luval.rpa.common
 
         private ApplicationElement GetElement(XElement el)
         {
-            var res = new ApplicationElement(el) {
+            var res = new ApplicationElement(el)
+            {
                 Name = GetAttributeText(el, "name"),
                 Id = GetElementValue(el, "id"),
                 DataType = GetElementValue(el, "datatype"),
@@ -128,7 +122,7 @@ namespace luval.rpa.common
             var node = el.Elements().Where(i => i.Name.LocalName == "attributes").FirstOrDefault();
             if (node == null) return res;
             var attributes = node.Elements().Where(i => i.Name.LocalName == "attribute").ToList();
-            foreach(var att in attributes)
+            foreach (var att in attributes)
             {
                 var val = att.Elements().FirstOrDefault(i => i.Name.LocalName == "ProcessValue");
                 res.Add(new ElementAttribute()

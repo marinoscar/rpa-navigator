@@ -31,12 +31,19 @@ namespace luval.rpa.common
         private IEnumerable<Stage> GetStages(XElement obj, string id)
         {
             var res = new List<Stage>();
-            var elements = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().ToList();
+            var process = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().ToList();
+            var elements = process.Where(i => i.Name.LocalName == "stage").ToList();
             foreach (var el in elements)
             {
-                if (el.Elements().Any(i => i.Name.LocalName == "subsheetid") && el.Attribute("type").Value != "SubSheetInfo")
+                var sId = default(string);
+                if (el.Elements().Any(i => i.Name.LocalName == "subsheetid"))
                 {
-                    var sId = el.Elements().Single(i => i.Name.LocalName == "subsheetid").Value;
+                    sId = el.Elements().Single(i => i.Name.LocalName == "subsheetid").Value;
+                    if (sId == id)
+                        res.Add(CreateStage(el));
+                }
+                else //applies for the initialize page
+                {
                     if (sId == id)
                         res.Add(CreateStage(el));
                 }

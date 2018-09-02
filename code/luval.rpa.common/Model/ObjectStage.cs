@@ -15,6 +15,7 @@ namespace luval.rpa.common.Model
             IdName = "id";
         }
 
+        public List<Stage> InitializeAction { get; set; }
         public List<ActionStage> Actions { get; set; }
         public ApplicationDefinition ApplicationDefinition { get; set; }
     }
