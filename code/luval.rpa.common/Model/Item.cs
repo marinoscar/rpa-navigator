@@ -20,43 +20,78 @@ namespace luval.rpa.common.Model
 
         protected virtual string GetAttributeValue(string name)
         {
-            var att = GetAttribute(name);
+            return GetAttributeValue(Xml, name);
+        }
+
+        protected virtual string GetAttributeValue(XElement el, string name)
+        {
+            var att = GetAttribute(el, name);
             if (att == null) return default(string);
             return att.Value;
         }
 
         protected virtual XAttribute GetAttribute(string name)
         {
-            return Xml.Attributes().FirstOrDefault(i => i.Name.LocalName == name);
+            return GetAttribute(Xml, name);
+        }
+
+        protected virtual XAttribute GetAttribute(XElement el, string name)
+        {
+            return el.Attributes().FirstOrDefault(i => i.Name.LocalName == name);
         }
 
         protected virtual XElement GetElement(string name)
         {
-            return Xml.Elements().FirstOrDefault(i => i.Name.LocalName == name);
+            return GetElement(Xml, name);
+        }
+
+        protected virtual XElement GetElement(XElement el, string name)
+        {
+            return el.Elements().FirstOrDefault(i => i.Name.LocalName == name);
         }
 
         protected virtual string GetElementValue(string name)
         {
-            var element = GetElement(name);
+            return GetElementValue(Xml, name);
+        }
+
+        protected virtual string GetElementValue(XElement el, string name)
+        {
+            var element = GetElement(el, name);
             if (element == null) return default(string);
             return element.Value;
         }
 
         protected virtual IEnumerable<string> GetElementValues(string name)
         {
-            return Xml.Elements().Where(i => i.Name.LocalName == name).Select(i => i.Value).ToList();
+            return GetElementValues(Xml, name);
+        }
+
+        protected virtual IEnumerable<string> GetElementValues(XElement el, string name)
+        {
+            return el.Elements().Where(i => i.Name.LocalName == name).Select(i => i.Value).ToList();
         }
 
         protected virtual void TrySetAttValue(string name, string value)
         {
-            var att = GetAttribute(name);
+            TrySetAttValue(Xml, name, value);
+        }
+
+        protected virtual void TrySetAttValue(XElement el, string name, string value)
+        {
+            var att = GetAttribute(el, name);
             if (att == null) return;
             att.Value = value;
         }
 
         protected virtual void TrySetElValue(string name, string value)
         {
-            var el = GetElement(name);
+            TrySetElValue(Xml, name, value);
+        }
+
+        protected virtual void TrySetElValue(XElement xml, string name, string value)
+        {
+            var el = GetElement(xml, name);
             if (el == null) return;
             el.Value = value;
         }
