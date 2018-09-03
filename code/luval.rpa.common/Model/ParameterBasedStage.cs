@@ -16,7 +16,9 @@ namespace luval.rpa.common.Model
         protected virtual List<Parameter> InitParams(string elName)
         {
             var res = new List<Parameter>();
-            Xml.Elements().Where(i => i.Name.LocalName == elName).ToList()
+            var element = Xml.Elements().Where(i => i.Name.LocalName == elName).FirstOrDefault();
+            if (element == null) return res;
+            element.Elements().ToList()
                 .ForEach(e => res.Add(new Parameter(e)));
             return res;
         }

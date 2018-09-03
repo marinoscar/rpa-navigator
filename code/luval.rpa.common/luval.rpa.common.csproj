@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtractorBase.cs" />
+    <Compile Include="Model\PageBasedStage.cs" />
     <Compile Include="Model\PageStage.cs" />
     <Compile Include="Model\ActionStage.cs" />
     <Compile Include="Model\ApplicationDefinition.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Model\ObjectStage.cs" />
     <Compile Include="Model\Parameter.cs" />
     <Compile Include="Model\ParameterBasedStage.cs" />
+    <Compile Include="Model\ProcessStage.cs" />
     <Compile Include="Model\SubProcessStage.cs" />
     <Compile Include="Model\Release.cs" />
     <Compile Include="Model\Resource.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Model\SubPageStage.cs" />
     <Compile Include="Model\WaitStage.cs" />
     <Compile Include="ObjectExtractor.cs" />
+    <Compile Include="PageBasedExtractor.cs" />
     <Compile Include="ProcessExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReleaseExtractor.cs" />

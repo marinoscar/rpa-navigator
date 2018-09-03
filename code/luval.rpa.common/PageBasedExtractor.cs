@@ -10,9 +10,15 @@ namespace luval.rpa.common
 {
     public class PageBasedExtractor : ExtractorBase
     {
+
+        public PageBasedExtractor(XElement xml)
+        {
+            RootXML = xml;
+        }
+
         protected virtual XElement RootXML { get; private set; }
 
-        private IEnumerable<T> GetPages<T>(string pageElementName, Func<XElement, IEnumerable<PageStage>, T> create ) where T : PageStage
+        protected virtual IEnumerable<T> GetPages<T>(string pageElementName, string id, Func<XElement, IEnumerable<PageStage>, T> create ) where T : PageBasedStage
         {
             var root = RootXML.Elements().ToList();
             var res = new List<T>();
@@ -21,14 +27,14 @@ namespace luval.rpa.common
                 .Where(i => i.Name.LocalName == pageElementName).ToList();
             foreach (var page in pages)
             {
-                var extractors = new StageExtractor(page, default(string));
+                var extractors = new StageExtractor(page, id);
                 extractors.Load();
                 res.Add(create(page, GetPages(page)));
             }
             return res;
         }
 
-        private IEnumerable<PageStage> GetPages(XElement obj)
+        protected virtual IEnumerable<PageStage> GetPages(XElement obj)
         {
             var res = new List<PageStage>();
             var elements = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().ToList();
@@ -37,7 +43,7 @@ namespace luval.rpa.common
             {
                 var stageExtractor = new StageExtractor(obj, sheet.Attribute("subsheetid").Value);
                 stageExtractor.Load();
-                res.Add(new PageStage(obj) { Stages = stageExtractor.Stages });
+                res.Add(new PageStage(sheet) { Stages = stageExtractor.Stages });
             }
             return res;
         }

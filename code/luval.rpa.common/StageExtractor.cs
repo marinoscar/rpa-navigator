@@ -60,7 +60,7 @@ namespace luval.rpa.common
                     stage = new DataItem(xml);
                     break;
                 case "Action":
-                    stage = new PageStage(xml);
+                    stage = new ActionStage(xml);
                     break;
                 case "Code":
                     stage = new CodeStage(xml);

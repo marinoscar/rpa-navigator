@@ -9,17 +9,15 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common
 {
-    public class ObjectExtractor : ExtractorBase
+    public class ObjectExtractor : PageBasedExtractor
     {
-        private XElement _xmlDOM;
 
         public ObjectExtractor(string xml) : this(XElement.Parse(xml))
         {
         }
 
-        public ObjectExtractor(XElement xml)
+        public ObjectExtractor(XElement xml) : base(xml)
         {
-            _xmlDOM = xml;
             Objects = new List<ObjectStage>();
         }
 
@@ -32,37 +30,17 @@ namespace luval.rpa.common
 
         private IEnumerable<ObjectStage> GetObjects()
         {
-            var root = _xmlDOM.Elements().ToList();
-            var res = new List<ObjectStage>();
-            var objects = _xmlDOM.Elements()
-                .Where(i => i.Name.LocalName == "contents").Elements()
-                .Where(i => i.Name.LocalName == "object").ToList();
-            foreach (var obj in objects)
-            {
-                var extractors = new StageExtractor(obj, default(string));
-                extractors.Load();
-                res.Add(new ObjectStage(obj)
-                {
-                    InitializeAction = extractors.Stages,
-                    Pages = new List<PageStage>(GetPages(obj)),
-                    ApplicationDefinition = GetDefinition(obj)
-                });
-            }
-            return res;
+            return GetPages<ObjectStage>("object", default(string), CreateStage);
         }
 
-        private IEnumerable<PageStage> GetPages(XElement obj)
+        private ObjectStage CreateStage(XElement xml, IEnumerable<PageStage> pages)
         {
-            var res = new List<PageStage>();
-            var elements = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().ToList();
-            var subsheets = elements.Where(i => i.Name.LocalName == "subsheet").ToList();
-            foreach (var sheet in subsheets)
+            var obj = new ObjectStage(xml)
             {
-                var stageExtractor = new StageExtractor(obj, sheet.Attribute("subsheetid").Value);
-                stageExtractor.Load();
-                res.Add(new PageStage(obj) { Stages = stageExtractor.Stages });
-            }
-            return res;
+                Pages = new List<PageStage>(pages),
+                ApplicationDefinition = GetDefinition(xml)
+            };
+            return obj;
         }
 
         private ApplicationDefinition GetDefinition(XElement obj)
