@@ -18,6 +18,8 @@ namespace luval.rpa.common.Model
         }
 
         protected virtual XElement ProcessXML { get; private set; }
+
+        public List<Stage> MainPage { get; set; }
         
         public List<PageStage> Pages { get; set; }
 

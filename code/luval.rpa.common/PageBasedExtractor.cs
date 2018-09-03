@@ -18,7 +18,7 @@ namespace luval.rpa.common
 
         protected virtual XElement RootXML { get; private set; }
 
-        protected virtual IEnumerable<T> GetPages<T>(string pageElementName, string id, Func<XElement, IEnumerable<PageStage>, T> create ) where T : PageBasedStage
+        protected virtual IEnumerable<T> GetPages<T>(string pageElementName, string id, Func<XElement, IEnumerable<Stage>, IEnumerable<PageStage>, T> create ) where T : PageBasedStage
         {
             var root = RootXML.Elements().ToList();
             var res = new List<T>();
@@ -29,7 +29,7 @@ namespace luval.rpa.common
             {
                 var extractors = new StageExtractor(page, id);
                 extractors.Load();
-                res.Add(create(page, GetPages(page)));
+                res.Add(create(page, extractors.Stages, GetPages(page)));
             }
             return res;
         }

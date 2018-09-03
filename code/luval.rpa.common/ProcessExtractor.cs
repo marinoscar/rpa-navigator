@@ -25,7 +25,7 @@ namespace luval.rpa.common
             Process = GetPages<ProcessStage>("process", null, CreateStage).ToList();
         }
 
-        private ProcessStage CreateStage(XElement xml, IEnumerable<PageStage> pages)
+        private ProcessStage CreateStage(XElement xml, IEnumerable<Stage> mainPageStages, IEnumerable<PageStage> pages)
         {
             var obj = new ProcessStage(xml)
             {

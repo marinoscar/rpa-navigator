@@ -33,10 +33,11 @@ namespace luval.rpa.common
             return GetPages<ObjectStage>("object", default(string), CreateStage);
         }
 
-        private ObjectStage CreateStage(XElement xml, IEnumerable<PageStage> pages)
+        private ObjectStage CreateStage(XElement xml, IEnumerable<Stage> mainStages, IEnumerable<PageStage> pages)
         {
             var obj = new ObjectStage(xml)
             {
+                MainPage = mainStages.ToList(),
                 Pages = new List<PageStage>(pages),
                 ApplicationDefinition = GetDefinition(xml)
             };
