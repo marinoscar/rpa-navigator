@@ -29,7 +29,7 @@ namespace luval.rpa.common.Model
             set { TrySetAttValue(_processXml, "bpversion", value); }
         }
 
-        public string Description
+        public override string Description
         {
             get { return GetAttributeValue(_processXml, "narrative"); }
             set { TrySetAttValue(_processXml, "narrative", value); }

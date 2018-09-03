@@ -53,48 +53,32 @@ namespace luval.rpa.common
 
         private Stage CreateStage(XElement xml)
         {
-            if (xml.Elements().Any(i => i.Name.LocalName == "inputs" || i.Name.LocalName == "outputs"))
-                return CreateStageWithParam(xml);
-            return new Stage(xml);
-        }
-
-        private StageWithParameters CreateStageWithParam(XElement obj)
-        {
-            var newStage = new StageWithParameters(obj);
-            newStage.Parameters = new List<Parameter>();
-            newStage.Parameters.AddRange(GetInputs(obj));
-            newStage.Parameters.AddRange(GetOutputs(obj));
-            return newStage;
-        }
-
-        private IEnumerable<Parameter> GetInputs(XElement obj)
-        {
-            return GetParameters(obj, "inputs", false);
-        }
-
-        private IEnumerable<Parameter> GetOutputs(XElement obj)
-        {
-            return GetParameters(obj, "outputs", false);
-        }
-
-        private IEnumerable<Parameter> GetParameters(XElement obj, string node, bool isOutput)
-        {
-            var res = new List<Parameter>();
-            var inputNode = obj.Elements().Where(i => i.Name.LocalName == node).FirstOrDefault();
-            if (inputNode == null) return res;
-            var inputs = inputNode.Elements().ToList();
-            foreach(var input in inputs)
+            Stage stage = new Stage(xml);
+            switch (stage.Type)
             {
-                res.Add(new Parameter() {
-                    Name = GetAttributeText(input, "name"),
-                    Description = GetAttributeText(input, "narrative"),
-                    IsOutput = isOutput,
-                    Type =  GetAttributeText( input,"type"),
-                    Stage = GetAttributeText(input, "stage"),
-                    Expression = GetAttributeText(input,"expr")
-                });
+                case "Data":
+                    stage = new DataItem(xml);
+                    break;
+                case "Action":
+                    stage = new ActionPage(xml);
+                    break;
+                case "Code":
+                    stage = new CodeStage(xml);
+                    break;
+                case "Exception":
+                    stage = new ExceptionStage(xml);
+                    break;
+                case "WaitStart":
+                    stage = new WaitStage(xml);
+                    break;
+                case "Start":
+                    stage = new StartStage(xml);
+                    break;
+                case "End":
+                    stage = new EndStage(xml);
+                    break;
             }
-            return res;
+            return stage;
         }
     }
 }

@@ -26,12 +26,6 @@ namespace luval.rpa.common.Model
 
         public List<Choice> Choices { get; set; }
 
-        public string Description
-        {
-            get { return GetElementValue("narrative"); }
-            set { TrySetElValue("narrative", value); }
-        }
-
         public string Timeout
         {
             get { return GetElementValue("timeout"); }
