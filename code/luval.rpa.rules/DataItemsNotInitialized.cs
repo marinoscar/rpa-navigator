@@ -14,7 +14,19 @@ namespace luval.rpa.rules
     {
         public IEnumerable<Result> Execute(Release release)
         {
-            throw new NotImplementedException();
+            var items = release.GetAnalysisUnits()
+                .Where(i => i.Stage.Type == "Data" && ((DataItem)(i.Stage)).HasInitialValue).ToList();
+            return items.Select(i => new Result() {
+                Type = ResultType.Error,
+                Parent = i.ParentName,
+                Page = i.Page,
+                StageId = i.Stage.Id,
+                Stage = i.Stage.Name,
+                StageType = i.Stage.Type,
+                Message = string.Format("Data item {0} is initialized", i.Stage.Name),
+                Description = "Data items should not be initialized",
+                Scope = i.ParentType
+            });
         }
     }
 }
