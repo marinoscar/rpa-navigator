@@ -44,23 +44,23 @@ namespace luval.rpa.common
                 res.Add(new ObjectStage(obj)
                 {
                     InitializeAction = extractors.Stages,
-                    Actions = new List<ActionPage>(GetActions(obj)),
+                    Pages = new List<PageStage>(GetPages(obj)),
                     ApplicationDefinition = GetDefinition(obj)
                 });
             }
             return res;
         }
 
-        private IEnumerable<ActionPage> GetActions(XElement obj)
+        private IEnumerable<PageStage> GetPages(XElement obj)
         {
-            var res = new List<ActionPage>();
+            var res = new List<PageStage>();
             var elements = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().ToList();
             var subsheets = elements.Where(i => i.Name.LocalName == "subsheet").ToList();
             foreach (var sheet in subsheets)
             {
                 var stageExtractor = new StageExtractor(obj, sheet.Attribute("subsheetid").Value);
                 stageExtractor.Load();
-                res.Add(new ActionPage(obj) { Stages = stageExtractor.Stages });
+                res.Add(new PageStage(obj) { Stages = stageExtractor.Stages });
             }
             return res;
         }

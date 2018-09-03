@@ -7,9 +7,9 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common.Model
 {
-    public class ActionPage : Stage
+    public class PageStage : Stage
     {
-        public ActionPage(XElement el) : base(el)
+        public PageStage(XElement el) : base(el)
         {
             Stages = new List<Stage>();
             IdName = "subsheetid";

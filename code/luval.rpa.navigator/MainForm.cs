@@ -58,7 +58,7 @@ namespace luval.rpa.navigator
                 parent.Nodes.Add(objectNode);
                 var actionsNode = new TreeNode("Actions");
                 objectNode.Nodes.Add(actionsNode);
-                LoadActions(actionsNode, obj.Actions);
+                LoadActions(actionsNode, obj.Pages);
                 LoadAppModel(objectNode, obj);
             }
         }
@@ -83,7 +83,7 @@ namespace luval.rpa.navigator
                 }
             }
         }
-        private void LoadActions(TreeNode parent, IEnumerable<ActionPage> actions)
+        private void LoadActions(TreeNode parent, IEnumerable<PageStage> actions)
         {
             foreach(var action in actions)
             {
