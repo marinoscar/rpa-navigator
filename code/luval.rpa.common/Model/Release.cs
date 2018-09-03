@@ -14,6 +14,7 @@ namespace luval.rpa.common.Model
             Objects = new List<ObjectStage>();
         }
         public List<ObjectStage> Objects { get; set; }
+        public List<ProcessStage> Processes { get; set; }
 
         public string Name
         {
