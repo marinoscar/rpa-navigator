@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common
 {
-    public class ExtractorBase
+    public abstract class ExtractorBase
     {
         public string Decode(string text)
         {
@@ -29,5 +29,7 @@ namespace luval.rpa.common
             if (element == null) return string.Empty;
             return Decode(element.Value);
         }
+
+        public abstract void Load();
     }
 }

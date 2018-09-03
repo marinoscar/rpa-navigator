@@ -23,7 +23,7 @@ namespace luval.rpa.common
 
         public List<Stage> Stages { get; private set; }
 
-        public void Load()
+        public override void Load()
         {
             Stages = GetStages(_xmlDOM, _id).ToList();
         }

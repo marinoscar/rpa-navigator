@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common
 {
-    public class ReleaseExtractor
+    public class ReleaseExtractor : ExtractorBase
     {
         private XElement _xmlDOM;
 
@@ -19,20 +19,16 @@ namespace luval.rpa.common
 
         public Release Release { get; private set; }
 
-        public List<ObjectStage> Objects { get; private set; }
-        public List<ProcessStage> Processes { get; set; }
-
-        public void Load()
+        public override void Load()
         {
             var processExtractor = new ProcessExtractor(_xmlDOM);
             var objectExtractor = new ObjectExtractor(_xmlDOM);
             objectExtractor.Load();
             processExtractor.Load();
-            Objects = new List<ObjectStage>(objectExtractor.Objects);
-            Processes = processExtractor.Process;
             Release = new Release(_xmlDOM)
             {
-                Objects = Objects, Processes = Processes
+                Objects = objectExtractor.Objects.ToList(),
+                Processes = processExtractor.Process.ToList()
             };
         }
 

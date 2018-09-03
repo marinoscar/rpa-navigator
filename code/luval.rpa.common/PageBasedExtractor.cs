@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common
 {
-    public class PageBasedExtractor : ExtractorBase
+    public abstract class PageBasedExtractor : ExtractorBase
     {
 
         public PageBasedExtractor(XElement xml)

@@ -14,7 +14,6 @@ namespace luval.rpa.common.Model
 
         }
 
-        public List<Stage> InitializeAction { get; set; }
         public ApplicationDefinition ApplicationDefinition { get; set; }
 
         public string RunMode

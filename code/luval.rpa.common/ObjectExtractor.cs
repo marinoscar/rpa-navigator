@@ -23,7 +23,7 @@ namespace luval.rpa.common
 
         public List<ObjectStage> Objects { get; set; }
 
-        public void Load()
+        public override void Load()
         {
             Objects = GetObjects().ToList();
         }
@@ -105,5 +105,6 @@ namespace luval.rpa.common
         {
             return string.IsNullOrWhiteSpace(text) ? false : true;
         }
+        
     }
 }

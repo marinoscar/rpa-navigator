@@ -20,7 +20,7 @@ namespace luval.rpa.common
         }
         public List<ProcessStage> Process { get; set; }
 
-        public void Load()
+        public override void Load()
         {
             Process = GetPages<ProcessStage>("process", null, CreateStage).ToList();
         }
