@@ -23,7 +23,7 @@ namespace luval.rpa.rules
         /// <summary>
         /// Scope of where the rule is applied
         /// </summary>
-        public Scope Scope { get; set; }
+        public string Scope { get; set; }
         /// <summary>
         /// Parent stage of the rule, for example a Release, Process or Object
         /// </summary>
@@ -32,6 +32,10 @@ namespace luval.rpa.rules
         /// Stage where the rule is evaluated
         /// </summary>
         public string Stage { get; set; }
+        /// <summary>
+        /// The type of stage
+        /// </summary>
+        public string StageType { get; set; }
         /// <summary>
         /// Name of the page where the rule is evaluated
         /// </summary>
