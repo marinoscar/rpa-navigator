@@ -51,5 +51,44 @@ namespace luval.rpa.common.Model
             get { return GetElementValue("created"); }
             set { TrySetElValue("created", value); }
         }
+
+        /// <summary>
+        /// Gets the stage analysis units for the release
+        /// </summary>
+        /// <returns>A collection of stage analysis units</returns>
+        public IEnumerable<StageAnalysisUnit> GetAnalysisUnits()
+        {
+            var res = new List<StageAnalysisUnit>();
+            foreach (var obj in Processes)
+            {
+                LoadAnalysisUnits(res, obj, "Process");
+            }
+            foreach (var obj in Objects)
+            {
+                LoadAnalysisUnits(res, obj, "Object");
+            }
+            return res;
+        }
+
+        private void LoadAnalysisUnits(List<StageAnalysisUnit> items, PageBasedStage parent, string type)
+        {
+            items.AddRange(parent.MainPage.Select(i => new StageAnalysisUnit()
+            {
+                Page = "Main",
+                ParentName = parent.Name,
+                ParentType = type,
+                Stage = i
+            }));
+            foreach (var page in parent.Pages)
+            {
+                items.AddRange(parent.MainPage.Select(i => new StageAnalysisUnit()
+                {
+                    Page = page.Name,
+                    ParentName = parent.Name,
+                    ParentType = type,
+                    Stage = i
+                }));
+            }
+        }
     }
 }
