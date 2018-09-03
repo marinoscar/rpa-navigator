@@ -105,14 +105,7 @@ namespace luval.rpa.common
 
         private ApplicationElement GetElement(XElement el)
         {
-            var res = new ApplicationElement(el)
-            {
-                Name = GetAttributeText(el, "name"),
-                Id = GetElementValue(el, "id"),
-                DataType = GetElementValue(el, "datatype"),
-                Type = GetElementValue(el, "type"),
-                Attributes = GetAttributes(el)
-            };
+            var res = new ApplicationElement(el);
             return res;
         }
 
@@ -124,14 +117,7 @@ namespace luval.rpa.common
             var attributes = node.Elements().Where(i => i.Name.LocalName == "attribute").ToList();
             foreach (var att in attributes)
             {
-                var val = att.Elements().FirstOrDefault(i => i.Name.LocalName == "ProcessValue");
-                res.Add(new ElementAttribute()
-                {
-                    Name = GetAttributeText(att, "name"),
-                    DataType = GetAttributeText(val, "datatype"),
-                    Value = GetAttributeText(val, "value"),
-                    InUse = GetInUse(GetAttributeText(att, "inuse"))
-                });
+                res.Add(new ElementAttribute(att));
             }
             return res;
         }
