@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using luval.rpa.common.Model;
-using luval.rpa.rules.Attributes;
+using luval.rpa.rules.core.Attributes;
+using luval.rpa.rules.core;
 
 namespace luval.rpa.rules
 {

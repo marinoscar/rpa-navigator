@@ -7,8 +7,8 @@
     <ProjectGuid>{E245CDC8-6937-45D2-97BC-B5272CC6A588}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>luval.rpa.rules</RootNamespace>
-    <AssemblyName>luval.rpa.rules</AssemblyName>
+    <RootNamespace>luval.rpa.rules.core</RootNamespace>
+    <AssemblyName>luval.rpa.rules.core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

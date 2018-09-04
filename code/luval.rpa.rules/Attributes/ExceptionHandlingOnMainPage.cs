@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using luval.rpa.common.Model;
 
-namespace luval.rpa.rules.Attributes
+namespace luval.rpa.rules.core.Attributes
 {
     [Name("Exception handling on main page"),
      Description("Checks that the main page of the process has exception handling")]
