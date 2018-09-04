@@ -81,7 +81,7 @@ namespace luval.rpa.common.Model
             }));
             foreach (var page in parent.Pages)
             {
-                items.AddRange(parent.MainPage.Select(i => new StageAnalysisUnit()
+                items.AddRange(page.Stages.Select(i => new StageAnalysisUnit()
                 {
                     Page = page.Name,
                     ParentName = parent.Name,

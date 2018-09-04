@@ -39,8 +39,8 @@ namespace luval.rpa.common.Model
 
         public string Condition
         {
-            get { return GetAttributeValue(_element, "id"); }
-            set { TrySetElValue(_element, "id", value); }
+            get { return GetElementValue(_condition, "id"); }
+            set { TrySetElValue(_condition, "id", value); }
         }
 
 

@@ -17,8 +17,9 @@ namespace luval.rpa.common.Model
         private void LoadChoices()
         {
             Choices = new List<Choice>();
-            var choices = Xml.Elements().Where(i => i.Name.LocalName == "choices").ToList();
-            foreach(var choice in choices)
+            var choicesRoot = Xml.Elements().Where(i => i.Name.LocalName == "choices").FirstOrDefault();
+            if (choicesRoot == null || !choicesRoot.HasElements) return;
+            foreach(var choice in choicesRoot.Elements())
             {
                 Choices.Add(new Choice(choice));
             }

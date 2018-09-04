@@ -28,7 +28,9 @@ namespace luval.rpa.rules
         private IEnumerable<IRule> GetAllRules()
         {
             var instances = new List<IRule>();
-            var types = Assembly.GetExecutingAssembly().GetTypes().Where(i => typeof(IRule).IsAssignableFrom(i));
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(
+                i => typeof(IRule).IsAssignableFrom(i) &&
+                !i.IsInterface && !i.IsAbstract).ToList();
             foreach (var t in types)
             {
                 instances.Add((IRule)Activator.CreateInstance(t));
