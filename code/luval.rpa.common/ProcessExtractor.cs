@@ -29,6 +29,7 @@ namespace luval.rpa.common
         {
             var obj = new ProcessStage(xml)
             {
+                MainPage = mainPageStages.ToList(),
                 Pages = new List<PageStage>(pages),
             };
             return obj;
