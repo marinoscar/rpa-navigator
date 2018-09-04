@@ -9,6 +9,14 @@ namespace luval.rpa.rules
     public class Result
     {
         /// <summary>
+        /// The name of the rule being applied
+        /// </summary>
+        public string RuleName { get; set; }
+        /// <summary>
+        /// Description about the rule
+        /// </summary>
+        public string RuleDescription { get; set; }
+        /// <summary>
         /// Type of result
         /// </summary>
         public ResultType Type { get; set; }

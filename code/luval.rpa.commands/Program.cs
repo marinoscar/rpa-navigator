@@ -1,4 +1,5 @@
 ﻿using luval.rpa.common;
+using luval.rpa.rules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +13,13 @@ namespace luval.rpa.commands
     {
         static void Main(string[] args)
         {
-            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\Tool-Release-v10.bprelease");
+            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\Tool-Release-v12.bprelease");
             var release = new ReleaseExtractor(xml);
             release.Load();
+            var ruleEngine = new Runner();
+            var results = ruleEngine.RunAll(release.Release);
+            var report = new ReportGenerator(results);
+            report.ToCsv(@"C:\Users\oscar.marin\Desktop\TMP\report.csv");
         }
     }
 }
