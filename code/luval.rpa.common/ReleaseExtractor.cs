@@ -17,6 +17,11 @@ namespace luval.rpa.common
             _xmlDOM = XElement.Parse(xml);
         }
 
+        public ReleaseExtractor(XElement xml)
+        {
+            _xmlDOM = xml;
+        }
+
         public Release Release { get; private set; }
 
         public override void Load()

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace luval.rpa.commands
 {
@@ -13,7 +14,7 @@ namespace luval.rpa.commands
     {
         static void Main(string[] args)
         {
-            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\Tool-Release-v12.bprelease");
+            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\BigPack.bprelease");
             var release = new ReleaseExtractor(xml);
             release.Load();
             var ruleEngine = new Runner();
