@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9BF97338-BF5F-49F0-A9C7-5D22B9F58D9B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>luval.rpa.commands</RootNamespace>
-    <AssemblyName>luval.rpa.commands</AssemblyName>
+    <ProjectGuid>{E245CDC8-6937-45D2-97BC-B5272CC6A588}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>luval.rpa.rules.core</RootNamespace>
+    <AssemblyName>luval.rpa.rules.core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,20 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Attributes\ExceptionHandlingOnMainPage.cs" />
+    <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Attributes\StringValueAttributte.cs" />
+    <Compile Include="Configuration\Rule.cs" />
+    <Compile Include="Configuration\RuleProfile.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="IRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="ReportGenerator.cs" />
+    <Compile Include="Result.cs" />
+    <Compile Include="RuleBase.cs" />
+    <Compile Include="Runner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">
       <Project>{75447bfb-966f-4a04-bead-44e41270340c}</Project>
       <Name>luval.rpa.common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\luval.rpa.rules.core\luval.rpa.rules.core.csproj">
-      <Project>{e245cdc8-6937-45d2-97bc-b5272cc6a588}</Project>
-      <Name>luval.rpa.rules.core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

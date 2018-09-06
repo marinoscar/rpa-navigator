@@ -1,4 +1,5 @@
 ﻿using luval.rpa.common.Model;
+using luval.rpa.rules.core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace luval.rpa.rules.core
 {
     public class Runner
     {
+
+        public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
+        {
+            return RunRules(release, GetRulesFromProfile(profile));
+        }
+
         public IEnumerable<Result> RunAll(Release release)
         {
             return RunRules(release, GetAllRules());
@@ -25,10 +32,26 @@ namespace luval.rpa.rules.core
             return res;
         }
 
+        private IEnumerable<IRule> GetRulesFromProfile(RuleProfile profile)
+        {
+            var rules = new List<IRule>();
+            foreach(var ruleConfig in profile.Rules)
+            {
+                var ass = Assembly.LoadFile(ruleConfig.AssemblyFile);
+                rules.AddRange(GetAllRules(ass));
+            }
+            return rules;
+        }
+
         private IEnumerable<IRule> GetAllRules()
         {
+            return GetAllRules(Assembly.GetExecutingAssembly());
+        }
+
+        private IEnumerable<IRule> GetAllRules(Assembly ass)
+        {
             var instances = new List<IRule>();
-            var types = Assembly.GetExecutingAssembly().GetTypes().Where(
+            var types = ass.GetTypes().Where(
                 i => typeof(IRule).IsAssignableFrom(i) &&
                 !i.IsInterface && !i.IsAbstract).ToList();
             foreach (var t in types)
