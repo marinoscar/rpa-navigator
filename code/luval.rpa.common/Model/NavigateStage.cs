@@ -11,14 +11,14 @@ namespace luval.rpa.common.Model
     {
         public NavigateStage(XElement xml) : base(xml)
         {
-            Actions = new List<NavigateAction>();
+            Actions = new List<NavigateStep>();
             var steps = Xml.Elements().Where(i => i.Name.LocalName == "step").ToList();
             foreach(var step in steps)
             {
-                Actions.Add(new NavigateAction(step));
+                Actions.Add(new NavigateStep(step));
             }
         }
 
-        public List<NavigateAction> Actions { get; set; }
+        public List<NavigateStep> Actions { get; set; }
     }
 }

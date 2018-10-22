@@ -7,18 +7,30 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common.Model
 {
-    public class NavigateAction : Item
+    public class NavigateStep : Item
     {
-        public NavigateAction(XElement element) : base(element)
+        public NavigateStep(XElement element) : base(element)
         {
             Arguments = new List<Argument>();
             var action = GetElement("action");
             var args = GetElement(action, "arguments");
             if (args == null) return;
-            foreach(var arg in args.Elements().ToList())
+            foreach (var arg in args.Elements().ToList())
             {
                 Arguments.Add(new Argument(arg));
             }
+        }
+
+        public string Stage
+        {
+            get { return GetAttributeValue("stage"); }
+            set { TrySetAttValue("stage", value); }
+        }
+
+        public string Expression
+        {
+            get { return GetAttributeValue("expr"); }
+            set { TrySetAttValue("expr", value); }
         }
 
         public List<Argument> Arguments { get; set; }

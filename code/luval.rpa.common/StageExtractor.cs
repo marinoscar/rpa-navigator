@@ -83,6 +83,12 @@ namespace luval.rpa.common
                 case "Navigate":
                     stage = new NavigateStage(xml);
                     break;
+                case "Read":
+                    stage = new ReadStage(xml);
+                    break;
+                case "Write":
+                    stage = new WriteStage(xml);
+                    break;
                 case "SubSheet":
                     stage = new SubPageStage(xml);
                     break;

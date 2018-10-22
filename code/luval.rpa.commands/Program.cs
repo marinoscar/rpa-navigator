@@ -26,7 +26,7 @@ namespace luval.rpa.commands
             //File.WriteAllText(prof, sw.ToString());
 
             var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
-            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\NA_CS_OTC_0001_Order Entry_v2.bprelease");
+            var xml = File.ReadAllText(@"C:\Users\oscar.marin\Desktop\TMP\NA_CS_OTC_0001_Order Entry_v3.bprelease");
             var release = new ReleaseExtractor(xml);
             release.Load();
             var ruleEngine = new Runner();
