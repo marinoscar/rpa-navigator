@@ -7,10 +7,10 @@ using System.Xml.Serialization;
 
 namespace luval.rpa.rules.core.Configuration
 {
-    [XmlType("rule")]
-    public class Rule
+    [XmlType("object")]
+    public class Exclusion
     {
-        [XmlElement(ElementName ="assemblyFile")]
-        public string AssemblyFile { get; set; }
+        [XmlAttribute("name")]
+        public string Name { get; set; }
     }
 }

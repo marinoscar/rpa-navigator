@@ -2,6 +2,7 @@
 using luval.rpa.rules.core.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,15 +15,23 @@ namespace luval.rpa.rules.core
 
         public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
         {
+            CleanReleaseFromProfileExclusions(profile, release);
             return RunRules(release, GetRulesFromProfile(profile));
         }
 
-        public IEnumerable<Result> RunAll(Release release)
+        
+        private void CleanReleaseFromProfileExclusions(RuleProfile profile, Release release)
         {
-            return RunRules(release, GetAllRules());
+            foreach(var exclusion in profile.Exclusions)
+            {
+                var item = release.Objects.FirstOrDefault(i => i.Name == exclusion.Name);
+                if (item == null) continue;
+                release.Objects.Remove(item);
+                item = null;
+            }
         }
 
-        public IEnumerable<Result> RunRules(Release release, IEnumerable<IRule> rules)
+        private IEnumerable<Result> RunRules(Release release, IEnumerable<IRule> rules)
         {
             var res = new List<Result>();
             foreach(var rule in rules)
@@ -37,10 +46,17 @@ namespace luval.rpa.rules.core
             var rules = new List<IRule>();
             foreach(var ruleConfig in profile.Rules)
             {
-                var ass = Assembly.LoadFile(ruleConfig.AssemblyFile);
+                var file = GetAbsolutePath(ruleConfig.AssemblyFile);
+                var ass = Assembly.LoadFile(file);
                 rules.AddRange(GetAllRules(ass));
             }
             return rules;
+        }
+
+        private string GetAbsolutePath(string fileName)
+        {
+            var absolutePath = Path.Combine(Environment.CurrentDirectory, fileName);
+            return Path.GetFullPath((new Uri(absolutePath)).LocalPath);
         }
 
         private IEnumerable<IRule> GetAllRules()

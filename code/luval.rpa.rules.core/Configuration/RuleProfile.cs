@@ -13,9 +13,12 @@ namespace luval.rpa.rules.core.Configuration
         public RuleProfile()
         {
             Rules = new List<Rule>();
+            Exclusions = new List<Exclusion>();
         }
 
         [XmlArray(ElementName = "rules")]
         public List<Rule> Rules { get; set; }
+        [XmlArray(ElementName = "exclusions")]
+        public List<Exclusion> Exclusions { get; set; }
     }
 }

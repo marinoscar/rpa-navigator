@@ -19,8 +19,16 @@ namespace luval.rpa.commands
         {
             var prof = @"C:\Users\oscar.marin\Desktop\TMP\profile.xml";
             var ser = new XmlSerializer(typeof(RuleProfile));
+
             //var profile = new RuleProfile();
-            //profile.Rules.Add(new Rule() { AssemblyName = typeof(DataItemsNotInitialized).AssemblyQualifiedName });
+            //profile.Rules.Add(new Rule() { AssemblyFile = typeof(luval.rpa.rules.DataItemsNotInitialized).Assembly.FullName });
+            //profile.Exclusions = new List<Exclusion>(
+            //    new[] {
+            //        new Exclusion() { Name = "MS Excel VBO"},
+            //        new Exclusion() { Name = "Utility - Environment"},
+            //        new Exclusion() { Name = "Utility - General"},
+            //        new Exclusion() { Name = "Utility - Collection Manipulation"},
+            //    });
             //var sw = new StringWriter();
             //ser.Serialize(sw, profile);
             //File.WriteAllText(prof, sw.ToString());
