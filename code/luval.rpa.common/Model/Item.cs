@@ -30,6 +30,26 @@ namespace luval.rpa.common.Model
             return att.Value;
         }
 
+        protected virtual bool HasElement(string name)
+        {
+            return HasElement(Xml, name);
+        }
+
+        protected virtual bool HasElement(XElement el, string name)
+        {
+            return GetElement(el, name) != null;
+        }
+
+        protected virtual bool HasAttribute(string name)
+        {
+            return HasAttribute(Xml, name);
+        }
+
+        protected virtual bool HasAttribute(XElement el, string name)
+        {
+            return GetAttribute(el, name) != null;
+        }
+
         protected virtual XAttribute GetAttribute(string name)
         {
             return GetAttribute(Xml, name);

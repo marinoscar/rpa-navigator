@@ -43,7 +43,32 @@ namespace luval.rpa.common.Model
             set { TrySetElValue("alwaysinit", value); }
         }
 
-        public bool IsPrivate { get { return Private == "Yes";  } }
+        public bool IsPrivate
+        {
+            get
+            {
+                return HasElement("private") || Private == "Yes";
+            }
+        }
         public bool HasInitialValue { get { return !string.IsNullOrWhiteSpace(InitialValue); } }
+
+        public bool IsEnvironment
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Exposure)) return false;
+                return Exposure.ToLowerInvariant().Equals("environment");
+            }
+        }
+
+        public bool IsSession
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Exposure)) return false;
+                return Exposure.ToLowerInvariant().Equals("session");
+            }
+        }
+
     }
 }
