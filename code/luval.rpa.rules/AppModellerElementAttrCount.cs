@@ -18,7 +18,7 @@ namespace luval.rpa.rules
             var res = new List<Result>();
             foreach (var obj in release.Objects)
             {
-                foreach (var el in obj.ApplicationDefinition.Elements.Where(i => i.Type.ToLowerInvariant().Contains("html")))
+                foreach (var el in obj.ApplicationDefinition.Elements.Where(i => !string.IsNullOrWhiteSpace(i.Type) && i.Type.ToLowerInvariant().Contains("html")))
                 {
                     var atts = el.Attributes.Where(i => i.IsInUse).ToList();
                     var max = GetMaxCount();

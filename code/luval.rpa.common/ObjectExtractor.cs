@@ -50,6 +50,10 @@ namespace luval.rpa.common
             var appDef = obj.Elements().Where(i => i.Name.LocalName == "process").Elements().FirstOrDefault();
             if (appDef == null) return res;
             res.Elements = GetElements(appDef);
+            foreach(var el in res.Elements)
+            {
+                el.Attributes = GetAttributes(el.Xml);
+            }
             return res;
         }
 
