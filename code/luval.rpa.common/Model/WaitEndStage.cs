@@ -7,9 +7,9 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common.Model
 {
-    public class WaitEnd : Stage
+    public class WaitEndStage : Stage
     {
-        public WaitEnd(XElement xml) : base(xml)
+        public WaitEndStage(XElement xml) : base(xml)
         {
         }
     }

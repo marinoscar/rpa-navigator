@@ -7,9 +7,9 @@ using System.Xml.Linq;
 
 namespace luval.rpa.common.Model
 {
-    public class WaitStage: Stage
+    public class WaitStartStage: Stage
     {
-        public WaitStage(XElement el): base(el)
+        public WaitStartStage(XElement el): base(el)
         {
             LoadChoices();
         }
