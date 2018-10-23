@@ -25,6 +25,12 @@ namespace luval.rpa.common.Model
             set { TrySetElValue("name", value); }
         }
 
+        public string OnTrue
+        {
+            get { return GetElementValue("ontrue"); }
+            set { TrySetElValue("ontrue", value); }
+        }
+
         public string CompareType
         {
             get { return GetElementValue("comparetype"); }
