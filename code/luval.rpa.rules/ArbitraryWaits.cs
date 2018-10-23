@@ -17,7 +17,7 @@ namespace luval.rpa.rules
         {
             var waits = release.GetAnalysisUnits()
                 .Where(i => i.ParentType == "Object" && i.Stage.Type == "WaitStart" &&
-                       ((WaitStage)(i.Stage)).IsArbitraryWait).ToList();
+                       ((WaitStartStage)(i.Stage)).IsArbitraryWait).ToList();
             return waits.Select(i => FromStageAnalysis(i,
                 ResultType.Warning, string.Format("Please check stage {0} for arbitrary waits", i.Stage.Name), ""));
         }

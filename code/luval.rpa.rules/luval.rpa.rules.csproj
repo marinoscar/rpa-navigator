@@ -44,8 +44,10 @@
     <Compile Include="ArbitraryWaits.cs" />
     <Compile Include="DataItemsNotInitialized.cs" />
     <Compile Include="ExceptionHandlingOnMainPage.cs" />
+    <Compile Include="NavigateShouldFollowWait.cs" />
     <Compile Include="ParentURLInUse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadAndWriteNeedToHaveACheckItExists.cs" />
     <Compile Include="StageCountOnPage.cs" />
     <Compile Include="TimeoutShouldThrowException.cs" />
   </ItemGroup>

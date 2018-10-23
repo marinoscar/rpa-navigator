@@ -34,8 +34,10 @@ namespace luval.rpa.rules
         {
             if (stage == null || string.IsNullOrWhiteSpace(stage.OnSuccess)) return false;
             var next = units.FirstOrDefault(i => i.Stage.Id == stage.OnSuccess);
-            if ((next == null || next.Stage.Type == "End") || next.Stage.Type != "WaitStart") return false;
-            return true;
+            if ((next == null || next.Stage.Type == "End")) return false;
+            if (next.Stage.Type.ToLowerInvariant() == "anchor") return IsNextWait(next.Stage, units);
+            if (next.Stage.Type.ToLowerInvariant().Contains("wait")) return true;
+            return false;
         }
     }
 }
