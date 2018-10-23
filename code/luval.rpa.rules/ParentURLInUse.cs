@@ -24,6 +24,7 @@ namespace luval.rpa.rules
                     {
                         if (at.Name.ToLowerInvariant() == "purl" && at.IsInUse)
                             res.Add(new Result() {
+                                Type = ResultType.Error,
                                 Parent = obj.Name, Page = "Application Modeller", Scope = "Object",
                                 RuleName = GetRuleName(), RuleDescription = GetRuleDescription(),
                                 Message = string.Format("Parent Url is being used for element {0}", el.Name)

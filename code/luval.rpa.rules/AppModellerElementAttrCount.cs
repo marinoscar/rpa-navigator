@@ -27,6 +27,7 @@ namespace luval.rpa.rules
 
                     res.Add(new Result()
                     {
+                        Type = ResultType.Error,
                         Parent = obj.Name,
                         Page = "Application Modeller",
                         Scope = "Object",

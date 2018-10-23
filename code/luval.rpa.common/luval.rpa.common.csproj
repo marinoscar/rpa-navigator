@@ -70,6 +70,7 @@
     <Compile Include="Model\Stage.cs" />
     <Compile Include="Model\StartStage.cs" />
     <Compile Include="Model\SubPageStage.cs" />
+    <Compile Include="Model\WaitEnd.cs" />
     <Compile Include="Model\WaitStage.cs" />
     <Compile Include="Model\WriteStage.cs" />
     <Compile Include="ObjectExtractor.cs" />

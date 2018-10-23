@@ -71,6 +71,9 @@ namespace luval.rpa.common
                 case "WaitStart":
                     stage = new WaitStage(xml);
                     break;
+                case "WaitEnd":
+                    stage = new WaitEnd(xml);
+                    break;
                 case "Start":
                     stage = new StartStage(xml);
                     break;
