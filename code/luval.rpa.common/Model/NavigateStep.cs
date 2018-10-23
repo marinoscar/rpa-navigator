@@ -13,6 +13,7 @@ namespace luval.rpa.common.Model
         {
             Arguments = new List<Argument>();
             var action = GetElement("action");
+            if (action == null) return;
             var args = GetElement(action, "arguments");
             if (args == null) return;
             foreach (var arg in args.Elements().ToList())

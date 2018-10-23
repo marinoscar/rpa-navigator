@@ -45,5 +45,11 @@ namespace luval.rpa.common.Model
             get { return GetElementValue("narrative"); }
             set { TrySetElValue("narrative", value); }
         }
+
+        public virtual string OnSuccess
+        {
+            get { return GetElementValue("onsuccess"); }
+            set { TrySetElValue("onsuccess", value); }
+        }
     }
 }
