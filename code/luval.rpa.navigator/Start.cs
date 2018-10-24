@@ -24,11 +24,18 @@ namespace luval.rpa.navigator
 
         private void btnRules_Click(object sender, EventArgs e)
         {
-            var file = GetReleaseFile();
-            if (string.IsNullOrWhiteSpace(file))
-                return;
-            var report = RunRules(file);
-            SaveReport(report);
+            try
+            {
+                var file = GetReleaseFile();
+                if (string.IsNullOrWhiteSpace(file))
+                    return;
+                var report = RunRules(file);
+                SaveReport(report);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private ReportGenerator RunRules(string file)
