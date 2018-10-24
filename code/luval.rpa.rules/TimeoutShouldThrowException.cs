@@ -31,9 +31,9 @@ namespace luval.rpa.rules
 
         private bool HasExceptionInPath(Stage stage, IEnumerable<StageAnalysisUnit> units)
         {
-            if (string.IsNullOrWhiteSpace(stage.OnSuccess)) return false;
             if (stage.Type.ToLowerInvariant().Contains("exception")) return true;
-            if (stage.Type.ToLowerInvariant().Contains("end")) return false;
+            if (string.IsNullOrWhiteSpace(stage.OnSuccess)) return false;
+            if (stage.Type.ToLowerInvariant() == "end") return false;
             var next = units.FirstOrDefault(i => i.Stage.Id == stage.OnSuccess);
             if (next == null || next.Stage == null) return false;
             return HasExceptionInPath(next.Stage, units);
