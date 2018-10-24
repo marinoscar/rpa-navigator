@@ -9,7 +9,7 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Proper use of descriptions"),
+    [Name("Proper Use Of Descriptions"),
      Description("Checks that main pages, inputs and outputs have descriptions")]
     public class ProperUseOfDescriptions : RuleBase, IRule
     {

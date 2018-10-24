@@ -9,7 +9,7 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Navigate should have a wait"),
+    [Name("Navigate Should Have a Wait"),
      Description("Checks that after a navigate there is a proper wait")]
     public class NavigateShouldFollowWait : RuleBase, IRule
     {

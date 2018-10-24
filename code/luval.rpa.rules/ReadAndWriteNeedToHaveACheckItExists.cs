@@ -9,7 +9,7 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Read and Write Stages need to check that element exists"),
+    [Name("Read And Write Stages Need To Check That Element Exists"),
      Description("Checks that before a read or write operation is executed there is a check that element exists")]
     public class ReadAndWriteNeedToHaveACheckItExists : RuleBase, IRule
     {

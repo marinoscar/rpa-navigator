@@ -11,7 +11,7 @@ namespace luval.rpa.rules
 {
     [Name("Data Item Not Initialized"),
      Description("Checks that there is no data item with an initial value")]
-    public class DataItemsIsInitialized : RuleBase, IRule
+    public class DataItemNotInitialized : RuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

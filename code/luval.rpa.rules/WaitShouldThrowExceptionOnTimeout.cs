@@ -9,7 +9,7 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Timeout stage should throw exception"),
+    [Name("Wait Stage Should Throw Exception On Timeout"),
      Description("Checks that when a timeout occurs an exception is thrown")]
     public class TimeoutShouldThrowException : RuleBase, IRule
     {
