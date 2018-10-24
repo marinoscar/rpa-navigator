@@ -33,8 +33,8 @@ namespace luval.rpa.rules
                         Scope = "Object",
                         RuleName = GetRuleName(),
                         RuleDescription = GetRuleDescription(),
-                        Message = string.Format("Too many attributes are used to identify the element, a total of {0} are in used, and the max allowed is {1}. List attributes {2}"
-                        , atts.Count, max, string.Join(", ", atts.Select(i => i.Name)))
+                        Message = string.Format("Too many attributes are used to identify the element {0}, a total of {1} are in used, and the max allowed is {2}. List attributes {3}"
+                        , el.Name, atts.Count, max, string.Join(", ", atts.Select(i => i.Name)))
                     });
                 }
             }
