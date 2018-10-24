@@ -9,9 +9,9 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Parent Url In Use"),
+    [Name("Parent Url Not In Use"),
      Description("Checks that html elements are not using the parent url")]
-    public class ParentURLInUse : RuleBase, IRule
+    public class ParentURLNotInUse : RuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

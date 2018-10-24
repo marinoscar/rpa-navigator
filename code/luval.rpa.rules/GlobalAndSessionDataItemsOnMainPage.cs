@@ -9,8 +9,8 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Proper use of descriptions"),
-    Description("Checks that main pages, inputs and outputs have descriptions")]
+    [Name("Global And Session Data Items On Main Page"),
+    Description("Global And Session Data Items On Main Page")]
     public class GlobalAndSessionDataItemsOnMainPage : RuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
