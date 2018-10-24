@@ -30,7 +30,7 @@ namespace luval.rpa.rules.core
             }
         }
 
-        private IEnumerable<Result> RunRules(RuleProfile profile, Release release, IEnumerable<IRule> rules)
+        public IEnumerable<Result> RunRules(RuleProfile profile, Release release, IEnumerable<IRule> rules)
         {
             CleanReleaseFromProfileExclusions(profile, release);
             var res = new List<Result>();

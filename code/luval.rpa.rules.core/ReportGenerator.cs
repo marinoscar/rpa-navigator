@@ -15,11 +15,13 @@ namespace luval.rpa.rules.core
 
         private RuleProfile _profile;
         private Release _release;
+        private IEnumerable<IRule> _rules;
 
-        public ReportGenerator(RuleProfile profile, Release release, IEnumerable<Result> results)
+        public ReportGenerator(RuleProfile profile, Release release, IEnumerable<Result> results, IEnumerable<IRule> rules)
         {
             _profile = profile;
             _release = release;
+            _rules = rules;
             Results = new List<Result>(results);
         }
 
@@ -27,16 +29,12 @@ namespace luval.rpa.rules.core
 
         public void ToCsv(string outputfile)
         {
-            var runData = GetRunProperites();
             var separator = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
             var properties = typeof(Result).GetProperties();
             var headers = properties.Select(i => i.Name).ToList();
             var sw = new StringWriter();
-            foreach(var rd in runData)
-            {
-                sw.WriteLine("{0}{1}{2}", rd.Key, separator, rd.Value);
-            }
-            sw.WriteLine();
+            PrintDicAsCsv("Run Property", "Value", GetRunProperites(), separator, sw);
+            PrintDicAsCsv("Rule Name", "Instance Count", GetRuleResults(), separator, sw);
             sw.WriteLine(string.Join(separator, headers));
             foreach(var res in Results)
             {
@@ -46,18 +44,39 @@ namespace luval.rpa.rules.core
             File.WriteAllText(outputfile, sw.ToString());
         }
 
+        private void PrintDicAsCsv(string col1, string col2, Dictionary<string, string> dic, string sep, StringWriter sw)
+        {
+            sw.WriteLine("{0}{1}{2}", col1, sep, col2);
+            foreach (var e in dic)
+            {
+                sw.WriteLine("{0}{1}{2}", e.Key, sep, e.Value);
+            }
+            sw.WriteLine();
+        }
+
         public Dictionary<string, string> GetRunProperites()
         {
             var dic = new Dictionary<string, string>();
-            dic["RunAtUTC"] = DateTime.UtcNow.ToString("YYYY-MM-DD hh:mm:ss");
-            dic["RunAtLocalTime"] = DateTime.Now.ToString("YYYY-MM-DD hh:mm:ss");
-            dic["RunOnMachine"] = Environment.MachineName;
-            dic["RunByUser"] = Environment.UserName;
-            dic["ProfileExclusions"] = string.Join("*", _profile.Exclusions.Select(i => i.Name));
-            dic["PackageName"] = _release.PackageName;
-            dic["ReleaseName"] = _release.Name;
-            dic["ReleaseObjectCount"] = _release.Objects.Count.ToString();
-            dic["ReleaseProcessCount"] = _release.Processes.Count.ToString();
+            dic["Run At UTC"] = DateTime.UtcNow.ToString("YYYY-MM-DD hh:mm:ss");
+            dic["Run At Local Time"] = DateTime.Now.ToString("YYYY-MM-DD hh:mm:ss");
+            dic["Run On Machine"] = Environment.MachineName;
+            dic["Run By User"] = Environment.UserName;
+            dic["Profile Exclusions"] = string.Join("*", _profile.Exclusions.Select(i => i.Name));
+            dic["Package Name"] = _release.PackageName;
+            dic["Release Name"] = _release.Name;
+            dic["Release Object Count"] = _release.Objects.Count.ToString();
+            dic["Release Process Count"] = _release.Processes.Count.ToString();
+            return dic;
+        }
+
+        public Dictionary<string, string> GetRuleResults()
+        {
+            var dic = new Dictionary<string, string>();
+            foreach (var rule in _rules)
+            {
+                var count = Results.Count(i => i.RuleName == rule.Name);
+                dic[rule.Name] = count.ToString();
+            }
             return dic;
         }
     }

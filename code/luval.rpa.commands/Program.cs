@@ -38,8 +38,9 @@ namespace luval.rpa.commands
             var release = new ReleaseExtractor(xml);
             release.Load();
             var ruleEngine = new Runner();
-            var results = ruleEngine.RunProfile(newProfile, release.Release);
-            var report = new ReportGenerator(newProfile, release.Release, results);
+            var rules = ruleEngine.GetRulesFromProfile(newProfile);
+            var results = ruleEngine.RunRules(newProfile, release.Release, rules);
+            var report = new ReportGenerator(newProfile, release.Release, results, rules);
             report.ToCsv(@"report.csv");
         }
     }
