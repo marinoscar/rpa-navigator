@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.Model;
 using luval.rpa.rules.core.Attributes;
 using luval.rpa.rules.core;
+using System.Configuration;
 
 namespace luval.rpa.rules
 {
@@ -57,6 +58,14 @@ namespace luval.rpa.rules
             var name = GetType().GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault();
             if (name == null) return string.Empty;
             return ((DescriptionAttribute)name).Value;
+        }
+
+        protected virtual T GetSetting<T>(string name, T defaultValue)
+        {
+            var settingName = string.Format("{0}.{1}", GetType().Name, name);
+            var value = ConfigurationManager.AppSettings[settingName];
+            if (string.IsNullOrWhiteSpace(value)) return defaultValue;
+            return ((T)Convert.ChangeType(value, typeof(T)));
         }
     }
 }

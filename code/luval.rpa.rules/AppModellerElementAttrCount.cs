@@ -41,10 +41,9 @@ namespace luval.rpa.rules
             return res;
         }
 
-        //TODO: Make sure this comes from a configuration setting
         private int GetMaxCount()
         {
-            return 4;
+            return GetSetting<int>("MaxCount", 20);
         }
     }
 }
