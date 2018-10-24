@@ -26,7 +26,7 @@ namespace luval.rpa.rules
                             res.Add(new Result() {
                                 Type = ResultType.Error,
                                 Parent = obj.Name, Page = "Application Modeller", Scope = "Object",
-                                RuleName = GetRuleName(), RuleDescription = GetRuleDescription(),
+                                RuleName = Name, RuleDescription = GetRuleDescription(),
                                 Message = string.Format("Parent Url is being used for element {0}", el.Name)
                             });
                     }

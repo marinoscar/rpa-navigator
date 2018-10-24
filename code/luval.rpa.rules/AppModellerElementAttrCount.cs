@@ -31,7 +31,7 @@ namespace luval.rpa.rules
                         Parent = obj.Name,
                         Page = "Application Modeller",
                         Scope = "Object",
-                        RuleName = GetRuleName(),
+                        RuleName = Name,
                         RuleDescription = GetRuleDescription(),
                         Message = string.Format("Too many attributes are used to identify the element {0}, a total of {1} are in used, and the max allowed is {2}. List attributes {3}"
                         , el.Name, atts.Count, max, string.Join(", ", atts.Select(i => i.Name)))

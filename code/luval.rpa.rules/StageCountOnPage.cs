@@ -45,7 +45,7 @@ namespace luval.rpa.rules
                 return;
             res.Add(new Result()
             {
-                RuleName = GetRuleName(),
+                RuleName = Name,
                 RuleDescription = GetRuleDescription(),
                 Scope = scope,
                 Page = page,

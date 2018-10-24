@@ -12,13 +12,20 @@ namespace luval.rpa.rules
 {
     public abstract class RuleBase : IRule
     {
+        /// <summary>
+        /// Gets the name of the rule
+        /// </summary>
+        public string Name { get { return GetRuleName(); } }
+
         public abstract IEnumerable<Result> Execute(Release release);
+
+
 
         protected virtual Result FromStageAnalysis(StageAnalysisUnit unit, ResultType type, string message, string description)
         {
             return new Result()
             {
-                RuleName = GetRuleName(),
+                RuleName = Name,
                 RuleDescription = GetRuleDescription(),
                 Type = type,
                 Scope = unit.ParentType,

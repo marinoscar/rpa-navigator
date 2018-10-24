@@ -33,7 +33,7 @@ namespace luval.rpa.rules
                         Page = "Main",
                         Parent = i.Name,
                         Scope = scope,
-                        RuleName = GetRuleName(),
+                        RuleName = Name,
                         RuleDescription = GetRuleDescription(),
                         Type = ResultType.Error,
                         Message = string.Format("Main page needs to have a proper description")
