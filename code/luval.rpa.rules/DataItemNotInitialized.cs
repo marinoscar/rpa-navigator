@@ -9,7 +9,7 @@ using luval.rpa.rules.core;
 
 namespace luval.rpa.rules
 {
-    [Name("Data Items Is Initialized"),
+    [Name("Data Item Not Initialized"),
      Description("Checks that there is no data item with an initial value")]
     public class DataItemsIsInitialized : RuleBase, IRule
     {
