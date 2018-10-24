@@ -57,7 +57,7 @@
     <Compile Include="ProperUseOfDescriptions.cs" />
     <Compile Include="ReadAndWriteNeedToHaveACheckItExists.cs" />
     <Compile Include="StageCountOnPage.cs" />
-    <Compile Include="TimeoutShouldThrowException.cs" />
+    <Compile Include="WaitShouldThrowExceptionOnTimeout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">

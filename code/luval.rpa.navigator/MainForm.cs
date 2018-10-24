@@ -176,7 +176,7 @@ namespace luval.rpa.navigator
 
         private void mnuContents_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/marinoscar/rpa-navigator/wiki/About");
+            Process.Start("https://github.com/marinoscar/rpa-navigator/wiki");
         }
 
         private void mnuRunCodeReview_Click(object sender, EventArgs e)
