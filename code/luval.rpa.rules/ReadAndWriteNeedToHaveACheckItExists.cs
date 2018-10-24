@@ -20,11 +20,23 @@ namespace luval.rpa.rules
             var readsAndWrites = units.Where(i => i.Stage.Type == "Read" || i.Stage.Type == "Write").ToList();
             foreach(var u in readsAndWrites)
             {
+                if (HasExclusion(u.Stage)) continue;
                 if (!HasCheckBefore(u.Stage, units))
                     res.Add(FromStageAnalysis(u, ResultType.Error,
                         string.Format("{0} stage {1} is not preceeded by a proper wait stage", u.Stage.Type, u.Stage.Name), ""));
             }
             return res;
+        }
+
+        private bool HasExclusion(Stage stage)
+        {
+            if(stage.Type == "Read")
+            {
+                var read = (ReadStage)stage;
+                var ex = GetActionExlusion();
+                return read.Actions.Any(i => ex.Contains(i.Action));
+            }
+            return false;
         }
 
         private bool HasCheckBefore(Stage stage, IEnumerable<StageAnalysisUnit> units)
@@ -48,6 +60,16 @@ namespace luval.rpa.rules
             if (unit == null) return null;
             if (unit.Stage.Type == "Anchor") return GetNextStage(unit.Stage.OnSuccess, units);
             return unit.Stage;
+        }
+
+        private List<string> GetActionExlusion() {
+            return GetActionExlusionSetting().Split(",".ToArray()).ToList();
+        }
+
+        private string GetActionExlusionSetting()
+        {
+            var defaultVal = "IsConnected,Snapshot,HTML Snapshot,Get Document URL,Get Document URL Domain,Get Screen Bounds,Get Bounds";
+            return GetSetting<string>("Exclusions", defaultVal);
         }
     }
 }

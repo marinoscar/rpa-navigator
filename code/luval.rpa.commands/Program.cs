@@ -17,7 +17,7 @@ namespace luval.rpa.commands
     {
         static void Main(string[] args)
         {
-            var prof = @"C:\Users\oscar.marin\Desktop\TMP\profile.xml";
+            var prof = @"profile.xml";
             var ser = new XmlSerializer(typeof(RuleProfile));
 
             //var profile = new RuleProfile();
