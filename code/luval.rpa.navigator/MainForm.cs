@@ -161,11 +161,17 @@ namespace luval.rpa.navigator
 
         private void mnuAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-@"Tool Created By Oscar Marin
-
-oscar@marin.cr
-https://marin.cr");
+            var version = GetVersionNumber();
+            var sw = new StringWriter();
+            sw.WriteLine();
+            sw.WriteLine("Tool Created By Oscar Marin");
+            sw.WriteLine();
+            sw.WriteLine("https://marin.cr");
+            sw.WriteLine("https://github.com/marinoscar/rpa-navigator");
+            sw.WriteLine();
+            sw.WriteLine("App Version: {0}", version);
+            sw.WriteLine();
+            MessageBox.Show(sw.ToString(),"About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void mnuContents_Click(object sender, EventArgs e)
@@ -241,7 +247,6 @@ https://marin.cr");
             if (ApplicationDeployment.IsNetworkDeployed)
             {
                 ApplicationDeployment ad = ApplicationDeployment.CurrentDeployment;
-
                 try
                 {
                     info = ad.CheckForDetailedUpdate();
@@ -301,6 +306,13 @@ https://marin.cr");
                     }
                 }
             }
+        }
+
+        private string GetVersionNumber()
+        {
+            if (!ApplicationDeployment.IsNetworkDeployed) return "1.0.0.0";
+            var ad = ApplicationDeployment.CurrentDeployment;
+            return Convert.ToString(ad.CurrentVersion);
         }
     }
 }
