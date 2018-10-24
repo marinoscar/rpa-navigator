@@ -43,7 +43,7 @@
     <Compile Include="AppModellerElementAttrCount.cs" />
     <Compile Include="ArbitraryWaits.cs" />
     <Compile Include="DataItemsIsInitialized.cs" />
-    <Compile Include="ExceptionHandlingOnMainPage.cs" />
+    <Compile Include="ExceptionRecoveryOnMainPage.cs" />
     <Compile Include="GlobalAndSessionDataItemsOnMainPage.cs" />
     <Compile Include="NavigateShouldFollowWait.cs" />
     <Compile Include="ParentURLInUse.cs" />

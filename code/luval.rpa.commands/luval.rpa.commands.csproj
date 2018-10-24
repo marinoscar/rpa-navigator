@@ -62,10 +62,5 @@
       <Name>luval.rpa.rules</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="profile.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
