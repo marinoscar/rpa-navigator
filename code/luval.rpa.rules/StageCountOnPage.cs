@@ -56,7 +56,7 @@ namespace luval.rpa.rules
 
         private IEnumerable<Stage> FilterStages(IEnumerable<Stage> stages)
         {
-            var types = new[] { "Start", "End", "Anchor", "Note", "Block" };
+            var types = new[] { "Start", "End", "Data", "Anchor", "Note", "Block" };
             return stages.Where(i => !types.Contains(i.Type)).ToList();
         }
 
