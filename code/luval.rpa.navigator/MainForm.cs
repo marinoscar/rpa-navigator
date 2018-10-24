@@ -1,9 +1,12 @@
 ﻿using luval.rpa.common;
 using luval.rpa.common.Model;
+using luval.rpa.rules.core;
+using luval.rpa.rules.core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,12 +14,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace luval.rpa.navigator
 {
     public partial class MainForm : Form
     {
-
+        private string _fileName;
         public MainForm()
         {
             InitializeComponent();
@@ -35,9 +39,24 @@ namespace luval.rpa.navigator
             var res = openDlg.ShowDialog();
             if (res == DialogResult.Cancel) return;
             var file = openDlg.FileName;
-            var extractor = new ReleaseExtractor(File.ReadAllText(file));
-            extractor.Load();
-            LoadTree(extractor.Release);
+            try
+            {
+                var extractor = new ReleaseExtractor(File.ReadAllText(file));
+                extractor.Load();
+                LoadTree(extractor.Release);
+                _fileName = file;
+            }
+            catch (Exception ex)
+            {
+                _fileName = null;
+                treeView.Nodes.Clear();
+                ShowEx(ex);
+            }
+        }
+
+        private void ShowEx(Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void LoadTree(Release release)
@@ -45,20 +64,35 @@ namespace luval.rpa.navigator
             treeView.Nodes.Clear();
             var root = new TreeNode("Release");
             var objects = new TreeNode("Objects");
+            var process = new TreeNode("Process");
+            root.Nodes.Add(process);
             root.Nodes.Add(objects);
+            LoadProcess(process, release.Processes);
             LoadObjects(objects, release.Objects);
             treeView.Nodes.Add(root);
         }
 
+        private void LoadProcess(TreeNode parent, IEnumerable<ProcessStage> processes)
+        {
+            foreach (var proc in processes)
+            {
+                var objectNode = new TreeNode(proc.Name) { Tag = proc };
+                parent.Nodes.Add(objectNode);
+                var actionsNode = new TreeNode("Pages");
+                objectNode.Nodes.Add(actionsNode);
+                LoadPages("Main", actionsNode, proc);
+            }
+        }
+
         private void LoadObjects(TreeNode parent, IEnumerable<ObjectStage> objects)
         {
-            foreach(var obj in objects)
+            foreach (var obj in objects)
             {
-                var objectNode = new TreeNode(obj.Name) { Tag = obj};
+                var objectNode = new TreeNode(obj.Name) { Tag = obj };
                 parent.Nodes.Add(objectNode);
                 var actionsNode = new TreeNode("Actions");
                 objectNode.Nodes.Add(actionsNode);
-                LoadActions(actionsNode, obj.Pages);
+                LoadPages("Initialize", actionsNode, obj);
                 LoadAppModel(objectNode, obj);
             }
         }
@@ -70,43 +104,37 @@ namespace luval.rpa.navigator
             if (obj.ApplicationDefinition == null) return;
             var app = new TreeNode(string.Format("{0} - {1}", obj.ApplicationDefinition.Name, obj.ApplicationDefinition.Type)) { Tag = obj.ApplicationDefinition };
             root.Nodes.Add(app);
-            foreach(var el in obj.ApplicationDefinition.Elements)
+            foreach (var el in obj.ApplicationDefinition.Elements)
             {
                 var elNode = new TreeNode(string.Format("{0} - {1}", el.Name, el.Type)) { Tag = el };
                 app.Nodes.Add(elNode);
                 var attNode = new TreeNode("Attributes");
                 elNode.Nodes.Add(attNode);
-                foreach(var att in el.Attributes.OrderByDescending(i => i.InUse))
+                foreach (var att in el.Attributes.OrderByDescending(i => i.InUse))
                 {
                     var aNode = new TreeNode(string.Format("{0} InUse: {1}", att.Name, att.InUse)) { Tag = att };
                     attNode.Nodes.Add(aNode);
                 }
             }
         }
-        private void LoadActions(TreeNode parent, IEnumerable<PageStage> actions)
+        private void LoadPages(string mainPageName, TreeNode parent, PageBasedStage pagedObject)
         {
-            foreach(var action in actions)
+            var mainNode = new TreeNode(mainPageName);
+            parent.Nodes.Add(mainNode);
+            LoadStages(mainNode, pagedObject.MainPage);
+            foreach(var page in pagedObject.Pages)
             {
-                var actionNode = new TreeNode(action.Name)
-                {
-                    Tag = action
-                };
-                var stagesType = action.Stages.Select(i => i.Type).Distinct().ToList();
-                foreach(var type in stagesType)
-                {
-                    var nodeType = new TreeNode(type);
-                    actionNode.Nodes.Add(nodeType);
-                    var stages = action.Stages.Where(i => i.Type == type).ToList();
-                    foreach(var stage in stages)
-                    {
-                        var stageNode = new TreeNode(stage.Name)
-                        {
-                            Tag = stage
-                        };
-                        nodeType.Nodes.Add(stageNode);
-                    }
-                }
-                parent.Nodes.Add(actionNode);
+                var pageNode = new TreeNode(page.Name) { Tag = page };
+                parent.Nodes.Add(pageNode);
+                LoadStages(pageNode, page.Stages);
+            }
+        }
+
+        private void LoadStages(TreeNode parent, IEnumerable<Stage> stages)
+        {
+            foreach (var stage in stages)
+            {
+                parent.Nodes.Add(new TreeNode(string.Format("{0} - {1}", stage.Type, stage.Name)) { Tag = stage });
             }
         }
 
@@ -118,6 +146,86 @@ namespace luval.rpa.navigator
                 return;
             }
             propertyGrid.SelectedObject = e.Node.Tag;
+            if (typeof(Stage).IsAssignableFrom(e.Node.Tag.GetType()))
+            {
+                txtArea.Clear();
+                txtArea.Text = Convert.ToString(((Stage)e.Node.Tag).Xml);
+            }
+        }
+
+        private void mnuExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+@"Tool Created By Oscar Marin
+
+oscar@marin.cr
+https://marin.cr");
+        }
+
+        private void mnuContents_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/marinoscar/rpa-navigator/wiki/About");
+        }
+
+        private void mnuRunCodeReview_Click(object sender, EventArgs e)
+        {
+            if(treeView.Nodes.Count <= 0)
+            {
+                MessageBox.Show("Please open a release file first", "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            ExecuteRules();
+        }
+
+        private void ExecuteRules()
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(_fileName))
+                    return;
+                var report = RunRules(_fileName);
+                var outputFile = SaveReport(report);
+                if (string.IsNullOrWhiteSpace(outputFile)) return;
+                var res = MessageBox.Show("Report Succesfully Saved. Do you want to open the file?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (res == DialogResult.No) return;
+                Process.Start(outputFile);
+            }
+            catch (Exception ex)
+            {
+                ShowEx(ex);
+            }
+        }
+
+        private ReportGenerator RunRules(string file)
+        {
+            var prof = @"profile.xml";
+            var ser = new XmlSerializer(typeof(RuleProfile));
+            var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
+            var xml = File.ReadAllText(file);
+            var release = new ReleaseExtractor(xml);
+            release.Load();
+            var ruleEngine = new Runner();
+            var rules = ruleEngine.GetRulesFromProfile(newProfile);
+            var results = ruleEngine.RunRules(newProfile, release.Release, rules);
+            return new ReportGenerator(newProfile, release.Release, results, rules);
+        }
+
+        private string SaveReport(ReportGenerator report)
+        {
+            var dialog = new SaveFileDialog()
+            {
+                Title = "Save Results",
+                RestoreDirectory = true,
+                Filter = "csv (*.csv)|*.csv|All files (*.*)|*.*"
+            };
+            if (dialog.ShowDialog() != DialogResult.OK) return null;
+            report.ToCsv(dialog.FileName);
+            return dialog.FileName;
         }
     }
 }
