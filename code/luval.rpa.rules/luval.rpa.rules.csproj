@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="AppModellerElementAttrCount.cs" />
     <Compile Include="ArbitraryWaits.cs" />
-    <Compile Include="DataItemsNotInitialized.cs" />
+    <Compile Include="DataItemsIsInitialized.cs" />
     <Compile Include="ExceptionHandlingOnMainPage.cs" />
     <Compile Include="GlobalAndSessionDataItemsOnMainPage.cs" />
     <Compile Include="NavigateShouldFollowWait.cs" />
