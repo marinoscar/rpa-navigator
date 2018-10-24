@@ -15,8 +15,7 @@ namespace luval.rpa.rules.core
 
         public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
         {
-            CleanReleaseFromProfileExclusions(profile, release);
-            return RunRules(release, GetRulesFromProfile(profile));
+            return RunRules(profile, release, GetRulesFromProfile(profile));
         }
 
         
@@ -31,8 +30,9 @@ namespace luval.rpa.rules.core
             }
         }
 
-        private IEnumerable<Result> RunRules(Release release, IEnumerable<IRule> rules)
+        private IEnumerable<Result> RunRules(RuleProfile profile, Release release, IEnumerable<IRule> rules)
         {
+            CleanReleaseFromProfileExclusions(profile, release);
             var res = new List<Result>();
             foreach(var rule in rules)
             {
@@ -41,7 +41,7 @@ namespace luval.rpa.rules.core
             return res;
         }
 
-        private IEnumerable<IRule> GetRulesFromProfile(RuleProfile profile)
+        public IEnumerable<IRule> GetRulesFromProfile(RuleProfile profile)
         {
             var rules = new List<IRule>();
             foreach(var ruleConfig in profile.Rules)

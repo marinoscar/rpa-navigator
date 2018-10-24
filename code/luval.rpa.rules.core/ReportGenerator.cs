@@ -1,4 +1,6 @@
-﻿using System;
+﻿using luval.rpa.common.Model;
+using luval.rpa.rules.core.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -10,8 +12,14 @@ namespace luval.rpa.rules.core
 {
     public class ReportGenerator
     {
-        public ReportGenerator(IEnumerable<Result> results)
+
+        private RuleProfile _profile;
+        private Release _release;
+
+        public ReportGenerator(RuleProfile profile, Release release, IEnumerable<Result> results)
         {
+            _profile = profile;
+            _release = release;
             Results = new List<Result>(results);
         }
 
@@ -19,10 +27,16 @@ namespace luval.rpa.rules.core
 
         public void ToCsv(string outputfile)
         {
+            var runData = GetRunProperites();
             var separator = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
             var properties = typeof(Result).GetProperties();
             var headers = properties.Select(i => i.Name).ToList();
             var sw = new StringWriter();
+            foreach(var rd in runData)
+            {
+                sw.WriteLine("{0}{1}{2}", rd.Key, separator, rd.Value);
+            }
+            sw.WriteLine();
             sw.WriteLine(string.Join(separator, headers));
             foreach(var res in Results)
             {
@@ -30,6 +44,21 @@ namespace luval.rpa.rules.core
                 sw.WriteLine(string.Join(separator, values));
             }
             File.WriteAllText(outputfile, sw.ToString());
+        }
+
+        public Dictionary<string, string> GetRunProperites()
+        {
+            var dic = new Dictionary<string, string>();
+            dic["RunAtUTC"] = DateTime.UtcNow.ToString("YYYY-MM-DD hh:mm:ss");
+            dic["RunAtLocalTime"] = DateTime.Now.ToString("YYYY-MM-DD hh:mm:ss");
+            dic["RunOnMachine"] = Environment.MachineName;
+            dic["RunByUser"] = Environment.UserName;
+            dic["ProfileExclusions"] = string.Join("*", _profile.Exclusions.Select(i => i.Name));
+            dic["PackageName"] = _release.PackageName;
+            dic["ReleaseName"] = _release.Name;
+            dic["ReleaseObjectCount"] = _release.Objects.Count.ToString();
+            dic["ReleaseProcessCount"] = _release.Processes.Count.ToString();
+            return dic;
         }
     }
 }

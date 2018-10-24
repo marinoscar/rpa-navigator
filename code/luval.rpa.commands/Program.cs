@@ -39,8 +39,8 @@ namespace luval.rpa.commands
             release.Load();
             var ruleEngine = new Runner();
             var results = ruleEngine.RunProfile(newProfile, release.Release);
-            var report = new ReportGenerator(results);
-            report.ToCsv(@"C:\Users\oscar.marin\Desktop\TMP\report.csv");
+            var report = new ReportGenerator(newProfile, release.Release, results);
+            report.ToCsv(@"report.csv");
         }
     }
 }
