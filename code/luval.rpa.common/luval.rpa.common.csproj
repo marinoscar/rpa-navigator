@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ExtractorBase.cs" />
     <Compile Include="Model\Argument.cs" />
+    <Compile Include="Model\ItemLocation.cs" />
     <Compile Include="Model\NavigateStep.cs" />
     <Compile Include="Model\NavigateStage.cs" />
     <Compile Include="Model\PageBasedStage.cs" />

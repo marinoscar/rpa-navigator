@@ -12,6 +12,7 @@ namespace luval.rpa.common.Model
         public Stage(XElement xml) : base(xml)
         {
             IdName = "stageid";
+            Location = new ItemLocation(xml);
         }
 
         protected string IdName { get; set; }
@@ -51,5 +52,7 @@ namespace luval.rpa.common.Model
             get { return GetElementValue("onsuccess"); }
             set { TrySetElValue("onsuccess", value); }
         }
+
+        public virtual ItemLocation Location { get; set; }
     }
 }
