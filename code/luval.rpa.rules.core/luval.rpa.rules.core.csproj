@@ -53,10 +53,12 @@
     <Compile Include="Configuration\Exclusion.cs" />
     <Compile Include="Configuration\Rule.cs" />
     <Compile Include="Configuration\RuleProfile.cs" />
+    <Compile Include="CsvOutputGenerator.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IRule.cs" />
+    <Compile Include="ITableOutputGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportGenerator.cs" />
+    <Compile Include="CodeReviewReportGenerator.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="RuleBase.cs" />
     <Compile Include="Runner.cs" />

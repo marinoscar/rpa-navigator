@@ -40,7 +40,7 @@ namespace luval.rpa.commands
             var ruleEngine = new Runner();
             var rules = ruleEngine.GetRulesFromProfile(newProfile);
             var results = ruleEngine.RunRules(newProfile, release.Release, rules);
-            var report = new ReportGenerator(newProfile, release.Release, results, rules);
+            var report = new CodeReviewReportGenerator(newProfile, release.Release, results, rules);
             report.ToCsv(@"report.csv");
         }
     }
