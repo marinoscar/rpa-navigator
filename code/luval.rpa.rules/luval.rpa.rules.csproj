@@ -52,6 +52,7 @@
     <Compile Include="ExceptionRecoveryOnMainPage.cs" />
     <Compile Include="GlobalAndSessionDataItemsOnMainPage.cs" />
     <Compile Include="NavigateShouldFollowWait.cs" />
+    <Compile Include="NoBusinessLogicInObject.cs" />
     <Compile Include="ParentURLNotInUse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProperUseOfDescriptions.cs" />
