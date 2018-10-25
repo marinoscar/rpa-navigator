@@ -49,6 +49,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRunCodeReview = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContents = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +61,7 @@
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.treeView = new System.Windows.Forms.TreeView();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.mnuCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNodeReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.panelLeft.SuspendLayout();
@@ -71,8 +72,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
             this.toolsToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -218,7 +219,8 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRunCodeReview});
+            this.mnuRunCodeReview,
+            this.mnuNodeReport});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -241,6 +243,13 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // mnuCheckForUpdates
+            // 
+            this.mnuCheckForUpdates.Name = "mnuCheckForUpdates";
+            this.mnuCheckForUpdates.Size = new System.Drawing.Size(207, 26);
+            this.mnuCheckForUpdates.Text = "Check For Updates";
+            this.mnuCheckForUpdates.Click += new System.EventHandler(this.mnuCheckForUpdates_Click);
             // 
             // mnuContents
             // 
@@ -334,12 +343,12 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
-            // mnuCheckForUpdates
+            // mnuNodeReport
             // 
-            this.mnuCheckForUpdates.Name = "mnuCheckForUpdates";
-            this.mnuCheckForUpdates.Size = new System.Drawing.Size(207, 26);
-            this.mnuCheckForUpdates.Text = "Check For Updates";
-            this.mnuCheckForUpdates.Click += new System.EventHandler(this.mnuCheckForUpdates_Click);
+            this.mnuNodeReport.Name = "mnuNodeReport";
+            this.mnuNodeReport.Size = new System.Drawing.Size(223, 26);
+            this.mnuNodeReport.Text = "Node Report";
+            this.mnuNodeReport.Click += new System.EventHandler(this.mnuNodeReport_Click);
             // 
             // MainForm
             // 
@@ -398,6 +407,7 @@
         private System.Windows.Forms.RichTextBox txtArea;
         private System.Windows.Forms.ToolStripMenuItem mnuRunCodeReview;
         private System.Windows.Forms.ToolStripMenuItem mnuCheckForUpdates;
+        private System.Windows.Forms.ToolStripMenuItem mnuNodeReport;
     }
 }
 

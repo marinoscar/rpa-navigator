@@ -62,6 +62,7 @@
     <Compile Include="Result.cs" />
     <Compile Include="RuleBase.cs" />
     <Compile Include="Runner.cs" />
+    <Compile Include="StageOutputReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">

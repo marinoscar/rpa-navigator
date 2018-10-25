@@ -34,9 +34,9 @@ namespace luval.rpa.rules.core
             var properties = typeof(Result).GetProperties();
             var headers = properties.Select(i => i.Name).ToList();
             var sw = new StringWriter();
-            sw.WriteLine(GetRunProperites());
-            sw.WriteLine(GetRuleResults());
-            sw.WriteLine(Results);
+            sw.WriteLine(generator.Create(GetRunProperites()));
+            sw.WriteLine(generator.Create(GetRuleResults()));
+            sw.WriteLine(generator.Create(Results));
             File.WriteAllText(outputfile, sw.ToString());
         }
 

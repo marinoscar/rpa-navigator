@@ -22,6 +22,7 @@ namespace luval.rpa.navigator
     public partial class MainForm : Form
     {
         private string _fileName;
+        private Release _release;
         public MainForm()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace luval.rpa.navigator
                 extractor.Load();
                 LoadTree(extractor.Release);
                 _fileName = file;
+                _release = extractor.Release;
             }
             catch (Exception ex)
             {
@@ -123,7 +125,7 @@ namespace luval.rpa.navigator
             var mainNode = new TreeNode(mainPageName);
             parent.Nodes.Add(mainNode);
             LoadStages(mainNode, pagedObject.MainPage);
-            foreach(var page in pagedObject.Pages)
+            foreach (var page in pagedObject.Pages)
             {
                 var pageNode = new TreeNode(page.Name) { Tag = page };
                 parent.Nodes.Add(pageNode);
@@ -171,7 +173,7 @@ namespace luval.rpa.navigator
             sw.WriteLine();
             sw.WriteLine("App Version: {0}", version);
             sw.WriteLine();
-            MessageBox.Show(sw.ToString(),"About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(sw.ToString(), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void mnuContents_Click(object sender, EventArgs e)
@@ -181,45 +183,58 @@ namespace luval.rpa.navigator
 
         private void mnuRunCodeReview_Click(object sender, EventArgs e)
         {
-            if(treeView.Nodes.Count <= 0)
-            {
-                MessageBox.Show("Please open a release file first", "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            ExecuteRules();
+            if (!IsFileLoaded()) return;
+            HandleAction(ExecuteRules, null, null);
         }
 
-        private void ExecuteRules()
+        private bool IsFileLoaded()
+        {
+            if (treeView.Nodes.Count <= 0)
+            {
+                MessageBox.Show("Please open a release file first", "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private void HandleAction(Action action, Action onSucces, Action onError)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(_fileName))
-                    return;
-                var report = RunRules(_fileName);
-                var outputFile = SaveReport(report);
-                if (string.IsNullOrWhiteSpace(outputFile)) return;
-                var res = MessageBox.Show("Report Succesfully Saved. Do you want to open the file?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (res == DialogResult.No) return;
-                Process.Start(outputFile);
+                action();
             }
             catch (Exception ex)
             {
                 ShowEx(ex);
+                onError?.Invoke();
             }
+            onSucces?.Invoke();
         }
 
-        private CodeReviewReportGenerator RunRules(string file)
+        private void ExecuteRules()
+        {
+            var report = RunRules();
+            RunReport(() => { return SaveReport(report); });
+        }
+
+        private void RunReport(Func<string> runReport)
+        {
+            var fileName = runReport();
+            if (string.IsNullOrWhiteSpace(fileName)) return;
+            var res = MessageBox.Show("Report Succesfully Saved. Do you want to open the file?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (res == DialogResult.No) return;
+            Process.Start(fileName);
+        }
+
+        private CodeReviewReportGenerator RunRules()
         {
             var prof = @"profile.xml";
             var ser = new XmlSerializer(typeof(RuleProfile));
             var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
-            var xml = File.ReadAllText(file);
-            var release = new ReleaseExtractor(xml);
-            release.Load();
             var ruleEngine = new Runner();
             var rules = ruleEngine.GetRulesFromProfile(newProfile);
-            var results = ruleEngine.RunRules(newProfile, release.Release, rules);
-            return new CodeReviewReportGenerator(newProfile, release.Release, results, rules);
+            var results = ruleEngine.RunRules(newProfile, _release, rules);
+            return new CodeReviewReportGenerator(newProfile, _release, results, rules);
         }
 
         private string SaveReport(CodeReviewReportGenerator report)
@@ -232,6 +247,32 @@ namespace luval.rpa.navigator
             };
             if (dialog.ShowDialog() != DialogResult.OK) return null;
             report.ToCsv(dialog.FileName);
+            return dialog.FileName;
+        }
+
+        private void mnuNodeReport_Click(object sender, EventArgs e)
+        {
+            if (!IsFileLoaded()) return;
+            HandleAction(ExecuteNodeReport, null, null);
+        }
+
+        private void ExecuteNodeReport()
+        {
+            var report = new StageOutputReport();
+            var file = GetOutputFileName();
+            if (string.IsNullOrWhiteSpace(file)) return;
+            RunReport(() => { return report.Generate(file, _release); });
+        }
+
+        private string GetOutputFileName()
+        {
+            var dialog = new SaveFileDialog()
+            {
+                Title = "Save Results",
+                RestoreDirectory = true,
+                Filter = "csv (*.csv)|*.csv|All files (*.*)|*.*"
+            };
+            if (dialog.ShowDialog() != DialogResult.OK) return null;
             return dialog.FileName;
         }
 
