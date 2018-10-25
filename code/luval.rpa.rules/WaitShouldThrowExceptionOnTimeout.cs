@@ -20,23 +20,34 @@ namespace luval.rpa.rules
             var waits = units.Where(i => i.Stage != null && i.Stage.Type == "WaitEnd").ToList();
             foreach (var wait in waits)
             {
-                if (!HasExceptionInPath(wait.Stage, units))
+                var ex = GetNextException(wait.Stage, units);
+                if (ex == null)
                     res.Add(FromStageAnalysis(wait, ResultType.Error,
                         string.Format("Unable to find a exception after the timeout")
                         , ""));
-
+                else if (IsSystemException(ex))
+                    res.Add(FromStageAnalysis(wait, ResultType.Error,
+                        string.Format("Exception type after timeout should be a System Exception, current exception type is {0} with message {1}", ex.Details.Type, ex.Details.Detail)
+                        , ""));
             }
             return res;
         }
 
-        private bool HasExceptionInPath(Stage stage, IEnumerable<StageAnalysisUnit> units)
+        private bool IsSystemException(ExceptionStage ex)
         {
-            if (stage.Type.ToLowerInvariant().Contains("exception")) return true;
-            if (string.IsNullOrWhiteSpace(stage.OnSuccess)) return false;
-            if (stage.Type.ToLowerInvariant() == "end") return false;
+            return ex.Details != null && 
+                !string.IsNullOrWhiteSpace(ex.Details.Type) && 
+                ex.Details.Type.ToLowerInvariant().Equals("system exception");
+        }
+
+        private ExceptionStage GetNextException(Stage stage, IEnumerable<StageAnalysisUnit> units)
+        {
+            if (stage.Type.ToLowerInvariant().Contains("exception")) return (ExceptionStage)stage;
+            if (string.IsNullOrWhiteSpace(stage.OnSuccess)) return null;
+            if (stage.Type.ToLowerInvariant() == "end") return null;
             var next = units.FirstOrDefault(i => i.Stage.Id == stage.OnSuccess);
-            if (next == null || next.Stage == null) return false;
-            return HasExceptionInPath(next.Stage, units);
+            if (next == null || next.Stage == null) return null;
+            return GetNextException(next.Stage, units);
         }
     }
 }
