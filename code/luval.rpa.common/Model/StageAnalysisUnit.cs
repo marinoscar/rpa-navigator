@@ -12,6 +12,10 @@ namespace luval.rpa.common.Model
     public class StageAnalysisUnit
     {
         /// <summary>
+        /// Gets or sets the id of the page
+        /// </summary>
+        public string PageId { get; set; }
+        /// <summary>
         /// Gets or sets the type of parent, Process or Object
         /// </summary>
         public string ParentType { get; set; }
