@@ -15,6 +15,7 @@ namespace luval.rpa.rules
     {
         public override IEnumerable<Result> Execute(Release release)
         {
+            var helper = new StageHelper();
             var res = new List<Result>();
             var units = release.GetAnalysisUnits();
             var readsAndWrites = units.Where(i => i.Stage.Type == "Read" || i.Stage.Type == "Write").ToList();
@@ -22,7 +23,8 @@ namespace luval.rpa.rules
             {
 
                 if (HasExclusion(u.Stage)) continue;
-                if (!HasCheckBefore(u.Stage, units))
+                var stages = helper.FilterStagesByPage(u, units);
+                if (!helper.HasAnImediatePreviousWait(u.Stage, units.Where(i => i.PageId == u.PageId).Select(i => i.Stage)))
                     res.Add(FromStageAnalysis(u, ResultType.Error,
                         string.Format("{0} stage {1} is not preceeded by a proper wait stage", u.Stage.Type, u.Stage.Name), ""));
             }
