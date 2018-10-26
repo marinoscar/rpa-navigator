@@ -22,12 +22,12 @@ namespace luval.rpa.rules
                 {
                     var atts = el.Attributes.Where(i => i.IsInUse).ToList();
                     var max = GetMaxCount();
-                    if (atts.Count < max)
+                    if (atts.Count <= max)
                         continue;
 
                     res.Add(new Result()
                     {
-                        Type = ResultType.Error,
+                        Type = ResultType.Warning,
                         Parent = obj.Name,
                         Page = "Application Modeller",
                         Scope = "Object",
@@ -43,7 +43,7 @@ namespace luval.rpa.rules
 
         private int GetMaxCount()
         {
-            return GetSetting<int>("MaxCount", 4);
+            return GetSetting<int>("MaxCount", 5);
         }
     }
 }
