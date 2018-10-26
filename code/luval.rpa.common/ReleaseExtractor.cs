@@ -14,7 +14,7 @@ namespace luval.rpa.common
 
         public ReleaseExtractor(string xml)
         {
-            _xmlDOM = XElement.Parse(xml);
+            InitializeXml(xml);
         }
 
         public ReleaseExtractor(XElement xml)
@@ -37,7 +37,33 @@ namespace luval.rpa.common
             };
         }
 
-             
+        private void InitializeXml(string xml)
+        {
+            var fix = "&#x0;";
+            try
+            {
+                DoInitialize(xml, true);
+            }
+            catch(Exception ex)
+            {
+                xml = xml.Replace(fix, string.Empty);
+                if (!DoInitialize(xml, false)) throw ex;
+            }
+        }
+        
+        private bool DoInitialize(string xml, bool raise)
+        {
+            try
+            {
+                _xmlDOM = XElement.Parse(xml);
+            }
+            catch (Exception ex)
+            {
+                if (raise) throw ex;
+                return false;
+            }
+            return true;
+        }
 
        
     }
