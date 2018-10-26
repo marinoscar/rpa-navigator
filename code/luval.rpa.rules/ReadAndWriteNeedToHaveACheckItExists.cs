@@ -20,10 +20,18 @@ namespace luval.rpa.rules
             var readsAndWrites = units.Where(i => i.Stage.Type == "Read" || i.Stage.Type == "Write").ToList();
             foreach(var u in readsAndWrites)
             {
-                if (HasExclusion(u.Stage)) continue;
-                if (!HasCheckBefore(u.Stage, units))
-                    res.Add(FromStageAnalysis(u, ResultType.Error,
-                        string.Format("{0} stage {1} is not preceeded by a proper wait stage", u.Stage.Type, u.Stage.Name), ""));
+                var idx = readsAndWrites.IndexOf(u);
+                try
+                {
+                    if (HasExclusion(u.Stage)) continue;
+                    if (!HasCheckBefore(u.Stage, units))
+                        res.Add(FromStageAnalysis(u, ResultType.Error,
+                            string.Format("{0} stage {1} is not preceeded by a proper wait stage", u.Stage.Type, u.Stage.Name), ""));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return res;
         }
@@ -41,13 +49,13 @@ namespace luval.rpa.rules
 
         private bool HasCheckBefore(Stage stage, IEnumerable<StageAnalysisUnit> units)
         {
-            var waits = units.Where(i => i.Stage.Type == "WaitStart").ToList();
+            var waits = units.Where(i => i.PageId == stage.PageId && i.Stage.Type == "WaitStart").ToList();
             foreach(var wait in waits)
             {
                 foreach(var c in ((WaitStartStage)wait.Stage).Choices)
                 {
                     var nextStage = GetNextStage(c.OnTrue, units);
-                    if (nextStage.Id == stage.Id) return true;
+                    if (nextStage != null && nextStage.Id == stage.Id) return true;
                 }
             }
             return false;
