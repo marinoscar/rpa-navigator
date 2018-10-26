@@ -83,6 +83,7 @@ namespace luval.rpa.common.Model
             {
                 items.AddRange(page.Stages.Select(i => new StageAnalysisUnit()
                 {
+                    PageId = page.Id,
                     Page = page.Name,
                     ParentName = parent.Name,
                     ParentType = type,
