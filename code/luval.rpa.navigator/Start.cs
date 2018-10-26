@@ -48,7 +48,7 @@ namespace luval.rpa.navigator
             release.Load();
             var ruleEngine = new Runner();
             var rules = ruleEngine.GetRulesFromProfile(newProfile);
-            var results = ruleEngine.RunRules(newProfile, release.Release, rules);
+            var results = ruleEngine.RunRules(newProfile, release.Release, rules.ToList());
             return new CodeReviewReportGenerator(newProfile, release.Release, results, rules);
         }
 

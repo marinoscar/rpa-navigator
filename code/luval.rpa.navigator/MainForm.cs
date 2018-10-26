@@ -202,14 +202,21 @@ namespace luval.rpa.navigator
 
         private void HandleAction(Action action, Action onSucces, Action onError)
         {
+            var current = this.Cursor;
+            Cursor = Cursors.WaitCursor;
             try
             {
                 action();
             }
             catch (Exception ex)
             {
+                Cursor = current;
                 ShowEx(ex);
                 onError?.Invoke();
+            }
+            finally
+            {
+                Cursor = current;
             }
             onSucces?.Invoke();
         }
@@ -235,9 +242,16 @@ namespace luval.rpa.navigator
             var ser = new XmlSerializer(typeof(RuleProfile));
             var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
             var ruleEngine = new Runner();
+            ruleEngine.RuleRun += RuleEngine_RuleRun;
             var rules = ruleEngine.GetRulesFromProfile(newProfile);
-            var results = ruleEngine.RunRules(newProfile, _release, rules);
+            var results = ruleEngine.RunRules(newProfile, _release, rules.ToList());
             return new CodeReviewReportGenerator(newProfile, _release, results, rules);
+        }
+
+        private void RuleEngine_RuleRun(object sender, RunnerMessageEventArgs e)
+        {
+            Application.DoEvents();
+            lblStatus.Text = e.Message;
         }
 
         private string SaveReport(CodeReviewReportGenerator report)

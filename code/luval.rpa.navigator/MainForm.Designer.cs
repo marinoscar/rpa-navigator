@@ -37,6 +37,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRunCodeReview = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNodeReport = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +49,6 @@
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRunCodeReview = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContents = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,13 +58,14 @@
             this.txtArea = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.splitter2 = new System.Windows.Forms.Splitter();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.treeView = new System.Windows.Forms.TreeView();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.mnuNodeReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.panelRight.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panelLeft.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,6 +145,30 @@
             this.mnuExit.Text = "E&xit";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRunCodeReview,
+            this.mnuNodeReport});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+            this.toolsToolStripMenuItem.Text = "&Tools";
+            // 
+            // mnuRunCodeReview
+            // 
+            this.mnuRunCodeReview.Name = "mnuRunCodeReview";
+            this.mnuRunCodeReview.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.mnuRunCodeReview.Size = new System.Drawing.Size(223, 26);
+            this.mnuRunCodeReview.Text = "Run Code Review";
+            this.mnuRunCodeReview.Click += new System.EventHandler(this.mnuRunCodeReview_Click);
+            // 
+            // mnuNodeReport
+            // 
+            this.mnuNodeReport.Name = "mnuNodeReport";
+            this.mnuNodeReport.Size = new System.Drawing.Size(223, 26);
+            this.mnuNodeReport.Text = "Node Report";
+            this.mnuNodeReport.Click += new System.EventHandler(this.mnuNodeReport_Click);
+            // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -216,23 +242,6 @@
             this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.selectAllToolStripMenuItem.Text = "Select &All";
             // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRunCodeReview,
-            this.mnuNodeReport});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
-            this.toolsToolStripMenuItem.Text = "&Tools";
-            // 
-            // mnuRunCodeReview
-            // 
-            this.mnuRunCodeReview.Name = "mnuRunCodeReview";
-            this.mnuRunCodeReview.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.mnuRunCodeReview.Size = new System.Drawing.Size(223, 26);
-            this.mnuRunCodeReview.Text = "Run Code Review";
-            this.mnuRunCodeReview.Click += new System.EventHandler(this.mnuRunCodeReview_Click);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -292,6 +301,8 @@
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 887);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1144, 22);
@@ -300,30 +311,21 @@
             // 
             // panelLeft
             // 
+            this.panelLeft.Controls.Add(this.treeView);
             this.panelLeft.Controls.Add(this.splitter2);
             this.panelLeft.Controls.Add(this.propertyGrid);
-            this.panelLeft.Controls.Add(this.treeView);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 28);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(403, 859);
             this.panelLeft.TabIndex = 5;
             // 
-            // splitter2
-            // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter2.Location = new System.Drawing.Point(0, 490);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(403, 3);
-            this.splitter2.TabIndex = 2;
-            this.splitter2.TabStop = false;
-            // 
             // propertyGrid
             // 
             this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.propertyGrid.Location = new System.Drawing.Point(0, 493);
+            this.propertyGrid.Location = new System.Drawing.Point(0, 522);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(403, 366);
+            this.propertyGrid.Size = new System.Drawing.Size(403, 337);
             this.propertyGrid.TabIndex = 1;
             // 
             // treeView
@@ -331,7 +333,7 @@
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(403, 859);
+            this.treeView.Size = new System.Drawing.Size(403, 512);
             this.treeView.TabIndex = 0;
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             // 
@@ -343,12 +345,20 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
-            // mnuNodeReport
+            // splitter2
             // 
-            this.mnuNodeReport.Name = "mnuNodeReport";
-            this.mnuNodeReport.Size = new System.Drawing.Size(223, 26);
-            this.mnuNodeReport.Text = "Node Report";
-            this.mnuNodeReport.Click += new System.EventHandler(this.mnuNodeReport_Click);
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.splitter2.Location = new System.Drawing.Point(0, 512);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(403, 10);
+            this.splitter2.TabIndex = 2;
+            this.splitter2.TabStop = false;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(1090, 19);
+            this.lblStatus.Spring = true;
             // 
             // MainForm
             // 
@@ -367,6 +377,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelRight.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panelLeft.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -402,12 +414,13 @@
         private System.Windows.Forms.Panel panelLeft;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.PropertyGrid propertyGrid;
         private System.Windows.Forms.RichTextBox txtArea;
         private System.Windows.Forms.ToolStripMenuItem mnuRunCodeReview;
         private System.Windows.Forms.ToolStripMenuItem mnuCheckForUpdates;
         private System.Windows.Forms.ToolStripMenuItem mnuNodeReport;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }
 

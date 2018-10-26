@@ -13,11 +13,18 @@ namespace luval.rpa.rules.core
     public class Runner
     {
 
+        public event EventHandler<RunnerMessageEventArgs> RuleRun;
+
         public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
         {
-            return RunRules(profile, release, GetRulesFromProfile(profile));
+            return RunRules(profile, release, GetRulesFromProfile(profile).ToList());
         }
 
+
+        protected virtual void OnRuleRun(RunnerMessageEventArgs e)
+        {
+            RuleRun?.Invoke(this, e);
+        }
         
         private void CleanReleaseFromProfileExclusions(RuleProfile profile, Release release)
         {
@@ -30,14 +37,25 @@ namespace luval.rpa.rules.core
             }
         }
 
-        public IEnumerable<Result> RunRules(RuleProfile profile, Release release, IEnumerable<IRule> rules)
+        public IEnumerable<Result> RunRules(RuleProfile profile, Release release, IList<IRule> rules)
         {
             CleanReleaseFromProfileExclusions(profile, release);
             var res = new List<Result>();
             foreach(var rule in rules)
             {
-                res.AddRange(rule.Execute(release));
+                var msg = string.Format("Running {0} {1} out of {2}", rule.Name, rules.IndexOf(rule) + 1, rules.Count);
+                try
+                {
+                    OnRuleRun(new RunnerMessageEventArgs(msg));
+                    res.AddRange(rule.Execute(release));
+                }
+                catch (Exception ex)
+                {
+                    OnRuleRun(new RunnerMessageEventArgs(string.Format("Failed to run rule", rule.Name)));
+                    throw new Exception(string.Format("Unable to run rule: {0}\n{1}", rule.Name, ex.Message), ex);
+                }
             }
+            OnRuleRun(new RunnerMessageEventArgs("Completed"));
             return res;
         }
 
@@ -77,5 +95,14 @@ namespace luval.rpa.rules.core
             return instances;
         }
 
+    }
+
+    public class RunnerMessageEventArgs: EventArgs
+    {
+        public RunnerMessageEventArgs(string message)
+        {
+            Message = message;
+        }
+        public string Message { get; private set; }
     }
 }
