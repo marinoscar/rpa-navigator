@@ -77,6 +77,7 @@ namespace luval.rpa.common.Model
 
         protected virtual string GetElementValue(XElement el, string name)
         {
+            if (el == null) return default(string);
             var element = GetElement(el, name);
             if (element == null) return default(string);
             return element.Value;
