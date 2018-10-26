@@ -18,13 +18,13 @@ namespace luval.rpa.rules
             var res = new List<Result>();
             var units = release.GetAnalysisUnits();
             var navs = units.Where(i => i.Stage.Type == "Navigate").ToList();
-            foreach(var nav in navs)
+            foreach (var nav in navs)
             {
                 var navStage = ((NavigateStage)nav.Stage);
-                if (!navStage.Actions.Any(i => i.Action == "Navigate"))
+                if (!navStage.Actions.Any(i => !string.IsNullOrWhiteSpace(i.Action) && i.Action == "Navigate"))
                     continue;
                 if (!IsNextWait(navStage, units))
-                    res.Add(FromStageAnalysis(nav, ResultType.Error, 
+                    res.Add(FromStageAnalysis(nav, ResultType.Error,
                         string.Format("A navigation stage needs to follow a wait stage to control the flow"), ""));
             }
             return res;
@@ -39,5 +39,29 @@ namespace luval.rpa.rules
             if (next.Stage.Type.ToLowerInvariant().Contains("wait")) return true;
             return false;
         }
+
+        private string[] _navigateActions = {
+            "AttachApplication",
+            "ActivateApp",
+            "SendKeys",
+            "Launch",
+            "Press",
+            "Default",
+            "Select",
+            "SetFocus",
+            "SendKeyEvents",
+            "AAFocus",
+            "MouseClickCentre",
+            "AAClickCentre",
+            "Terminate",
+            "HTMLInsertJavascriptFragment",
+            "HTMLInvokeJavascriptMethod",
+            "HTMLClickCentre",
+            "HTMLSelectItem",
+            "HTMLFocus",
+            "DetachApplication",
+            "AASendKeys",
+            "MouseClick",
+        };
     }
 }
