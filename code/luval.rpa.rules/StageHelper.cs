@@ -56,5 +56,20 @@ namespace luval.rpa.rules
             return units.Where(i => i.ParentType == unit.ParentType && i.ParentName == unit.ParentName && i.PageId == unit.PageId)
                 .Select(i => i.Stage);
         }
+
+        /// <summary>
+        /// Checks the stages that are inside a block
+        /// </summary>
+        /// <param name="block">The block to inspect</param>
+        /// <param name="stages">The stages to analize</param>
+        /// <returns></returns>
+        public IEnumerable<Stage> GetStagesInBlock(Stage block, IEnumerable<Stage> stages)
+        {
+            return stages.Where(i => i.Location != null && 
+                i.Location.X >= block.Location.X &&
+                i.Location.Y <= block.Location.Y &&
+                (i.Location.X + i.Location.Width) >= (block.Location.X + block.Location.Width) &&
+                (i.Location.Y + i.Location.Height) >= (block.Location.Y + block.Location.Height)).ToList();
+        }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="DataItemNotInitialized.cs" />
     <Compile Include="ExceptionRecoveryOnMainPage.cs" />
     <Compile Include="GlobalAndSessionDataItemsOnMainPage.cs" />
+    <Compile Include="NavigateNeedToCheckElementExists.cs" />
     <Compile Include="NavigateShouldFollowWait.cs" />
     <Compile Include="NoBusinessLogicInObject.cs" />
     <Compile Include="NoDefaultNameOnStages.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="ProperUseOfDescriptions.cs" />
     <Compile Include="ReadAndWriteNeedToHaveACheckItExists.cs" />
     <Compile Include="StageCountOnPage.cs" />
+    <Compile Include="StageHelper.cs" />
     <Compile Include="WaitShouldThrowExceptionOnTimeout.cs" />
   </ItemGroup>
   <ItemGroup>
