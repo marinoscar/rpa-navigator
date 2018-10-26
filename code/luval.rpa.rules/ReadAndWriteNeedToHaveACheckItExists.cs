@@ -18,27 +18,20 @@ namespace luval.rpa.rules
             var res = new List<Result>();
             var units = release.GetAnalysisUnits();
             var readsAndWrites = units.Where(i => i.Stage.Type == "Read" || i.Stage.Type == "Write").ToList();
-            foreach(var u in readsAndWrites)
+            foreach (var u in readsAndWrites)
             {
-                var idx = readsAndWrites.IndexOf(u);
-                try
-                {
-                    if (HasExclusion(u.Stage)) continue;
-                    if (!HasCheckBefore(u.Stage, units))
-                        res.Add(FromStageAnalysis(u, ResultType.Error,
-                            string.Format("{0} stage {1} is not preceeded by a proper wait stage", u.Stage.Type, u.Stage.Name), ""));
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+
+                if (HasExclusion(u.Stage)) continue;
+                if (!HasCheckBefore(u.Stage, units))
+                    res.Add(FromStageAnalysis(u, ResultType.Error,
+                        string.Format("{0} stage {1} is not preceeded by a proper wait stage", u.Stage.Type, u.Stage.Name), ""));
             }
             return res;
         }
 
         private bool HasExclusion(Stage stage)
         {
-            if(stage.Type == "Read")
+            if (stage.Type == "Read")
             {
                 var read = (ReadStage)stage;
                 var ex = GetActionExlusion();
@@ -50,9 +43,9 @@ namespace luval.rpa.rules
         private bool HasCheckBefore(Stage stage, IEnumerable<StageAnalysisUnit> units)
         {
             var waits = units.Where(i => i.PageId == stage.PageId && i.Stage.Type == "WaitStart").ToList();
-            foreach(var wait in waits)
+            foreach (var wait in waits)
             {
-                foreach(var c in ((WaitStartStage)wait.Stage).Choices)
+                foreach (var c in ((WaitStartStage)wait.Stage).Choices)
                 {
                     var nextStage = GetNextStage(c.OnTrue, units);
                     if (nextStage != null && nextStage.Id == stage.Id) return true;
@@ -70,7 +63,8 @@ namespace luval.rpa.rules
             return unit.Stage;
         }
 
-        private List<string> GetActionExlusion() {
+        private List<string> GetActionExlusion()
+        {
             return GetActionExlusionSetting().Split(",".ToArray()).ToList();
         }
 
