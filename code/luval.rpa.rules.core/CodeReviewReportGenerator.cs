@@ -42,17 +42,19 @@ namespace luval.rpa.rules.core
 
         public IEnumerable<object> GetRunProperites()
         {
+            var units = _release.GetAnalysisUnits();
             var res = new List<dynamic>
             {
-                new { Paramter = "Run At UTC", Value = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss") },
-                new { Paramter = "Run At Local Time", Value = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") },
-                new { Paramter = "Run On Machine", Value = Environment.MachineName },
-                new { Paramter = "Run By User", Value = Environment.UserName },
-                new { Paramter = "Profile Exclusions", Value = string.Join("*", _profile.Exclusions.Select(i => i.Name)) },
-                new { Paramter = "Package Name", Value = _release.PackageName },
-                new { Paramter = "Release Name", Value = _release.Name },
-                new { Paramter = "Object Count", Value = _release.Objects.Count.ToString() },
-                new { Paramter = "Process Count", Value = _release.Processes.Count.ToString() }
+                new { Parameter = "Run At UTC", Value = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss") },
+                new { Parameter = "Run At Local Time", Value = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") },
+                new { Parameter = "Run On Machine", Value = Environment.MachineName },
+                new { Parameter = "Run By User", Value = Environment.UserName },
+                new { Parameter = "Profile Exclusions", Value = string.Join("*", _profile.Exclusions.Select(i => i.Name)) },
+                new { Parameter = "Package Name", Value = _release.PackageName },
+                new { Parameter = "Release Name", Value = _release.Name },
+                new { Parameter = "Object Count", Value = _release.Objects.Count.ToString() },
+                new { Parameter = "Process Count", Value = _release.Processes.Count.ToString() },
+                new { Parameter = "Total Stages", Value = units.Count().ToString() }
             };
             return res;
         }
