@@ -162,6 +162,7 @@
     <Content Include="profile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="report_template.html" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="profile.xml">

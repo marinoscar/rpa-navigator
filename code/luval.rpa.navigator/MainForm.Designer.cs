@@ -63,6 +63,7 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.mnuFullReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -149,7 +150,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRunCodeReview,
-            this.mnuNodeReport});
+            this.mnuNodeReport,
+            this.mnuFullReport});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -285,7 +287,7 @@
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRight.Location = new System.Drawing.Point(406, 28);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(738, 857);
+            this.panelRight.Size = new System.Drawing.Size(738, 859);
             this.panelRight.TabIndex = 3;
             // 
             // txtArea
@@ -294,7 +296,7 @@
             this.txtArea.Location = new System.Drawing.Point(0, 0);
             this.txtArea.Name = "txtArea";
             this.txtArea.ReadOnly = true;
-            this.txtArea.Size = new System.Drawing.Size(738, 857);
+            this.txtArea.Size = new System.Drawing.Size(738, 859);
             this.txtArea.TabIndex = 0;
             this.txtArea.Text = "";
             // 
@@ -303,16 +305,16 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 885);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 887);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1144, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1144, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(1090, 19);
+            this.lblStatus.Size = new System.Drawing.Size(1129, 17);
             this.lblStatus.Spring = true;
             // 
             // panelLeft
@@ -323,7 +325,7 @@
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 28);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(403, 857);
+            this.panelLeft.Size = new System.Drawing.Size(403, 859);
             this.panelLeft.TabIndex = 5;
             // 
             // treeView
@@ -331,14 +333,14 @@
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(403, 510);
+            this.treeView.Size = new System.Drawing.Size(403, 512);
             this.treeView.TabIndex = 0;
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter2.Location = new System.Drawing.Point(0, 510);
+            this.splitter2.Location = new System.Drawing.Point(0, 512);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(403, 10);
             this.splitter2.TabIndex = 2;
@@ -347,7 +349,7 @@
             // propertyGrid
             // 
             this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.propertyGrid.Location = new System.Drawing.Point(0, 520);
+            this.propertyGrid.Location = new System.Drawing.Point(0, 522);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(403, 337);
             this.propertyGrid.TabIndex = 1;
@@ -356,9 +358,16 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(403, 28);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 857);
+            this.splitter1.Size = new System.Drawing.Size(3, 859);
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
+            // 
+            // mnuFullReport
+            // 
+            this.mnuFullReport.Name = "mnuFullReport";
+            this.mnuFullReport.Size = new System.Drawing.Size(223, 26);
+            this.mnuFullReport.Text = "Full Report";
+            this.mnuFullReport.Click += new System.EventHandler(this.mnuFullReport_Click);
             // 
             // MainForm
             // 
@@ -421,6 +430,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuNodeReport;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.ToolStripMenuItem mnuFullReport;
     }
 }
 

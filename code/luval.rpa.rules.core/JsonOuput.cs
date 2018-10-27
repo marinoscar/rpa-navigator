@@ -19,9 +19,9 @@ namespace luval.rpa.rules.core
             {
                 RunProperties = CodeReviewReportGenerator.GetRunProperites(release, profile),
                 RuleResults = CodeReviewReportGenerator.GetRuleResults(rules, results),
-                DataItems = GetVariableData(units),
-                Elements = GetElements(release),
-                Results = results
+                DataItems = GetVariableData(units).Take(100),
+                Elements = GetElements(release).Take(100),
+                Results = results.Take(500),
             };
             return JsonConvert.SerializeObject(result, Formatting.None);
         }

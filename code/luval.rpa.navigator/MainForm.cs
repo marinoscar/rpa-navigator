@@ -190,6 +190,23 @@ namespace luval.rpa.navigator
             HandleAction(ExecuteRules, null, null);
         }
 
+        private void mnuFullReport_Click(object sender, EventArgs e)
+        {
+            if (!IsFileLoaded()) return;
+            HandleAction(() => {
+
+                var prof = @"profile.xml";
+                var ser = new XmlSerializer(typeof(RuleProfile));
+                var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
+                var ruleEngine = new Runner();
+                ruleEngine.RuleRun += RuleEngine_RuleRun;
+                var rules = ruleEngine.GetRulesFromProfile(newProfile);
+                var results = ruleEngine.RunRules(newProfile, _release, rules.ToList());
+                var output = new JsonOuput();
+                var json = output.CreateReport(newProfile, rules, results, _release);
+            }, null, null);
+        }
+
         private bool IsFileLoaded()
         {
             if (treeView.Nodes.Count <= 0)
