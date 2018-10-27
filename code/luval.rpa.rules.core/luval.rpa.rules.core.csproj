@@ -66,6 +66,7 @@
     <Compile Include="Result.cs" />
     <Compile Include="RuleBase.cs" />
     <Compile Include="Runner.cs" />
+    <Compile Include="StageHelper.cs" />
     <Compile Include="StageOutputReport.cs" />
   </ItemGroup>
   <ItemGroup>
