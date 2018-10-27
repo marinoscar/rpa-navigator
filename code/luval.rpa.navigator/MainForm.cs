@@ -250,8 +250,8 @@ namespace luval.rpa.navigator
 
         private void RuleEngine_RuleRun(object sender, RunnerMessageEventArgs e)
         {
-            Application.DoEvents();
             lblStatus.Text = e.Message;
+            Application.DoEvents();
         }
 
         private string SaveReport(CodeReviewReportGenerator report)
