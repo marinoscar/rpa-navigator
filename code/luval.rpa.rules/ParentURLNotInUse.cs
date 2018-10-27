@@ -26,6 +26,7 @@ namespace luval.rpa.rules
                         if (at.Name.ToLowerInvariant() == "purl" && at.IsInUse)
                         {
                             var uses = helper.ElementUses(el, obj);
+                            if (uses.Count() <= 0) continue;
                             res.Add(new Result()
                             {
                                 Type = ResultType.Error,
@@ -35,7 +36,7 @@ namespace luval.rpa.rules
                                 RuleName = Name,
                                 RuleDescription = GetRuleDescription(),
                                 Message = string.Format(@"Parent Url is being used for element ""{0}"" the element is being used {1} times in these stages {2}", 
-                                el.Name, uses.Count(), uses.Select(i => i.Name))
+                                el.Name, uses.Count(), string.Join(",", uses.Select(i => i.Name)))
                             });
                         }
                     }

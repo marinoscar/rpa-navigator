@@ -26,6 +26,7 @@ namespace luval.rpa.rules
                     if (atts.Count <= max)
                         continue;
                     var uses = helper.ElementUses(el, obj);
+                    if (uses.Count() <= 0) continue;
                     res.Add(new Result()
                     {
                         Type = ResultType.Warning,
