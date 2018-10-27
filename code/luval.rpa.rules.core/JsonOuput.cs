@@ -19,11 +19,11 @@ namespace luval.rpa.rules.core
             {
                 RunProperties = CodeReviewReportGenerator.GetRunProperites(release, profile),
                 RuleResults = CodeReviewReportGenerator.GetRuleResults(rules, results),
-                DataItems = GetVariableData(units).Take(100),
-                Elements = GetElements(release).Take(100),
-                Results = results.Take(500),
+                DataItems = GetVariableData(units).Take(50),
+                Elements = GetElements(release).Take(50),
+                Results = GetGroupedRules(rules, results).Take(50),
             };
-            return JsonConvert.SerializeObject(result, Formatting.None);
+            return JsonConvert.SerializeObject(result, Formatting.Indented);
         }
 
         private IEnumerable<object> GetVariableData(IEnumerable<StageAnalysisUnit> units)
@@ -33,6 +33,23 @@ namespace luval.rpa.rules.core
                       Name = i.Stage.Name, DataType = ((DataItem)i.Stage).DataType,
                       InitialValue = ((DataItem)i.Stage).InitialValue, Exposure = ((DataItem)i.Stage).Exposure,
                       IsPrivate = ((DataItem)i.Stage).IsPrivate}).ToList();
+        }
+
+        private IEnumerable<object> GetGroupedRules(IEnumerable<IRule> rules, IEnumerable<Result> results)
+        {
+            var res = new List<object>();
+            foreach(var rule in rules)
+            {
+                var item = new
+                {
+                    Name = rule.Name,
+                    Description = "",
+                    Results = results.Where(i => i.RuleName == rule.Name).Select(i => 
+                        new { Type = i.Scope, Parent = i.Parent, Page = i.Page, Stage = i.Stage, StageType = i.StageType, Message = i.Message }).ToList().Take(10)
+                };
+                res.Add(item);
+            }
+            return res;
         }
 
         private IEnumerable<object> GetElements(Release release)
