@@ -37,6 +37,10 @@ namespace luval.rpa.rules.core
         /// </summary>
         public string Parent { get; set; }
         /// <summary>
+        /// Name of the page where the rule is evaluated
+        /// </summary>
+        public string Page { get; set; }
+        /// <summary>
         /// Stage where the rule is evaluated
         /// </summary>
         public string Stage { get; set; }
@@ -44,10 +48,6 @@ namespace luval.rpa.rules.core
         /// The type of stage
         /// </summary>
         public string StageType { get; set; }
-        /// <summary>
-        /// Name of the page where the rule is evaluated
-        /// </summary>
-        public string Page { get; set; }
         /// <summary>
         /// Id of the stage where the rule is evaluated
         /// </summary>
