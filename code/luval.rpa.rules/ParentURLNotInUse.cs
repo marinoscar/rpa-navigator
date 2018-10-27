@@ -16,19 +16,28 @@ namespace luval.rpa.rules
         public override IEnumerable<Result> Execute(Release release)
         {
             var res = new List<Result>();
-            foreach(var obj in release.Objects)
+            var helper = new StageHelper();
+            foreach (var obj in release.Objects)
             {
-                foreach(var el in obj.ApplicationDefinition.Elements.Where(i => i.Type.ToLowerInvariant().Contains("html")))
+                foreach (var el in obj.ApplicationDefinition.Elements.Where(i => i.Type.ToLowerInvariant().Contains("html")))
                 {
-                    foreach(var at in el.Attributes)
+                    foreach (var at in el.Attributes)
                     {
                         if (at.Name.ToLowerInvariant() == "purl" && at.IsInUse)
-                            res.Add(new Result() {
+                        {
+                            var uses = helper.ElementUses(el, obj);
+                            res.Add(new Result()
+                            {
                                 Type = ResultType.Error,
-                                Parent = obj.Name, Page = "Application Modeller", Scope = "Object",
-                                RuleName = Name, RuleDescription = GetRuleDescription(),
-                                Message = string.Format("Parent Url is being used for element {0}", el.Name)
+                                Parent = obj.Name,
+                                Page = "Application Modeller",
+                                Scope = "Object",
+                                RuleName = Name,
+                                RuleDescription = GetRuleDescription(),
+                                Message = string.Format(@"Parent Url is being used for element ""{0}"" the element is being used {1} times in these stages {2}", 
+                                el.Name, uses.Count(), uses.Select(i => i.Name))
                             });
+                        }
                     }
                 }
             }
