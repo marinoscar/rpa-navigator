@@ -42,18 +42,23 @@ namespace luval.rpa.rules.core
 
         public IEnumerable<object> GetRunProperites()
         {
-            var units = _release.GetAnalysisUnits();
+            return GetRunProperites(_release, _profile);
+        }
+
+        public static IEnumerable<object> GetRunProperites(Release release, RuleProfile profile)
+        {
+            var units = release.GetAnalysisUnits();
             var res = new List<dynamic>
             {
                 new { Parameter = "Run At UTC", Value = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss") },
                 new { Parameter = "Run At Local Time", Value = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") },
                 new { Parameter = "Run On Machine", Value = Environment.MachineName },
                 new { Parameter = "Run By User", Value = Environment.UserName },
-                new { Parameter = "Profile Exclusions", Value = string.Join("*", _profile.Exclusions.Select(i => i.Name)) },
-                new { Parameter = "Package Name", Value = _release.PackageName },
-                new { Parameter = "Release Name", Value = _release.Name },
-                new { Parameter = "Object Count", Value = _release.Objects.Count.ToString() },
-                new { Parameter = "Process Count", Value = _release.Processes.Count.ToString() },
+                new { Parameter = "Profile Exclusions", Value = string.Join("*", profile.Exclusions.Select(i => i.Name)) },
+                new { Parameter = "Package Name", Value = release.PackageName },
+                new { Parameter = "Release Name", Value = release.Name },
+                new { Parameter = "Object Count", Value = release.Objects.Count.ToString() },
+                new { Parameter = "Process Count", Value = release.Processes.Count.ToString() },
                 new { Parameter = "Total Stages", Value = units.Count().ToString() }
             };
             return res;
@@ -61,10 +66,15 @@ namespace luval.rpa.rules.core
 
         public IEnumerable<object> GetRuleResults()
         {
+            return GetRuleResults(_rules, Results);
+        }
+
+        public static IEnumerable<object> GetRuleResults(IEnumerable<IRule> rules, IEnumerable<Result> results)
+        {
             var res = new List<dynamic>();
-            foreach (var rule in _rules)
+            foreach (var rule in rules)
             {
-                var count = Results.Count(i => i.RuleName == rule.Name);
+                var count = results.Count(i => i.RuleName == rule.Name);
                 res.Add(new { Rule = rule.Name, Count = Convert.ToString(count) });
             }
             return res;
