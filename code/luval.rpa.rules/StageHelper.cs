@@ -17,7 +17,7 @@ namespace luval.rpa.rules
         /// <returns></returns>
         public bool HasAnImediatePreviousWait(Stage currentStage, IEnumerable<Stage> stages)
         {
-            var waits = stages.Where(i => !string.IsNullOrWhiteSpace(i.Type) && 
+            var waits = stages.Where(i => !string.IsNullOrWhiteSpace(i.Type) &&
                 i.Type.ToLowerInvariant().Equals("waitstart"));
             foreach (var wait in waits)
             {
@@ -65,11 +65,44 @@ namespace luval.rpa.rules
         /// <returns></returns>
         public IEnumerable<Stage> GetStagesInBlock(Stage block, IEnumerable<Stage> stages)
         {
-            return stages.Where(i => i.Location != null && 
+            return stages.Where(i => i.Location != null &&
                 i.Location.X >= block.Location.X &&
                 i.Location.Y <= block.Location.Y &&
                 (i.Location.X + i.Location.Width) >= (block.Location.X + block.Location.Width) &&
                 (i.Location.Y + i.Location.Height) >= (block.Location.Y + block.Location.Height)).ToList();
+        }
+
+
+        /// <summary>
+        /// Provide the stages where an element is in use
+        /// </summary>
+        /// <param name="el">The element to search</param>
+        /// <param name="stages">The stages to use in the search</param>
+        /// <returns></returns>
+        public IEnumerable<Stage> ElementUses(ApplicationElement el, IEnumerable<Stage> stages)
+        {
+            var res = new List<Stage>();
+            if (el == null || string.IsNullOrWhiteSpace(el.Id)) return res;
+            var navs = new[] { "Read", "Write", "Navigate" };
+            var navigates = stages.Where(i => navs.Contains(i.Type)).Select(i => (NavigateStage)i).ToList();
+            res.AddRange(navigates.Where(i => i.Actions != null && i.Actions.Any(a => a.ElementId == el.Id)));
+            var waits = stages.Where(i => i.Type == "WaitStart").Select(i => (WaitStartStage)i).ToList();
+            res.AddRange(waits.Where(i => i.Choices != null && i.Choices.Any(c => c.ElementId == el.Id)));
+            return res;
+        }
+
+        /// <summary>
+        /// Provide the stages where an element is in use
+        /// </summary>
+        /// <param name="el">The element to search</param>
+        /// <param name="obj">The object to use in the search</param>
+        /// <returns></returns>
+        public IEnumerable<Stage> ElementUses(ApplicationElement el, ObjectStage obj)
+        {
+            var res = new List<Stage>();
+            res.AddRange(ElementUses(el, obj.MainPage));
+            res.AddRange(ElementUses(el, obj.Pages.SelectMany(i => i.Stages)));
+            return res;
         }
     }
 }
