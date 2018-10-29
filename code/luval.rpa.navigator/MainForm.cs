@@ -190,23 +190,6 @@ namespace luval.rpa.navigator
             HandleAction(ExecuteRules, null, null);
         }
 
-        private void mnuFullReport_Click(object sender, EventArgs e)
-        {
-            if (!IsFileLoaded()) return;
-            HandleAction(() => {
-
-                var prof = @"profile.xml";
-                var ser = new XmlSerializer(typeof(RuleProfile));
-                var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
-                var ruleEngine = new Runner();
-                ruleEngine.RuleRun += RuleEngine_RuleRun;
-                var rules = ruleEngine.GetRulesFromProfile(newProfile);
-                var results = ruleEngine.RunRules(newProfile, _release, rules.ToList());
-                var output = new JsonOuput();
-                var json = output.CreateReport(newProfile, rules, results, _release);
-            }, null, null);
-        }
-
         private bool IsFileLoaded()
         {
             if (treeView.Nodes.Count <= 0)
@@ -240,8 +223,14 @@ namespace luval.rpa.navigator
 
         private void ExecuteRules()
         {
-            var report = RunRules();
-            RunReport(() => { return SaveReport(report); });
+            var prof = @"profile.xml";
+            var ser = new XmlSerializer(typeof(RuleProfile));
+            var profile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
+            var ruleEngine = new Runner();
+            ruleEngine.RuleRun += RuleEngine_RuleRun;
+            var rules = ruleEngine.GetRulesFromProfile(profile);
+            var results = ruleEngine.RunRules(profile, _release, rules.ToList());
+            RunReport(() => { return SaveReport(profile, rules, results, _release); });
         }
 
         private void RunReport(Func<string> runReport)
@@ -253,49 +242,37 @@ namespace luval.rpa.navigator
             Process.Start(fileName);
         }
 
-        private CodeReviewReportGenerator RunRules()
-        {
-            var prof = @"profile.xml";
-            var ser = new XmlSerializer(typeof(RuleProfile));
-            var newProfile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
-            var ruleEngine = new Runner();
-            ruleEngine.RuleRun += RuleEngine_RuleRun;
-            var rules = ruleEngine.GetRulesFromProfile(newProfile);
-            var results = ruleEngine.RunRules(newProfile, _release, rules.ToList());
-            return new CodeReviewReportGenerator(newProfile, _release, results, rules);
-        }
-
         private void RuleEngine_RuleRun(object sender, RunnerMessageEventArgs e)
         {
             lblStatus.Text = e.Message;
             Application.DoEvents();
         }
 
-        private string SaveReport(CodeReviewReportGenerator report)
+        private string SaveReport(RuleProfile profile, IEnumerable<IRule> rules, IEnumerable<Result> results, Release release)
         {
             var dialog = new SaveFileDialog()
             {
                 Title = "Save Results",
                 RestoreDirectory = true,
-                Filter = "csv (*.csv)|*.csv|All files (*.*)|*.*"
+                Filter = "Excel (*.xlsx)|*.xlsx|Comma Separated Values (*.csv)|*.csv|JSON (*.json)|*.json"
             };
             if (dialog.ShowDialog() != DialogResult.OK) return null;
-            report.ToCsv(dialog.FileName);
+            var fileInfo = new FileInfo(dialog.FileName);
+            switch (fileInfo.Extension.ToLowerInvariant())
+            {
+                case ".json":
+                    var json = new JsonOuput().CreateReport(profile, rules, results, release);
+                    File.WriteAllText(fileInfo.FullName, json);
+                    break;
+                case ".xlsx":
+                    new ExcelOutputGenerator().CreateReport(fileInfo.FullName, profile, rules, results, release);
+                    break;
+                default:
+                    var csv = new CsvReportGenerator(profile, release, results, rules);
+                    csv.ToCsv(fileInfo.FullName);
+                    break;
+            }
             return dialog.FileName;
-        }
-
-        private void mnuNodeReport_Click(object sender, EventArgs e)
-        {
-            if (!IsFileLoaded()) return;
-            HandleAction(ExecuteNodeReport, null, null);
-        }
-
-        private void ExecuteNodeReport()
-        {
-            var report = new StageOutputReport();
-            var file = GetOutputFileName();
-            if (string.IsNullOrWhiteSpace(file)) return;
-            RunReport(() => { return report.Generate(file, _release); });
         }
 
         private string GetOutputFileName()

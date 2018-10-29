@@ -16,6 +16,7 @@ namespace luval.rpa.rules
         /// Gets the name of the rule
         /// </summary>
         public string Name { get { return GetRuleName(); } }
+        public string Description { get { return GetRuleDescription(); } }
 
         public abstract IEnumerable<Result> Execute(Release release);
 

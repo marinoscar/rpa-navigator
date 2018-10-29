@@ -39,7 +39,6 @@
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRunCodeReview = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNodeReport = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +62,6 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.mnuFullReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -149,9 +147,7 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRunCodeReview,
-            this.mnuNodeReport,
-            this.mnuFullReport});
+            this.mnuRunCodeReview});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -163,13 +159,6 @@
             this.mnuRunCodeReview.Size = new System.Drawing.Size(223, 26);
             this.mnuRunCodeReview.Text = "Run Code Review";
             this.mnuRunCodeReview.Click += new System.EventHandler(this.mnuRunCodeReview_Click);
-            // 
-            // mnuNodeReport
-            // 
-            this.mnuNodeReport.Name = "mnuNodeReport";
-            this.mnuNodeReport.Size = new System.Drawing.Size(223, 26);
-            this.mnuNodeReport.Text = "Node Report";
-            this.mnuNodeReport.Click += new System.EventHandler(this.mnuNodeReport_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -362,13 +351,6 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
-            // mnuFullReport
-            // 
-            this.mnuFullReport.Name = "mnuFullReport";
-            this.mnuFullReport.Size = new System.Drawing.Size(223, 26);
-            this.mnuFullReport.Text = "Full Report";
-            this.mnuFullReport.Click += new System.EventHandler(this.mnuFullReport_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -427,10 +409,8 @@
         private System.Windows.Forms.RichTextBox txtArea;
         private System.Windows.Forms.ToolStripMenuItem mnuRunCodeReview;
         private System.Windows.Forms.ToolStripMenuItem mnuCheckForUpdates;
-        private System.Windows.Forms.ToolStripMenuItem mnuNodeReport;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
-        private System.Windows.Forms.ToolStripMenuItem mnuFullReport;
     }
 }
 

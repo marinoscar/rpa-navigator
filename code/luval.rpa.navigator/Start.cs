@@ -38,7 +38,7 @@ namespace luval.rpa.navigator
             }
         }
 
-        private CodeReviewReportGenerator RunRules(string file)
+        private CsvReportGenerator RunRules(string file)
         {
             var prof = @"profile.xml";
             var ser = new XmlSerializer(typeof(RuleProfile));
@@ -49,7 +49,7 @@ namespace luval.rpa.navigator
             var ruleEngine = new Runner();
             var rules = ruleEngine.GetRulesFromProfile(newProfile);
             var results = ruleEngine.RunRules(newProfile, release.Release, rules.ToList());
-            return new CodeReviewReportGenerator(newProfile, release.Release, results, rules);
+            return new CsvReportGenerator(newProfile, release.Release, results, rules);
         }
 
         private string GetReleaseFile()
@@ -66,7 +66,7 @@ namespace luval.rpa.navigator
             return dialog.FileName;
         }
 
-        private void SaveReport(CodeReviewReportGenerator report)
+        private void SaveReport(CsvReportGenerator report)
         {
             var dialog = new SaveFileDialog()
             {

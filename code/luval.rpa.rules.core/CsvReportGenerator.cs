@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace luval.rpa.rules.core
 {
-    public class CodeReviewReportGenerator
+    public class CsvReportGenerator
     {
 
         private RuleProfile _profile;
         private Release _release;
         private IEnumerable<IRule> _rules;
 
-        public CodeReviewReportGenerator(RuleProfile profile, Release release, IEnumerable<Result> results, IEnumerable<IRule> rules)
+        public CsvReportGenerator(RuleProfile profile, Release release, IEnumerable<Result> results, IEnumerable<IRule> rules)
         {
             _profile = profile;
             _release = release;
@@ -75,7 +75,7 @@ namespace luval.rpa.rules.core
             foreach (var rule in rules)
             {
                 var count = results.Count(i => i.RuleName == rule.Name);
-                res.Add(new { Rule = rule.Name, Count = Convert.ToString(count) });
+                res.Add(new { Rule = rule.Name, Count = Convert.ToString(count), RuleDescription = rule.Description });
             }
             return res;
         }

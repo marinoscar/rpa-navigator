@@ -22,6 +22,7 @@ namespace luval.rpa.rules.core
         /// Gets the name of the rule
         /// </summary>
         string Name { get; }
+        string Description { get; }
 
     }
 }
