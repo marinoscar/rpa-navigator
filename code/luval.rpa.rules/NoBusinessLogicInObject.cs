@@ -30,7 +30,7 @@ namespace luval.rpa.rules
                 foreach(var page in obj.Pages)
                 {
                     count = GetDecisionCount(page.Stages);
-                    if (count > _maxCount) AddResult(res, "Initialize", obj);
+                    if (count > _maxCount) AddResult(res, page.Name, obj);
                 }
             }
             return res;
