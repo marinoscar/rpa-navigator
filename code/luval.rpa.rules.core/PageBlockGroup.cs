@@ -35,7 +35,7 @@ namespace luval.rpa.rules.core
                     Block = block, Stages = inBlock.ToList()
                 });
             }
-            StagesOutsideOfBlock = stages.Where(i => !Blocks.SelectMany(s => s.Stages).Contains(i)).ToList();
+            StagesOutsideOfBlock = stages.Where(i => i.Type != "Block" && !Blocks.SelectMany(s => s.Stages).Contains(i)).ToList();
         }
     }
 

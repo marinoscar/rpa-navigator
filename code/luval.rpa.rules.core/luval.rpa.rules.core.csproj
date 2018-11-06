@@ -59,6 +59,7 @@
     <Compile Include="Attributes\DescriptionAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\StringValueAttributte.cs" />
+    <Compile Include="PageBlockGroup.cs" />
     <Compile Include="Configuration\Exclusion.cs" />
     <Compile Include="Configuration\Rule.cs" />
     <Compile Include="Configuration\RuleProfile.cs" />

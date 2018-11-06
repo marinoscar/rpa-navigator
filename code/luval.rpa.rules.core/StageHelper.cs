@@ -67,9 +67,9 @@ namespace luval.rpa.rules.core
         {
             return stages.Where(i => i.Location != null &&
                 i.Location.X >= block.Location.X &&
-                i.Location.Y <= block.Location.Y &&
-                (i.Location.X + i.Location.Width) >= (block.Location.X + block.Location.Width) &&
-                (i.Location.Y + i.Location.Height) >= (block.Location.Y + block.Location.Height)).ToList();
+                i.Location.Y >= block.Location.Y &&
+                (i.Location.X + i.Location.Width) <= (block.Location.X + block.Location.Width) &&
+                (i.Location.Y + i.Location.Height) <= (block.Location.Y + block.Location.Height)).ToList();
         }
 
 

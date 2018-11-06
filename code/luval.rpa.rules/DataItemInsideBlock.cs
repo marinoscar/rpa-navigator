@@ -31,7 +31,7 @@ namespace luval.rpa.rules
                 LoadErrors(res, pageBlock);
                 foreach (var page in item.Pages)
                 {
-                    pageBlock.Load(page.Stages, item.Name, page.Name, type);
+                    pageBlock.Load(FilterByPage(page.Stages), item.Name, page.Name, type);
                     LoadErrors(res, pageBlock);
                 }
             }
@@ -46,7 +46,7 @@ namespace luval.rpa.rules
                     Parent = pageBlock.Parent, Page = pageBlock.PageName,
                     Scope = pageBlock.Type, Type = ResultType.Warning,
                     Stage = stage.Name, StageType = stage.Type, StageId = stage.Id,
-                    Message = string.Format("Data Item {0} is outside of a block stage", stage.Name)
+                    Message = string.Format(@"Data Item ""{0}"" is outside of a block stage", stage.Name)
                 });
             }
         }

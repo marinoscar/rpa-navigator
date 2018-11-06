@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AppModellerElementAttrCount.cs" />
     <Compile Include="ArbitraryWaits.cs" />
+    <Compile Include="DataItemInsideBlock.cs" />
     <Compile Include="DataItemNotInitialized.cs" />
     <Compile Include="ExceptionRecoveryOnMainPage.cs" />
     <Compile Include="GlobalAndSessionDataItemsOnMainPage.cs" />
