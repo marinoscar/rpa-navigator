@@ -59,37 +59,60 @@ namespace luval.rpa.common.Model
         public IEnumerable<StageAnalysisUnit> GetAnalysisUnits()
         {
             var res = new List<StageAnalysisUnit>();
-            foreach (var obj in Processes)
+            foreach (var prc in Processes)
             {
-                LoadAnalysisUnits(res, obj, "Process");
+                res.AddRange(GetAnalysisUnits(prc, "Process"));
             }
             foreach (var obj in Objects)
             {
-                LoadAnalysisUnits(res, obj, "Object");
+                res.AddRange(GetAnalysisUnits(obj, "Object"));
             }
             return res;
         }
 
-        private void LoadAnalysisUnits(List<StageAnalysisUnit> items, PageBasedStage parent, string type)
+        /// <summary>
+        /// Gets the stage analysis units for the release
+        /// </summary>
+        /// <param name="parent">The page based stage</param>
+        /// <param name="type">The parent type</param>
+        /// <returns>A collection of stage analysis units</returns>
+        public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(PageBasedStage parent, string type)
         {
-            items.AddRange(parent.MainPage.Select(i => new StageAnalysisUnit()
+            var res = new List<StageAnalysisUnit>();
+            res.AddRange(parent.MainPage.Select(i => new StageAnalysisUnit()
             {
                 Page = "Main",
                 ParentName = parent.Name,
                 ParentType = type,
                 Stage = i
             }));
+
             foreach (var page in parent.Pages)
             {
-                items.AddRange(page.Stages.Select(i => new StageAnalysisUnit()
-                {
-                    PageId = page.Id,
-                    Page = page.Name,
-                    ParentName = parent.Name,
-                    ParentType = type,
-                    Stage = i
-                }));
+                res.AddRange(GetAnalysisUnits(page, type, parent.Name));
             }
+            return res;
+        }
+
+        /// <summary>
+        /// Gets the stage analysis units for the release
+        /// </summary>
+        /// <param name="page">The page based stage</param>
+        /// <param name="type">The parent type</param>
+        /// <param name="parent">The parent name</param>
+        /// <returns>A collection of stage analysis units</returns>
+        public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(PageStage page, string type, string parent)
+        {
+            var res = new List<StageAnalysisUnit>();
+            res.AddRange(page.Stages.Select(i => new StageAnalysisUnit()
+            {
+                PageId = page.Id,
+                Page = page.Name,
+                ParentName = parent,
+                ParentType = type,
+                Stage = i
+            }));
+            return res;
         }
     }
 }
