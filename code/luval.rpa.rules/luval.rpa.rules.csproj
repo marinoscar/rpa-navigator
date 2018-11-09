@@ -61,6 +61,7 @@
     <Compile Include="ProperUseOfDescriptions.cs" />
     <Compile Include="ReadAndWriteNeedToHaveACheckItExists.cs" />
     <Compile Include="StageCountOnPage.cs" />
+    <Compile Include="TagQueueItemOnException.cs" />
     <Compile Include="WaitShouldThrowExceptionOnTimeout.cs" />
   </ItemGroup>
   <ItemGroup>
