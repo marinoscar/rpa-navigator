@@ -58,14 +58,24 @@ namespace luval.rpa.common.Model
         /// <returns>A collection of stage analysis units</returns>
         public IEnumerable<StageAnalysisUnit> GetAnalysisUnits()
         {
+            return GetAnalysisUnits(i => true);
+        }
+
+        /// <summary>
+        /// Gets the stage analysis units for the release
+        /// </summary>
+        /// <param name="filter">the predicate to filter the stages</param>
+        /// <returns>A collection of stage analysis units</returns>
+        public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(Func<Stage,bool> filter)
+        {
             var res = new List<StageAnalysisUnit>();
             foreach (var prc in Processes)
             {
-                res.AddRange(GetAnalysisUnits(prc, "Process"));
+                res.AddRange(GetAnalysisUnits(prc, "Process", filter));
             }
             foreach (var obj in Objects)
             {
-                res.AddRange(GetAnalysisUnits(obj, "Object"));
+                res.AddRange(GetAnalysisUnits(obj, "Object", filter));
             }
             return res;
         }
@@ -78,8 +88,20 @@ namespace luval.rpa.common.Model
         /// <returns>A collection of stage analysis units</returns>
         public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(PageBasedStage parent, string type)
         {
+            return GetAnalysisUnits(parent, type, i => true);
+        }
+
+        /// <summary>
+        /// Gets the stage analysis units for the release
+        /// </summary>
+        /// <param name="parent">The page based stage</param>
+        /// <param name="type">The parent type</param>
+        /// <param name="filter">the predicate to filter the stages</param>
+        /// <returns>A collection of stage analysis units</returns>
+        public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(PageBasedStage parent, string type, Func<Stage, bool> filter)
+        {
             var res = new List<StageAnalysisUnit>();
-            res.AddRange(parent.MainPage.Select(i => new StageAnalysisUnit()
+            res.AddRange(parent.MainPage.Where(filter).Select(i => new StageAnalysisUnit()
             {
                 Page = "Main",
                 ParentName = parent.Name,
@@ -89,7 +111,7 @@ namespace luval.rpa.common.Model
 
             foreach (var page in parent.Pages)
             {
-                res.AddRange(GetAnalysisUnits(page, type, parent.Name));
+                res.AddRange(GetAnalysisUnits(page, type, parent.Name, filter));
             }
             return res;
         }
@@ -103,8 +125,21 @@ namespace luval.rpa.common.Model
         /// <returns>A collection of stage analysis units</returns>
         public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(PageStage page, string type, string parent)
         {
+            return GetAnalysisUnits(page, type, parent, i => true);
+        }
+
+        /// <summary>
+        /// Gets the stage analysis units for the release
+        /// </summary>
+        /// <param name="page">The page based stage</param>
+        /// <param name="type">The parent type</param>
+        /// <param name="parent">The parent name</param>
+        /// <param name="filter">the predicate to filter the stages</param>
+        /// <returns>A collection of stage analysis units</returns>
+        public IEnumerable<StageAnalysisUnit> GetAnalysisUnits(PageStage page, string type, string parent, Func<Stage,bool> filter)
+        {
             var res = new List<StageAnalysisUnit>();
-            res.AddRange(page.Stages.Select(i => new StageAnalysisUnit()
+            res.AddRange(page.Stages.Where(filter).Select(i => new StageAnalysisUnit()
             {
                 PageId = page.Id,
                 Page = page.Name,
