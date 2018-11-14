@@ -57,6 +57,7 @@ namespace luval.rpa.common.Model
 
         protected virtual XAttribute GetAttribute(XElement el, string name)
         {
+            if (el == null) return null;
             return el.Attributes().FirstOrDefault(i => i.Name.LocalName == name);
         }
 
@@ -67,6 +68,7 @@ namespace luval.rpa.common.Model
 
         protected virtual XElement GetElement(XElement el, string name)
         {
+            if (el == null) return null;
             return el.Elements().FirstOrDefault(i => i.Name.LocalName == name);
         }
 
