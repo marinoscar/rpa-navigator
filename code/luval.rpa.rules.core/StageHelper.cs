@@ -85,9 +85,11 @@ namespace luval.rpa.rules.core
             if (el == null || string.IsNullOrWhiteSpace(el.Id)) return res;
             var navs = new[] { "Read", "Write", "Navigate" };
             var navigates = stages.Where(i => navs.Contains(i.Type)).Select(i => (NavigateStage)i).ToList();
-            res.AddRange(navigates.Where(i => i.Actions != null && i.Actions.Any(a => a.ElementId == el.Id)));
+            res.AddRange(navigates.Where(i => i.Actions != null && i.Actions.Any(a => 
+                !string.IsNullOrWhiteSpace(a.ElementId) && a.ElementId == el.Id)));
             var waits = stages.Where(i => i.Type == "WaitStart").Select(i => (WaitStartStage)i).ToList();
-            res.AddRange(waits.Where(i => i.Choices != null && i.Choices.Any(c => c.ElementId == el.Id)));
+            res.AddRange(waits.Where(i => i.Choices != null && i.Choices.Any(c => !string.IsNullOrWhiteSpace(c.ElementId) &&
+                c.ElementId == el.Id)));
             return res;
         }
 
