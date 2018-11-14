@@ -9,8 +9,8 @@ using luval.rpa.common.Model;
 
 namespace luval.rpa.rules
 {
-    [Name("Data Items Are Inside Block Stage"),
-     Description("Checks that all data items are inside a block stage")]
+    [Name("Tag Queue Item Before Exception"),
+     Description("Checks that a queue item is tag before it is marked as exception")]
     public class TagQueueItemOnException : RuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
@@ -24,7 +24,13 @@ namespace luval.rpa.rules
             foreach (var ac in mark)
             {
                 //no tag for the mark exception
-                var tagFound = tag.Any(i => helper.GetNextStage(i.OnSuccess, stages).Id == ac.Id);
+                var tagFound = tag.Any(i => {
+                    var next = helper.GetNextStage(i.OnSuccess, stages);
+                    return
+                        !string.IsNullOrWhiteSpace(i.OnSuccess)
+                        &&  next != null && next.Id == ac.Id;
+                    
+                });
                 if (!tagFound)
                     res.Add(FromStageAnalysis(units.Single(i => i.Stage.Id == ac.Id),
                         ResultType.Error, string.Format(@"Mark exception stage ""{0}"" requires that item has the exception labeled", ac.Name),
