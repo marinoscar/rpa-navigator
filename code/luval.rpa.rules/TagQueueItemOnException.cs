@@ -24,9 +24,10 @@ namespace luval.rpa.rules
             foreach (var ac in mark)
             {
                 //no tag for the mark exception
-                if (!tag.Any(i => helper.GetNextStage(ac.Id, stages).Id == i.Id))
+                var tagFound = tag.Any(i => helper.GetNextStage(i.OnSuccess, stages).Id == ac.Id);
+                if (!tagFound)
                     res.Add(FromStageAnalysis(units.Single(i => i.Stage.Id == ac.Id),
-                        ResultType.Error, string.Format("Mark exception requires that item has the exception labeled"),
+                        ResultType.Error, string.Format(@"Mark exception stage ""{0}"" requires that item has the exception labeled", ac.Name),
                         ""
                         ));
             }            
