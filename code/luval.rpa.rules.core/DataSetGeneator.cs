@@ -20,7 +20,17 @@ namespace luval.rpa.rules.core
                 DataItems = GetVariableData(units),
                 Elements = GetElements(release),
                 Exceptions = GetExceptionDetails(units),
-                Results =groupRuleResult ? GetGroupedRules(rules, results) : results,
+                Results =groupRuleResult ? GetGroupedRules(rules, results) : results.Select(i => new {
+                    RuleName = i.RuleName, 
+                    Type = i.Type,
+                    Message = i.Message,
+                    Scope = i.Scope,
+                    Parent = i.Parent,
+                    Page = i.Page,
+                    Stage = i.Stage,
+                    StageType = i.StageType,
+                    StageId = i.StageId
+                }),
             };
             return result;
         }
