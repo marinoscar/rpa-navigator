@@ -1,6 +1,7 @@
 ﻿using luval.rpa.common.Model;
 using luval.rpa.rules.core.Configuration;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using OfficeOpenXml.Table;
 using OfficeOpenXml.Table.PivotTable;
 using System;
@@ -22,6 +23,7 @@ namespace luval.rpa.rules.core
             {
                 var releaseWs = p.Workbook.Worksheets.Add("ReleaseInfo");
                 var row = LoadCollection(ds.RunProperties, releaseWs, "ReleaseInfoTable", 0, true);
+                
                 var resultsWs = p.Workbook.Worksheets.Add("Results");
                 LoadCollection(ds.Results, resultsWs, "ResultsTable", 0);
                 var summaryWs = p.Workbook.Worksheets.Add("Summary");
@@ -48,10 +50,6 @@ namespace luval.rpa.rules.core
             var dataField = pivotTable.DataFields.Add(pivotTable.Fields["Message"]);
             dataField.Name = "Count";
             dataField.Function = DataFieldFunctions.Count;
-            foreach(var field in pivotTable.RowFields)
-            {
-                field.ShowAll = false;
-            }
         }
 
         private int LoadCollection(IEnumerable<object> items, ExcelWorksheet ws, string tableName, int startIndex, bool tryCast = false)
@@ -93,8 +91,13 @@ namespace luval.rpa.rules.core
         private void CreateTable(int startRow, int endRow, int columnCount, string name, ExcelWorksheet ws)
         {
             var range = ws.Cells[startRow, 1, endRow, columnCount];
+            range.AutoFitColumns(9, 80);
+            for (int i = 0; i < range.Columns; i++)
+            {
+                ws.Column(i+1).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                ws.Column(i+1).Style.WrapText = true;
+            }
             var table = ws.Tables.Add(range, name);
-
         }
         private List<PropertyInfo> GetProperties(object obj)
         {
