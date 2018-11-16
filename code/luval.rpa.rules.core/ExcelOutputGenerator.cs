@@ -1,6 +1,8 @@
 ﻿using luval.rpa.common.Model;
 using luval.rpa.rules.core.Configuration;
 using OfficeOpenXml;
+using OfficeOpenXml.Table;
+using OfficeOpenXml.Table.PivotTable;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,11 +20,12 @@ namespace luval.rpa.rules.core
             var ds = (new DataSetGeneator()).Create(profile, rules, results, release, false);
             using (var p = new ExcelPackage())
             {
-                var summaryWs = p.Workbook.Worksheets.Add("Summary");
-                var row = LoadCollection(ds.RunProperties, summaryWs, "RunPropertiesTable", 0, true);
-                LoadCollection(ds.RuleResults, summaryWs, "RuleResutsTable", row + 1, true);
+                var releaseWs = p.Workbook.Worksheets.Add("ReleaseInfo");
+                var row = LoadCollection(ds.RunProperties, releaseWs, "ReleaseInfoTable", 0, true);
                 var resultsWs = p.Workbook.Worksheets.Add("Results");
                 LoadCollection(ds.Results, resultsWs, "ResultsTable", 0);
+                var summaryWs = p.Workbook.Worksheets.Add("Summary");
+                CreateResultsPivot(summaryWs, resultsWs.Tables["ResultsTable"]);
                 var dataItemsWs = p.Workbook.Worksheets.Add("DataItems");
                 LoadCollection(ds.DataItems, dataItemsWs, "DataItemsTable", 0);
                 var elementsWs = p.Workbook.Worksheets.Add("Elements");
@@ -30,6 +33,24 @@ namespace luval.rpa.rules.core
                 var exceptionsWs = p.Workbook.Worksheets.Add("Exceptions");
                 LoadCollection(ds.Exceptions, exceptionsWs, "ExceptionsTable", 0);
                 p.SaveAs(new FileInfo(fileName));
+            }
+        }
+
+        private void CreateResultsPivot(ExcelWorksheet ws, ExcelTable table)
+        {
+            var range = table.WorkSheet.Cells[table.Address.Address];
+            var pivotTable = ws.PivotTables.Add(ws.Cells["A1"], range, "ResultPivotTable");
+            pivotTable.RowFields.Add(pivotTable.Fields["RuleName"]);
+            pivotTable.RowFields.Add(pivotTable.Fields["Scope"]);
+            pivotTable.RowFields.Add(pivotTable.Fields["Parent"]);
+            pivotTable.RowFields.Add(pivotTable.Fields["Page"]);
+            pivotTable.RowFields.Add(pivotTable.Fields["Message"]);
+            var dataField = pivotTable.DataFields.Add(pivotTable.Fields["Message"]);
+            dataField.Name = "Count";
+            dataField.Function = DataFieldFunctions.Count;
+            foreach(var field in pivotTable.RowFields)
+            {
+                field.ShowAll = false;
             }
         }
 

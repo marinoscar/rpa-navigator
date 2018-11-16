@@ -30,7 +30,7 @@ namespace luval.rpa.rules.core
                     Stage = i.Stage,
                     StageType = i.StageType,
                     StageId = i.StageId
-                }),
+                }).ToList(),
             };
             return result;
         }
