@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace luval.rpa.rules.core
+namespace luval.rpa.rules
 {
     public class ExcelOutputGenerator
     {
