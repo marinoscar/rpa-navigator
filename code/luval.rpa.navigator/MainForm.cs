@@ -1,5 +1,6 @@
 ﻿using luval.rpa.common;
 using luval.rpa.common.Model;
+using luval.rpa.rules;
 using luval.rpa.rules.core;
 using luval.rpa.rules.core.Configuration;
 using System;
@@ -216,36 +217,11 @@ namespace luval.rpa.navigator
             {
                 Title = "Save Results",
                 RestoreDirectory = true,
-                Filter = "Excel (*.xlsx)|*.xlsx|Comma Separated Values (*.csv)|*.csv|JSON (*.json)|*.json"
+                Filter = "Excel (*.xlsx)|*.xlsx"
             };
             if (dialog.ShowDialog() != DialogResult.OK) return null;
             var fileInfo = new FileInfo(dialog.FileName);
-            switch (fileInfo.Extension.ToLowerInvariant())
-            {
-                case ".json":
-                    var json = new JsonOuput().CreateReport(profile, rules, results, release);
-                    File.WriteAllText(fileInfo.FullName, json);
-                    break;
-                case ".xlsx":
-                    new ExcelOutputGenerator().CreateReport(fileInfo.FullName, profile, rules, results, release);
-                    break;
-                default:
-                    var csv = new CsvReportGenerator(profile, release, results, rules);
-                    csv.ToCsv(fileInfo.FullName);
-                    break;
-            }
-            return dialog.FileName;
-        }
-
-        private string GetOutputFileName()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save Results",
-                RestoreDirectory = true,
-                Filter = "csv (*.csv)|*.csv|All files (*.*)|*.*"
-            };
-            if (dialog.ShowDialog() != DialogResult.OK) return null;
+            new ExcelOutputGenerator().CreateReport(fileInfo.FullName, profile, rules, results, release);
             return dialog.FileName;
         }
 

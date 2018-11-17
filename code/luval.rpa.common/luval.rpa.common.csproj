@@ -48,15 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtractorBase.cs" />
-    <Compile Include="Model\Argument.cs" />
-    <Compile Include="Model\ItemLocation.cs" />
-    <Compile Include="Model\NavigateStep.cs" />
-    <Compile Include="Model\NavigateStage.cs" />
-    <Compile Include="Model\PageBasedStage.cs" />
-    <Compile Include="Model\PageStage.cs" />
     <Compile Include="Model\ActionStage.cs" />
     <Compile Include="Model\ApplicationDefinition.cs" />
     <Compile Include="Model\ApplicationElement.cs" />
+    <Compile Include="Model\Argument.cs" />
     <Compile Include="Model\Choice.cs" />
     <Compile Include="Model\CodeStage.cs" />
     <Compile Include="Model\DataItem.cs" />
@@ -65,18 +60,23 @@
     <Compile Include="Model\ExceptionStage.cs" />
     <Compile Include="Model\ExceptionStageDetail.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\ItemLocation.cs" />
+    <Compile Include="Model\NavigateStage.cs" />
+    <Compile Include="Model\NavigateStep.cs" />
     <Compile Include="Model\ObjectStage.cs" />
+    <Compile Include="Model\PageBasedStage.cs" />
+    <Compile Include="Model\PageStage.cs" />
     <Compile Include="Model\Parameter.cs" />
     <Compile Include="Model\ParameterBasedStage.cs" />
     <Compile Include="Model\ProcessStage.cs" />
     <Compile Include="Model\ReadStage.cs" />
-    <Compile Include="Model\StageAnalysisUnit.cs" />
-    <Compile Include="Model\SubProcessStage.cs" />
     <Compile Include="Model\Release.cs" />
     <Compile Include="Model\Resource.cs" />
     <Compile Include="Model\Stage.cs" />
+    <Compile Include="Model\StageAnalysisUnit.cs" />
     <Compile Include="Model\StartStage.cs" />
     <Compile Include="Model\SubPageStage.cs" />
+    <Compile Include="Model\SubProcessStage.cs" />
     <Compile Include="Model\WaitEndStage.cs" />
     <Compile Include="Model\WaitStartStage.cs" />
     <Compile Include="Model\WriteStage.cs" />

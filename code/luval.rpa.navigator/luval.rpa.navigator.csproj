@@ -109,12 +109,6 @@
     <Compile Include="Rules.Designer.cs">
       <DependentUpon>Rules.cs</DependentUpon>
     </Compile>
-    <Compile Include="Start.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Start.Designer.cs">
-      <DependentUpon>Start.cs</DependentUpon>
-    </Compile>
     <Compile Include="UiHelper.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -130,9 +124,6 @@
     </Compile>
     <EmbeddedResource Include="Rules.resx">
       <DependentUpon>Rules.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Start.resx">
-      <DependentUpon>Start.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="luval.rpa.navigator_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">

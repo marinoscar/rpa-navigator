@@ -1,4 +1,5 @@
 ﻿using luval.rpa.common.Model;
+using luval.rpa.rules.core;
 using luval.rpa.rules.core.Configuration;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
