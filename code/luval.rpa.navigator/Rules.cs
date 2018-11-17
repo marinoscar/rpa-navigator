@@ -48,10 +48,11 @@ namespace luval.rpa.navigator
             };
             if (dialog.ShowDialog() == DialogResult.Cancel) return null;
             var files = dialog.FileNames.Select(i => new FileInfo(i)).ToList();
+            files.ForEach(i =>
+                File.Copy(i.FullName, Path.Combine(Environment.CurrentDirectory, i.Name)));
             var rules = new List<string>();
             foreach (var file in files)
             {
-                File.Copy(file.FullName, Path.Combine(Environment.CurrentDirectory, file.Name));
                 if (HasRule(file.Name))
                     rules.Add(file.Name);
             }
