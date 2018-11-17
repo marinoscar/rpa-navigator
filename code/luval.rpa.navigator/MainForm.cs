@@ -4,24 +4,17 @@ using luval.rpa.rules.core;
 using luval.rpa.rules.core.Configuration;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Deployment.Application;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace luval.rpa.navigator
 {
-    public partial class MainForm : Form
+    public partial class MainForm : BaseForm
     {
         private string _fileName;
         private Release _release;
@@ -32,37 +25,28 @@ namespace luval.rpa.navigator
 
         private void mnuOpen_Click(object sender, EventArgs e)
         {
-            var openDlg = new OpenFileDialog()
-            {
-                Filter = "(*.bprelease)|*.bprelease",
-                Title = "Open Releae",
-                CheckFileExists = true,
-                CheckPathExists = true,
-                RestoreDirectory = true
-            };
-            var res = openDlg.ShowDialog();
-            if (res == DialogResult.Cancel) return;
-            var file = openDlg.FileName;
-            try
-            {
+            this.ExecuteAction(() => {
+                var openDlg = new OpenFileDialog()
+                {
+                    Filter = "(*.bprelease)|*.bprelease",
+                    Title = "Open Releae",
+                    CheckFileExists = true,
+                    CheckPathExists = true,
+                    RestoreDirectory = true
+                };
+                var res = openDlg.ShowDialog();
+                if (res == DialogResult.Cancel) return null;
+                var file = openDlg.FileName;
                 var extractor = new ReleaseExtractor(File.ReadAllText(file));
                 extractor.Load();
                 LoadTree(extractor.Release);
                 _fileName = file;
                 _release = extractor.Release;
-            }
-            catch (Exception ex)
-            {
-
+                return null;
+            }, null, (ex) => {
                 _fileName = null;
                 treeView.Nodes.Clear();
-                ShowEx(ex);
-            }
-        }
-
-        private void ShowEx(Exception ex)
-        {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
         }
 
         private void LoadTree(Release release)
@@ -187,7 +171,7 @@ namespace luval.rpa.navigator
         private void mnuRunCodeReview_Click(object sender, EventArgs e)
         {
             if (!IsFileLoaded()) return;
-            HandleAction(ExecuteRules, null, null);
+            this.ExecuteAction(ExecuteRules, null, null);
         }
 
         private bool IsFileLoaded()
@@ -200,37 +184,15 @@ namespace luval.rpa.navigator
             return true;
         }
 
-        private void HandleAction(Action action, Action onSucces, Action onError)
+        private object ExecuteRules()
         {
-            var current = this.Cursor;
-            Cursor = Cursors.WaitCursor;
-            try
-            {
-                action();
-            }
-            catch (Exception ex)
-            {
-                Cursor = current;
-                ShowEx(ex);
-                onError?.Invoke();
-            }
-            finally
-            {
-                Cursor = current;
-            }
-            onSucces?.Invoke();
-        }
-
-        private void ExecuteRules()
-        {
-            var prof = @"profile.xml";
-            var ser = new XmlSerializer(typeof(RuleProfile));
-            var profile = (RuleProfile)ser.Deserialize(File.OpenText(prof));
+            var profile = RuleProfile.LoadFromFile();
             var ruleEngine = new Runner();
             ruleEngine.RuleRun += RuleEngine_RuleRun;
             var rules = ruleEngine.GetRulesFromProfile(profile);
             var results = ruleEngine.RunRules(profile, _release, rules.ToList());
             RunReport(() => { return SaveReport(profile, rules, results, _release); });
+            return null;
         }
 
         private void RunReport(Func<string> runReport)
@@ -365,6 +327,12 @@ namespace luval.rpa.navigator
             if (!ApplicationDeployment.IsNetworkDeployed) return "1.0.0.0";
             var ad = ApplicationDeployment.CurrentDeployment;
             return Convert.ToString(ad.CurrentVersion);
+        }
+
+        private void mnuRules_Click(object sender, EventArgs e)
+        {
+            var rules = new Rules();
+            rules.ShowDialog();
         }
     }
 }
