@@ -160,10 +160,6 @@
       <Project>{75447bfb-966f-4a04-bead-44e41270340c}</Project>
       <Name>luval.rpa.common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\luval.rpa.rules.core\luval.rpa.rules.core.csproj">
-      <Project>{e245cdc8-6937-45d2-97bc-b5272cc6a588}</Project>
-      <Name>luval.rpa.rules.core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\luval.rpa.rules\luval.rpa.rules.csproj">
       <Project>{739cd132-13d9-4a0d-8180-08487f9b0e14}</Project>
       <Name>luval.rpa.rules</Name>
