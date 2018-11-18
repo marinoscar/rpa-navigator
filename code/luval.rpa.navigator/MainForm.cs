@@ -1,9 +1,9 @@
-﻿using luval.rpa.common;
-using luval.rpa.common.extractors.bp;
+﻿using luval.rpa.common.extractors.bp;
 using luval.rpa.common.model.bp;
-using luval.rpa.rules;
 using luval.rpa.common.rules;
 using luval.rpa.common.rules.configuration;
+using luval.rpa.rules.bp;
+using NuGet;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,8 +12,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Serialization;
-using luval.rpa.rules.bp;
 
 namespace luval.rpa.navigator
 {
@@ -309,7 +307,7 @@ namespace luval.rpa.navigator
 
         private void mnuRules_Click(object sender, EventArgs e)
         {
-            var rules = new Rules();
+            var rules = new RulesDialog();
             rules.ShowDialog();
         }
     }

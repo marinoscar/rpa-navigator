@@ -15,12 +15,12 @@ using System.Xml.Serialization;
 
 namespace luval.rpa.navigator
 {
-    public partial class Rules : BaseForm
+    public partial class RulesDialog : BaseForm
     {
 
         private RuleProfile _profile;
 
-        public Rules()
+        public RulesDialog()
         {
             InitializeComponent();
         }
@@ -46,10 +46,19 @@ namespace luval.rpa.navigator
                 CheckFileExists = true,
                 Multiselect = true
             };
+            var ruleDir = RuleProfile.GetRuleDir();
+            if (!ruleDir.Exists) ruleDir.Create();
             if (dialog.ShowDialog() == DialogResult.Cancel) return null;
             var files = dialog.FileNames.Select(i => new FileInfo(i)).ToList();
-            files.ForEach(i =>
-                File.Copy(i.FullName, Path.Combine(Environment.CurrentDirectory, i.Name)));
+            foreach(var file in files)
+            {
+                var newFile = new FileInfo(Path.Combine(ruleDir.FullName, file.Name));
+                var over = false;
+                if (newFile.Exists)
+                    over = MessageBox.Show(string.Format("File {0} has been already imported, do you want to override?", file.Name), "File Exists", MessageBoxButtons.YesNo) == DialogResult.Yes;
+                File.Copy(file.FullName, newFile.FullName, over);
+                
+            }
             var rules = new List<string>();
             foreach (var file in files)
             {
@@ -58,8 +67,8 @@ namespace luval.rpa.navigator
             }
             if(!rules.Any())
             {
-                MessageBox.Show("The files provided do not contain rules");
-                files.ForEach(i => File.Delete(Path.Combine(Environment.CurrentDirectory, i.Name)));
+                MessageBox.Show("The files provided doesn't contain rules");
+                files.ForEach(i => File.Delete(Path.Combine(ruleDir.FullName, i.Name)));
                 return null;
             }
             RegisterRule(rules);

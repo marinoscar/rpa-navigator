@@ -25,8 +25,14 @@ namespace luval.rpa.common.rules
 
         private string GetAbsolutePath(string fileName)
         {
-            var absolutePath = Path.Combine(Environment.CurrentDirectory, fileName);
-            return Path.GetFullPath((new Uri(absolutePath)).LocalPath);
+            var fileInfo = new FileInfo( Path.Combine(RuleProfile.GetRuleDir().FullName, fileName));
+            if (!fileInfo.Exists)
+            {
+                fileInfo = new FileInfo(Path.Combine(Environment.CurrentDirectory, fileName));
+                if (!fileInfo.Exists)
+                    throw new InvalidOperationException(string.Format("File {0} in profile not found", fileInfo.Name));
+            }
+            return fileInfo.FullName;
         }
 
         private IEnumerable<IRule> GetAllRules()

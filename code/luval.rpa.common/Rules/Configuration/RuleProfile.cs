@@ -30,7 +30,13 @@ namespace luval.rpa.common.rules.configuration
         public static RuleProfile LoadFromFile(string fileName)
         {
             var ser = new XmlSerializer(typeof(RuleProfile));
-            return (RuleProfile)ser.Deserialize(File.OpenRead(fileName));
+            var res = default(RuleProfile);
+            using (var reader = new StreamReader(fileName))
+            {
+                res = (RuleProfile)ser.Deserialize(reader);
+                reader.Close();
+            }
+            return res;
         }
 
         public void Save()
@@ -41,7 +47,16 @@ namespace luval.rpa.common.rules.configuration
         public void Save(string fileName)
         {
             var ser = new XmlSerializer(typeof(RuleProfile));
-            ser.Serialize(File.OpenWrite(fileName), this);
+            using (var writer = new StreamWriter(fileName))
+            {
+                ser.Serialize(writer, this);
+                writer.Close();
+            }
+        }
+
+        public static DirectoryInfo GetRuleDir()
+        {
+            return new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "CustomRules"));
         }
     }
 }
