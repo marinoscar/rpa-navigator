@@ -1,5 +1,5 @@
-﻿using luval.rpa.rules.core;
-using luval.rpa.rules.core.Configuration;
+﻿using luval.rpa.common.rules;
+using luval.rpa.common.rules.configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,7 +70,7 @@ namespace luval.rpa.navigator
         {
             foreach(var rule in rules)
             {
-                _profile.Rules.Add(new rules.core.Configuration.Rule() { AssemblyFile = string.Format(".\\{0}", rule) });
+                _profile.Rules.Add(new RuleInfo() { AssemblyFile = string.Format(".\\{0}", rule) });
             }
             _profile.Rules = _profile.Rules.Distinct().ToList();
             _profile.Save();
@@ -105,7 +105,7 @@ namespace luval.rpa.navigator
                 return null;
             }
             if (MessageBox.Show("Are you sure you want to remove the rule file?", "Remove", MessageBoxButtons.YesNo) == DialogResult.No) return null;
-            _profile.Rules.Remove((rules.core.Configuration.Rule)listView.SelectedItems.Cast<ListViewItem>().First().Tag);
+            _profile.Rules.Remove((RuleInfo)listView.SelectedItems.Cast<ListViewItem>().First().Tag);
             _profile.Save();
             LoadRules();
             return null;

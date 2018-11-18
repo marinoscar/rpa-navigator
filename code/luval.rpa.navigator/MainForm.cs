@@ -2,8 +2,8 @@
 using luval.rpa.common.extractors.bp;
 using luval.rpa.common.model.bp;
 using luval.rpa.rules;
-using luval.rpa.rules.core;
-using luval.rpa.rules.core.Configuration;
+using luval.rpa.common.rules;
+using luval.rpa.common.rules.configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using luval.rpa.rules.core;
 
 namespace luval.rpa.navigator
 {

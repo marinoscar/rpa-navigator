@@ -1,7 +1,7 @@
 ﻿using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
-using luval.rpa.rules.core;
-using luval.rpa.rules.core.Configuration;
+using luval.rpa.common.rules;
+using luval.rpa.common.rules.configuration;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Table;

@@ -1,11 +1,11 @@
-﻿using luval.rpa.rules.core;
+﻿using luval.rpa.common.rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using luval.rpa.common.model;
-using luval.rpa.rules.core.Attributes;
+using luval.rpa.common.rules.attributes;
 using System.Text.RegularExpressions;
 using luval.rpa.common.model.bp;
 

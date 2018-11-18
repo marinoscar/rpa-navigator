@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using luval.rpa.common.model;
 
-namespace luval.rpa.rules.core
+namespace luval.rpa.common.rules
 {
     /// <summary>
     /// Interface of how a rule needs to be implemented

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace luval.rpa.rules.core.Configuration
+namespace luval.rpa.common.rules.configuration
 {
     [XmlType("object")]
     public class Exclusion

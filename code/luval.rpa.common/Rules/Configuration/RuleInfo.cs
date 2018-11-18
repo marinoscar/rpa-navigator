@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace luval.rpa.rules.core.Configuration
+namespace luval.rpa.common.rules.configuration
 {
     [XmlType("rule")]
-    public class Rule
+    public class RuleInfo
     {
         [XmlElement(ElementName ="assemblyFile")]
         public string AssemblyFile { get; set; }

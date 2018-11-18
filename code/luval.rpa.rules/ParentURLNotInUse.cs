@@ -1,5 +1,5 @@
-﻿using luval.rpa.rules.core;
-using luval.rpa.rules.core.Attributes;
+﻿using luval.rpa.common.rules;
+using luval.rpa.common.rules.attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using luval.rpa.rules.core.Configuration;
+﻿using luval.rpa.common.rules.configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace luval.rpa.rules.core
+namespace luval.rpa.common.rules
 {
     public class RuleExtractor
     {

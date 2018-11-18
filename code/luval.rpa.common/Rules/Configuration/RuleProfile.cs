@@ -6,19 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace luval.rpa.rules.core.Configuration
+namespace luval.rpa.common.rules.configuration
 {
     [XmlRoot(ElementName = "ruleProfile")]
     public class RuleProfile
     {
         public RuleProfile()
         {
-            Rules = new List<Rule>();
+            Rules = new List<RuleInfo>();
             Exclusions = new List<Exclusion>();
         }
 
         [XmlArray(ElementName = "rules")]
-        public List<Rule> Rules { get; set; }
+        public List<RuleInfo> Rules { get; set; }
         [XmlArray(ElementName = "exclusions")]
         public List<Exclusion> Exclusions { get; set; }
 
