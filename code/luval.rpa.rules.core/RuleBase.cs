@@ -7,6 +7,7 @@ using luval.rpa.common.Model;
 using luval.rpa.rules.core.Attributes;
 using luval.rpa.rules.core;
 using System.Configuration;
+using luval.rpa.common.Model.BP;
 
 namespace luval.rpa.rules
 {

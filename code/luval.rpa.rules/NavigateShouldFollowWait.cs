@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using luval.rpa.common.Model;
+using luval.rpa.common.Model.BP;
 
 namespace luval.rpa.rules
 {

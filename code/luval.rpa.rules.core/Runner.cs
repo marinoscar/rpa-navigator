@@ -1,4 +1,5 @@
 ﻿using luval.rpa.common.Model;
+using luval.rpa.common.Model.BP;
 using luval.rpa.rules.core.Configuration;
 using System;
 using System.Collections.Generic;
