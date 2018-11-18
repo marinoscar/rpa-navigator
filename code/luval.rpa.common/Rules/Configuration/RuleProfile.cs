@@ -11,6 +11,7 @@ namespace luval.rpa.common.rules.configuration
     [XmlRoot(ElementName = "ruleProfile")]
     public class RuleProfile
     {
+        private const string nameOfFile = "profile.xml";
         public RuleProfile()
         {
             Rules = new List<RuleInfo>();
@@ -24,7 +25,7 @@ namespace luval.rpa.common.rules.configuration
 
         public static RuleProfile LoadFromFile()
         {
-            return LoadFromFile("profile.xml");
+            return LoadFromFile(nameOfFile);
         }
         public static RuleProfile LoadFromFile(string fileName)
         {
@@ -34,7 +35,7 @@ namespace luval.rpa.common.rules.configuration
 
         public void Save()
         {
-            Save("porfile.xml");
+            Save(nameOfFile);
         }
 
         public void Save(string fileName)

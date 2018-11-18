@@ -70,7 +70,7 @@ namespace luval.rpa.navigator
         {
             foreach(var rule in rules)
             {
-                _profile.Rules.Add(new RuleInfo() { AssemblyFile = string.Format(".\\{0}", rule) });
+                _profile.Rules.Add(new RuleInfo() { AssemblyFile = rule });
             }
             _profile.Rules = _profile.Rules.Distinct().ToList();
             _profile.Save();
@@ -79,7 +79,7 @@ namespace luval.rpa.navigator
 
         private void LoadRules()
         {
-            listView.Clear();
+            listView.Items.Clear();
             foreach(var rule in _profile.Rules)
             {
                 listView.Items.Add(new ListViewItem(rule.AssemblyFile) { Tag = rule });
