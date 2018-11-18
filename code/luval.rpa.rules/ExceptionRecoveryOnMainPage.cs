@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Exception Recovery On  Main Page"),
      Description("Checks that the main page of the process has a way to recover from an exception")]
-    public class ExceptionRecoveryOnMainPage : RuleBase, IRule
+    public class ExceptionRecoveryOnMainPage : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

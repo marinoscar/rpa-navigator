@@ -13,7 +13,7 @@ namespace luval.rpa.rules
 {
     [Name("No Default Name On Stages"),
      Description("Checks that there is a meaningful name for the stage")]
-    public class NoDefaultNameOnStages : RuleBase, IRule
+    public class NoDefaultNameOnStages : BPRuleBase, IRule
     {
         const string _exp = "{0} *[1-9]*";
         public override IEnumerable<Result> Execute(Release release)

@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Arbitrary Waits"),
      Description("Checks if there are arbitrary waits in the release")]
-    public class ArbitraryWaits : RuleBase, IRule
+    public class ArbitraryWaits : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

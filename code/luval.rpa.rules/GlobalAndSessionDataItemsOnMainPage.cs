@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Global And Session Data Items On Main Page"),
     Description("Global And Session Data Items On Main Page")]
-    public class GlobalAndSessionDataItemsOnMainPage : RuleBase, IRule
+    public class GlobalAndSessionDataItemsOnMainPage : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

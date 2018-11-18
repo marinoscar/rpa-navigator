@@ -13,7 +13,7 @@ namespace luval.rpa.rules
 
     [Name("Data Items Are Inside Block Stage"),
      Description("Checks that all data items are inside a block stage")]
-    public class DataItemInsideBlock : RuleBase, IRule
+    public class DataItemInsideBlock : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

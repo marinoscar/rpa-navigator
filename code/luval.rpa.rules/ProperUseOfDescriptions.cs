@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Proper Use Of Descriptions"),
      Description("Checks that main pages, inputs and outputs have descriptions")]
-    public class ProperUseOfDescriptions : RuleBase, IRule
+    public class ProperUseOfDescriptions : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

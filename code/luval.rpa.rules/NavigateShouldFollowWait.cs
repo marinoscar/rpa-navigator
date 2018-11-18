@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Navigate Should Have a Wait"),
      Description("Checks that after a navigate there is a proper wait")]
-    public class NavigateShouldFollowWait : RuleBase, IRule
+    public class NavigateShouldFollowWait : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

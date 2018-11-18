@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Parent Url Not In Use"),
      Description("Checks that html elements are not using the parent url")]
-    public class ParentURLNotInUse : RuleBase, IRule
+    public class ParentURLNotInUse : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Navigate Actions Need To Check That Element Exist"),
      Description("Checks that before a navigation item that works on a element, there is a wait stage")]
-    public class NavigateNeedToCheckElementExists : RuleBase, IRule
+    public class NavigateNeedToCheckElementExists : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

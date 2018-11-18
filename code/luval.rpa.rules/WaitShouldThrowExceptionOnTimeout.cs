@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Wait Stage Should Throw Exception On Timeout"),
      Description("Checks that when a timeout occurs an exception is thrown")]
-    public class WaitShouldThrowExceptionOnTimeout : RuleBase, IRule
+    public class WaitShouldThrowExceptionOnTimeout : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

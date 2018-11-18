@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("App Modeller Element Attribute Count"),
      Description("Checks that a reasonable amount of attributes are used to select the element")]
-    public class AppModellerElementAttrCount : RuleBase, IRule
+    public class AppModellerElementAttrCount : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

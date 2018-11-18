@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("No Business Logic In Object"),
      Description("Checks for a reasonable amount of decisions in the actions of an object")]
-    public class NoBusinessLogicInObject : RuleBase, IRule
+    public class NoBusinessLogicInObject : BPRuleBase, IRule
     {
         private int _maxCount;
 

@@ -96,11 +96,15 @@
     <Compile Include="Rules\Enums.cs" />
     <Compile Include="Rules\IRule.cs" />
     <Compile Include="Rules\Result.cs" />
+    <Compile Include="Rules\BPRuleBase.cs" />
     <Compile Include="Rules\RuleBase.cs" />
     <Compile Include="Rules\RuleExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="luval.rpa.navigator_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rules\BP\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Read And Write Stages Need To Check That Element Exists"),
      Description("Checks that before a read or write operation is executed there is a check that element exists")]
-    public class ReadAndWriteNeedToHaveACheckItExists : RuleBase, IRule
+    public class ReadAndWriteNeedToHaveACheckItExists : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {

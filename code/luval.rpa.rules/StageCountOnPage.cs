@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Stage Count On Page"),
      Description("Checks that a reasonable number of stages are in used on a page")]
-    public class StageCountOnPage : RuleBase, IRule
+    public class StageCountOnPage : BPRuleBase, IRule
     {
         private int _maxCount;
         public StageCountOnPage()

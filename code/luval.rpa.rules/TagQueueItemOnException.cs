@@ -12,7 +12,7 @@ namespace luval.rpa.rules
 {
     [Name("Tag Queue Item Before Exception"),
      Description("Checks that a queue item is tag before it is marked as exception")]
-    public class TagQueueItemOnException : RuleBase, IRule
+    public class TagQueueItemOnException : BPRuleBase, IRule
     {
         public override IEnumerable<Result> Execute(Release release)
         {
