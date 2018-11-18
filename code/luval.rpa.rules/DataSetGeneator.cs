@@ -1,5 +1,5 @@
-﻿using luval.rpa.common.Model;
-using luval.rpa.common.Model.BP;
+﻿using luval.rpa.common.model;
+using luval.rpa.common.model.bp;
 using luval.rpa.rules.core;
 using luval.rpa.rules.core.Configuration;
 using System;

@@ -1,5 +1,5 @@
-﻿using luval.rpa.common.Model;
-using luval.rpa.common.Model.BP;
+﻿using luval.rpa.common.model;
+using luval.rpa.common.model.bp;
 using luval.rpa.rules.core.Configuration;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace luval.rpa.rules.core
                 try
                 {
                     OnRuleRun(new RunnerMessageEventArgs(msg));
-                    res.AddRange(rule.Execute(release));
+                    res.AddRange(rule.Execute((XmlItem)release));
                 }
                 catch (Exception ex)
                 {

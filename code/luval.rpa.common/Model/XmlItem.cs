@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace luval.rpa.common.Model
+namespace luval.rpa.common.model
 {
     public class XmlItem
     {

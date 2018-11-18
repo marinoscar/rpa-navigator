@@ -1,7 +1,6 @@
 ﻿using luval.rpa.common;
 using luval.rpa.common.extractors.bp;
-using luval.rpa.common.Model;
-using luval.rpa.common.Model.BP;
+using luval.rpa.common.model.bp;
 using luval.rpa.rules;
 using luval.rpa.rules.core;
 using luval.rpa.rules.core.Configuration;

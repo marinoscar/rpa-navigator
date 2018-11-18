@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace luval.rpa.common.Model.BP
+namespace luval.rpa.common.model.bp
 {
     /// <summary>
     /// Provides an analysis unit of a stage
