@@ -24,8 +24,9 @@ namespace luval.rpa.rules.bp
             using (var p = new ExcelPackage())
             {
                 var releaseWs = p.Workbook.Worksheets.Add("ReleaseInfo");
-                var row = LoadCollection(ds.RunProperties, releaseWs, "ReleaseInfoTable", 0, true);
-                
+                LoadCollection(ds.RunProperties, releaseWs, "ReleaseInfoTable", 0, true);
+                var rulesWs = p.Workbook.Worksheets.Add("Rules");
+                LoadCollection(ds.RuleResults, rulesWs, "RulesTable", 0, true);
                 var resultsWs = p.Workbook.Worksheets.Add("Results");
                 LoadCollection(ds.Results, resultsWs, "ResultsTable", 0);
                 var summaryWs = p.Workbook.Worksheets.Add("Summary");
