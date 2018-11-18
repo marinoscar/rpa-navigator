@@ -8,7 +8,7 @@ using luval.rpa.common.rules;
 using luval.rpa.common.rules.attributes;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Stage Count On Page"),
      Description("Checks that a reasonable number of stages are in used on a page")]

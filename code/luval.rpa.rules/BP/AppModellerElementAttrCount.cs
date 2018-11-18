@@ -8,7 +8,7 @@ using luval.rpa.common.model;
 using luval.rpa.common.rules.attributes;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("App Modeller Element Attribute Count"),
      Description("Checks that a reasonable amount of attributes are used to select the element")]

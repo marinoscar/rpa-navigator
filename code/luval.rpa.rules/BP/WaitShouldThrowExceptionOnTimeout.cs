@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Wait Stage Should Throw Exception On Timeout"),
      Description("Checks that when a timeout occurs an exception is thrown")]

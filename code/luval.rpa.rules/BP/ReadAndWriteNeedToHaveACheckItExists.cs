@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Read And Write Stages Need To Check That Element Exists"),
      Description("Checks that before a read or write operation is executed there is a check that element exists")]

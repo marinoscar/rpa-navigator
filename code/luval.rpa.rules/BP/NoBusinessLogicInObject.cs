@@ -8,7 +8,7 @@ using luval.rpa.common.model;
 using luval.rpa.common.rules.attributes;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("No Business Logic In Object"),
      Description("Checks for a reasonable amount of decisions in the actions of an object")]

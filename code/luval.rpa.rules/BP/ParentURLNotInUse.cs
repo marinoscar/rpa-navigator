@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Parent Url Not In Use"),
      Description("Checks that html elements are not using the parent url")]

@@ -14,7 +14,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     public class ExcelOutputGenerator
     {

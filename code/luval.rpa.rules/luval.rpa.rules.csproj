@@ -53,27 +53,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppModellerElementAttrCount.cs" />
-    <Compile Include="ArbitraryWaits.cs" />
-    <Compile Include="DataItemInsideBlock.cs" />
-    <Compile Include="DataItemNotInitialized.cs" />
-    <Compile Include="DataSetGeneator.cs" />
-    <Compile Include="ExcelOutputGenerator.cs" />
-    <Compile Include="ExceptionRecoveryOnMainPage.cs" />
-    <Compile Include="GlobalAndSessionDataItemsOnMainPage.cs" />
-    <Compile Include="NavigateNeedToCheckElementExists.cs" />
-    <Compile Include="NavigateShouldFollowWait.cs" />
-    <Compile Include="NoBusinessLogicInObject.cs" />
-    <Compile Include="NoDefaultNameOnStages.cs" />
-    <Compile Include="PageBlockGroup.cs" />
-    <Compile Include="ParentURLNotInUse.cs" />
+    <Compile Include="BP\AppModellerElementAttrCount.cs" />
+    <Compile Include="BP\ArbitraryWaits.cs" />
+    <Compile Include="BP\DataItemInsideBlock.cs" />
+    <Compile Include="BP\DataItemNotInitialized.cs" />
+    <Compile Include="BP\DataSetGeneator.cs" />
+    <Compile Include="BP\ExcelOutputGenerator.cs" />
+    <Compile Include="BP\ExceptionRecoveryOnMainPage.cs" />
+    <Compile Include="BP\GlobalAndSessionDataItemsOnMainPage.cs" />
+    <Compile Include="BP\NavigateNeedToCheckElementExists.cs" />
+    <Compile Include="BP\NavigateShouldFollowWait.cs" />
+    <Compile Include="BP\NoBusinessLogicInObject.cs" />
+    <Compile Include="BP\NoDefaultNameOnStages.cs" />
+    <Compile Include="BP\PageBlockGroup.cs" />
+    <Compile Include="BP\ParentURLNotInUse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProperUseOfDescriptions.cs" />
-    <Compile Include="ReadAndWriteNeedToHaveACheckItExists.cs" />
-    <Compile Include="StageCountOnPage.cs" />
-    <Compile Include="StageHelper.cs" />
-    <Compile Include="TagQueueItemOnException.cs" />
-    <Compile Include="WaitShouldThrowExceptionOnTimeout.cs" />
+    <Compile Include="BP\ProperUseOfDescriptions.cs" />
+    <Compile Include="BP\ReadAndWriteNeedToHaveACheckItExists.cs" />
+    <Compile Include="BP\StageCountOnPage.cs" />
+    <Compile Include="BP\StageHelper.cs" />
+    <Compile Include="BP\TagQueueItemOnException.cs" />
+    <Compile Include="BP\WaitShouldThrowExceptionOnTimeout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">
@@ -85,5 +85,6 @@
     <None Include="luval.rpa.navigator_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

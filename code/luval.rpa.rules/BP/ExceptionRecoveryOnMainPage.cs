@@ -8,7 +8,7 @@ using luval.rpa.common.rules;
 using luval.rpa.common.rules.attributes;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Exception Recovery On  Main Page"),
      Description("Checks that the main page of the process has a way to recover from an exception")]

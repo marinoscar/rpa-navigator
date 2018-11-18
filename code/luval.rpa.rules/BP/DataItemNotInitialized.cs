@@ -8,7 +8,7 @@ using luval.rpa.common.rules.attributes;
 using luval.rpa.common.rules;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Data Item Not Initialized"),
      Description("Checks that there is no data item with an initial value")]

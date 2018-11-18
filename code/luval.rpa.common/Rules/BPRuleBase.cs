@@ -9,7 +9,7 @@ using luval.rpa.common.rules;
 using System.Configuration;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     public abstract class BPRuleBase : RuleBase
     {

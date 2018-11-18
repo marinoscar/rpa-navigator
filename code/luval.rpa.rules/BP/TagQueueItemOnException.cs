@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Tag Queue Item Before Exception"),
      Description("Checks that a queue item is tag before it is marked as exception")]

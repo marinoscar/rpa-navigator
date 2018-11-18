@@ -9,7 +9,7 @@ using luval.rpa.common.rules.attributes;
 using System.Text.RegularExpressions;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("No Default Name On Stages"),
      Description("Checks that there is a meaningful name for the stage")]

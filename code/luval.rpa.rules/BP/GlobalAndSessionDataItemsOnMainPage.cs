@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Global And Session Data Items On Main Page"),
     Description("Global And Session Data Items On Main Page")]

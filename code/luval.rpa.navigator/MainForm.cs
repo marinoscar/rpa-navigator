@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using luval.rpa.rules.bp;
 
 namespace luval.rpa.navigator
 {

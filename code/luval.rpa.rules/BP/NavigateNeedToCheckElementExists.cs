@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using luval.rpa.common.model;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules
+namespace luval.rpa.rules.bp
 {
     [Name("Navigate Actions Need To Check That Element Exist"),
      Description("Checks that before a navigation item that works on a element, there is a wait stage")]
