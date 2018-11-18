@@ -35,6 +35,8 @@ namespace luval.rpa.rules.bp
                 LoadCollection(ds.DataItems, dataItemsWs, "DataItemsTable", 0);
                 var elementsWs = p.Workbook.Worksheets.Add("Elements");
                 LoadCollection(ds.Elements, elementsWs, "ElementsTable", 0);
+                var actionsWs = p.Workbook.Worksheets.Add("Actions");
+                LoadCollection(ds.Actions, actionsWs, "ActionsTable", 0);
                 var exceptionsWs = p.Workbook.Worksheets.Add("Exceptions");
                 LoadCollection(ds.Exceptions, exceptionsWs, "ExceptionsTable", 0);
                 p.SaveAs(new FileInfo(fileName));

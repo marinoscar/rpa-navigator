@@ -20,6 +20,14 @@ namespace luval.rpa.rules.bp
                 RunProperties = GetRunProperites(release, profile),
                 RuleResults = GetRuleResults(rules, results),
                 DataItems = GetVariableData(units),
+                Actions = units.Where(i => i.Stage.Type == "Action").Select(i => new {
+                    ParentType = i.ParentType,
+                    Parent = i.ParentName,
+                    Page = i.Page,
+                    Stage = i.Stage.Name,
+                    Object = ((ActionStage)i.Stage).Resource.Object,
+                    Action = ((ActionStage)i.Stage).Resource.Action
+                }),
                 Elements = GetElements(release),
                 Exceptions = GetExceptionDetails(units),
                 Results =groupRuleResult ? GetGroupedRules(rules, results) : results.Select(i => new {
