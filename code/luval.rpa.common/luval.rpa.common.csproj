@@ -80,12 +80,12 @@
     <Compile Include="Model\BP\WaitEndStage.cs" />
     <Compile Include="Model\BP\WaitStartStage.cs" />
     <Compile Include="Model\BP\WriteStage.cs" />
-    <Compile Include="ObjectExtractor.cs" />
-    <Compile Include="PageBasedExtractor.cs" />
-    <Compile Include="ProcessExtractor.cs" />
+    <Compile Include="Extractors\BP\ObjectExtractor.cs" />
+    <Compile Include="Extractors\BP\PageBasedExtractor.cs" />
+    <Compile Include="Extractors\BP\ProcessExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReleaseExtractor.cs" />
-    <Compile Include="StageExtractor.cs" />
+    <Compile Include="Extractors\BP\ReleaseExtractor.cs" />
+    <Compile Include="Extractors\BP\StageExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="luval.rpa.navigator_TemporaryKey.pfx" />

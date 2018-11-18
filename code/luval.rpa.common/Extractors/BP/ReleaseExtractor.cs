@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace luval.rpa.common
+namespace luval.rpa.common.extractors.bp
 {
     public class ReleaseExtractor : ExtractorBase
     {

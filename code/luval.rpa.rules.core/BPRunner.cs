@@ -11,14 +11,15 @@ using System.Threading.Tasks;
 
 namespace luval.rpa.rules.core
 {
-    public class Runner
+    public class BPRunner
     {
 
         public event EventHandler<RunnerMessageEventArgs> RuleRun;
 
         public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
         {
-            return RunRules(profile, release, GetRulesFromProfile(profile).ToList());
+            var ruleExtractor = new RuleExtractor();
+            return RunRules(profile, release, ruleExtractor.GetRulesFromProfile(profile).ToList());
         }
 
 
@@ -58,42 +59,6 @@ namespace luval.rpa.rules.core
             }
             OnRuleRun(new RunnerMessageEventArgs("Completed"));
             return res;
-        }
-
-        public IEnumerable<IRule> GetRulesFromProfile(RuleProfile profile)
-        {
-            var rules = new List<IRule>();
-            foreach(var ruleConfig in profile.Rules)
-            {
-                var file = GetAbsolutePath(ruleConfig.AssemblyFile);
-                var ass = Assembly.LoadFile(file);
-                rules.AddRange(GetAllRules(ass));
-            }
-            return rules;
-        }
-
-        private string GetAbsolutePath(string fileName)
-        {
-            var absolutePath = Path.Combine(Environment.CurrentDirectory, fileName);
-            return Path.GetFullPath((new Uri(absolutePath)).LocalPath);
-        }
-
-        private IEnumerable<IRule> GetAllRules()
-        {
-            return GetAllRules(Assembly.GetExecutingAssembly());
-        }
-
-        private IEnumerable<IRule> GetAllRules(Assembly ass)
-        {
-            var instances = new List<IRule>();
-            var types = ass.GetTypes().Where(
-                i => typeof(IRule).IsAssignableFrom(i) &&
-                !i.IsInterface && !i.IsAbstract).ToList();
-            foreach (var t in types)
-            {
-                instances.Add((IRule)Activator.CreateInstance(t));
-            }
-            return instances;
         }
 
     }

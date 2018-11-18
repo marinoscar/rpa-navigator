@@ -189,7 +189,7 @@ namespace luval.rpa.navigator
         private object ExecuteRules()
         {
             var profile = RuleProfile.LoadFromFile();
-            var ruleEngine = new Runner();
+            var ruleEngine = new BPRunner();
             ruleEngine.RuleRun += RuleEngine_RuleRun;
             var rules = ruleEngine.GetRulesFromProfile(profile);
             var results = ruleEngine.RunRules(profile, _release, rules.ToList());

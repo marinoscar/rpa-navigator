@@ -52,7 +52,6 @@
     <Compile Include="Attributes\DescriptionAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\StringValueAttributte.cs" />
-    <Compile Include="PageBlockGroup.cs" />
     <Compile Include="Configuration\Exclusion.cs" />
     <Compile Include="Configuration\Rule.cs" />
     <Compile Include="Configuration\RuleProfile.cs" />
@@ -61,8 +60,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="RuleBase.cs" />
-    <Compile Include="Runner.cs" />
-    <Compile Include="StageHelper.cs" />
+    <Compile Include="RuleExtractor.cs" />
+    <Compile Include="BPRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">

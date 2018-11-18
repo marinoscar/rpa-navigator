@@ -65,11 +65,13 @@
     <Compile Include="NavigateShouldFollowWait.cs" />
     <Compile Include="NoBusinessLogicInObject.cs" />
     <Compile Include="NoDefaultNameOnStages.cs" />
+    <Compile Include="PageBlockGroup.cs" />
     <Compile Include="ParentURLNotInUse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProperUseOfDescriptions.cs" />
     <Compile Include="ReadAndWriteNeedToHaveACheckItExists.cs" />
     <Compile Include="StageCountOnPage.cs" />
+    <Compile Include="StageHelper.cs" />
     <Compile Include="TagQueueItemOnException.cs" />
     <Compile Include="WaitShouldThrowExceptionOnTimeout.cs" />
   </ItemGroup>

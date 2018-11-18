@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace luval.rpa.rules.core
+namespace luval.rpa.rules
 {
     public class PageBlockGroup
     {
