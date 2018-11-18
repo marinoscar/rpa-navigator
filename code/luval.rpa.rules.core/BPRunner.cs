@@ -18,8 +18,7 @@ namespace luval.rpa.rules.core
 
         public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
         {
-            var ruleExtractor = new RuleExtractor();
-            return RunRules(profile, release, ruleExtractor.GetRulesFromProfile(profile).ToList());
+            return RunRules(profile, release, GetRulesFromProfile(profile).ToList());
         }
 
 
@@ -61,6 +60,11 @@ namespace luval.rpa.rules.core
             return res;
         }
 
+        public IEnumerable<IRule> GetRulesFromProfile(RuleProfile profile)
+        {
+            var ruleExtractor = new RuleExtractor();
+            return ruleExtractor.GetRulesFromProfile(profile);
+        }
     }
 
     public class RunnerMessageEventArgs: EventArgs
