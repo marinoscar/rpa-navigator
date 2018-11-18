@@ -16,14 +16,22 @@ namespace luval.rpa.rules.core
         /// <summary>
         /// Execute the rule
         /// </summary>
-        /// <param name="release">The elements to be evaluated</param>
+        /// <param name="package">The elements to be evaluated</param>
         /// <returns>The results of the execution of the rule</returns>
-        IEnumerable<Result> Execute(Release release);
+        IEnumerable<Result> Execute(XmlItem package);
         /// <summary>
         /// Gets the name of the rule
         /// </summary>
         string Name { get; }
+        /// <summary>
+        /// Gets the description for the rule
+        /// </summary>
         string Description { get; }
+
+        /// <summary>
+        /// Gets the rule target platform
+        /// </summary>
+        RuleTarget RuleTarget { get; }
 
     }
 }

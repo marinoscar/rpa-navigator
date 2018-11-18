@@ -19,9 +19,14 @@ namespace luval.rpa.rules
         public string Name { get { return GetRuleName(); } }
         public string Description { get { return GetRuleDescription(); } }
 
+        public RuleTarget RuleTarget { get { return RuleTarget.BP; } }
+
         public abstract IEnumerable<Result> Execute(Release release);
 
-
+        public IEnumerable<Result> Execute(XmlItem package)
+        {
+            return Execute((Release)package);
+        }
 
         protected virtual Result FromStageAnalysis(StageAnalysisUnit unit, ResultType type, string message, string description)
         {
