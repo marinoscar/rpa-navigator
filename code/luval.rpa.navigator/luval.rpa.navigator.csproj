@@ -30,7 +30,7 @@
     <PublisherName>Oscar Marin</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -166,9 +166,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="profile.xml">
+    <Content Include="profile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="report_template.html" />
   </ItemGroup>
   <ItemGroup>
