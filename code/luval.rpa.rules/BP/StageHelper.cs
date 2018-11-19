@@ -76,10 +76,10 @@ namespace luval.rpa.rules.bp
             // upgrade the size
             var bc = new ItemLocation(xml)
             {
-                X = ApplyLocationOffSet(block.Location.X, 0.2f, true),
-                Y = ApplyLocationOffSet(block.Location.Y, 0.15f, false),
-                Width = ApplyLocationOffSet(block.Location.Width, 0.9f, false),
-                Height = ApplyLocationOffSet(block.Location.Height, 0.35f, false)
+                X = ApplyLocationOffSet(block.Location.X, 0.1f, true),
+                Y = ApplyLocationOffSet(block.Location.Y, 0.2f, false),
+                Width = ApplyLocationOffSet(block.Location.Width, 0.99f, false),
+                Height = ApplyLocationOffSet(block.Location.Height, 0.2f, false)
             };
             return stages.Where(i => i.Location != null &&
                 InsideX(bc, i.Location) &&
