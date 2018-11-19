@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace luval.rpa.rules.bp
 {
@@ -66,13 +67,47 @@ namespace luval.rpa.rules.bp
         /// <returns></returns>
         public IEnumerable<Stage> GetStagesInBlock(Stage block, IEnumerable<Stage> stages)
         {
+            // there is a problem with the BP XML, the location data for some reason does not enable
+            // to locate the data item inside the box, but for some reason it does rendered inside in the 
+            // BP interactive client, adding a buffer of 20% to see if that helps
+
+            //we clone the item
+            var xml = XElement.Parse(block.Location.Xml.ToString());
+            // upgrade the size
+            var bc = new ItemLocation(xml)
+            {
+                X = ApplyLocationOffSet(block.Location.X, 0.2f, true),
+                Y = ApplyLocationOffSet(block.Location.Y, 0.15f, false),
+                Width = ApplyLocationOffSet(block.Location.Width, 0.9f, false),
+                Height = ApplyLocationOffSet(block.Location.Height, 0.35f, false)
+            };
             return stages.Where(i => i.Location != null &&
-                i.Location.X >= block.Location.X &&
-                i.Location.Y >= block.Location.Y &&
-                (i.Location.X + i.Location.Width) <= (block.Location.X + block.Location.Width) &&
-                (i.Location.Y + i.Location.Height) <= (block.Location.Y + block.Location.Height)).ToList();
+                InsideX(bc, i.Location) &&
+                InsideY(bc, i.Location)).ToList();
         }
 
+        private int ApplyLocationOffSet(int original, float offset, bool substract)
+        {
+            var current = Math.Abs(original);
+            var isNegative = original < 0;
+            var res = (int)(current * offset);
+            res = substract && !isNegative ? current - res : current + res;
+            return isNegative ? res * -1 : res;
+        }
+
+        private bool InsideX(ItemLocation block, ItemLocation item)
+        {
+            var blockEndX = block.X + block.Width;
+            var itemEndX = item.X + item.Width;
+            return block.X <= item.X && blockEndX >= itemEndX;
+        }
+
+        private bool InsideY(ItemLocation block, ItemLocation item)
+        {
+            var blockEndY = block.Y + block.Height;
+            var itemEndY = item.Y + item.Height;
+            return block.Y <= item.Y && blockEndY >= itemEndY;
+        }
 
         /// <summary>
         /// Provide the stages where an element is in use
@@ -86,7 +121,7 @@ namespace luval.rpa.rules.bp
             if (el == null || string.IsNullOrWhiteSpace(el.Id)) return res;
             var navs = new[] { "Read", "Write", "Navigate" };
             var navigates = stages.Where(i => navs.Contains(i.Type)).Select(i => (NavigateStage)i).ToList();
-            res.AddRange(navigates.Where(i => i.Actions != null && i.Actions.Any(a => 
+            res.AddRange(navigates.Where(i => i.Actions != null && i.Actions.Any(a =>
                 !string.IsNullOrWhiteSpace(a.ElementId) && a.ElementId == el.Id)));
             var waits = stages.Where(i => i.Type == "WaitStart").Select(i => (WaitStartStage)i).ToList();
             res.AddRange(waits.Where(i => i.Choices != null && i.Choices.Any(c => !string.IsNullOrWhiteSpace(c.ElementId) &&
