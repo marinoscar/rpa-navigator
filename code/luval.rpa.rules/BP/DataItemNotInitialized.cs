@@ -23,8 +23,7 @@ namespace luval.rpa.rules.bp
                         return i.Stage.Type == "Data" &&
                         item.HasInitialValue &&
                         string.IsNullOrWhiteSpace(item.Exposure);
-                    }
-                    ).ToList();
+                    }).ToList();
             return items.Select(i => FromStageAnalysis(i, ResultType.Error,
                 string.Format("Data item {0} is initialized", i.Stage.Name),
                 "Data items should not be initialized"));
