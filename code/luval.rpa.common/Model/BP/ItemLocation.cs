@@ -19,11 +19,15 @@ namespace luval.rpa.common.model.bp
             set { TrySetElValue("displayx", Convert.ToString(value)); }
         }
 
+        public int X2 { get { return X + Width; } }
+
         public int Y
         {
             get { return Convert.ToInt32(GetElementValue("displayy")); }
             set { TrySetElValue("displayy", Convert.ToString(value)); }
         }
+
+        public int Y2 { get { return Y + Height; } }
 
         public int Width
         {

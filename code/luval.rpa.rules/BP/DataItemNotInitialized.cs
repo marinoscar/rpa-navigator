@@ -17,11 +17,11 @@ namespace luval.rpa.rules.bp
         public override IEnumerable<Result> Execute(Release release)
         {
             var items = release.GetAnalysisUnits()
+                .Where(i => i.Stage.Type == "Data")
                 .Where(
                     i => {
                         var item = ((DataItem)(i.Stage));
-                        return i.Stage.Type == "Data" &&
-                        item.HasInitialValue &&
+                        return item.HasInitialValue &&
                         string.IsNullOrWhiteSpace(item.Exposure);
                     }).ToList();
             return items.Select(i => FromStageAnalysis(i, ResultType.Error,

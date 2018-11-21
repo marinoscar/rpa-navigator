@@ -77,10 +77,13 @@ namespace luval.rpa.rules.bp
             var bc = new ItemLocation(xml)
             {
                 X = ApplyLocationOffSet(block.Location.X, 0.1f, true),
-                Y = ApplyLocationOffSet(block.Location.Y, 0.2f, false),
-                Width = ApplyLocationOffSet(block.Location.Width, 0.99f, false),
-                Height = ApplyLocationOffSet(block.Location.Height, 0.2f, false)
+                //Y = ApplyLocationOffSet(block.Location.Y, 0.1f, true),
+                Y = block.Location.Y,
+                Width = ApplyLocationOffSet(block.Location.Width, 0.9f, false),
+                //Height = ApplyLocationOffSet(block.Location.Height, 0.2f, false)
+                Height = block.Location.Height
             };
+            //var bc = block.Location;
             return stages.Where(i => i.Location != null &&
                 InsideX(bc, i.Location) &&
                 InsideY(bc, i.Location)).ToList();
@@ -97,16 +100,14 @@ namespace luval.rpa.rules.bp
 
         private bool InsideX(ItemLocation block, ItemLocation item)
         {
-            var blockEndX = block.X + block.Width;
-            var itemEndX = item.X + item.Width;
-            return block.X <= item.X && blockEndX >= itemEndX;
+            return block.X <= item.X && block.X2 >= item.X2;
         }
 
         private bool InsideY(ItemLocation block, ItemLocation item)
         {
-            var blockEndY = block.Y + block.Height;
-            var itemEndY = item.Y + item.Height;
-            return block.Y <= item.Y && blockEndY >= itemEndY;
+            var res = false;
+            res = block.Y2 >= item.Y2 && block.Y <= item.Y;
+            return res;
         }
 
         /// <summary>
