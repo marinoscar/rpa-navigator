@@ -37,8 +37,14 @@ namespace luval.rpa.rules.bp
         private bool IsSystemException(ExceptionStage ex)
         {
             return ex.Details != null && 
-                !string.IsNullOrWhiteSpace(ex.Details.Type) && 
-                ex.Details.Type.ToLowerInvariant().Equals("system exception");
+                !string.IsNullOrWhiteSpace(ex.Details.Type) &&
+                CleanString(ex.Details.Type).ToLowerInvariant().Equals("system exception");
+        }
+
+        private string CleanString(string value)
+        {
+            return string.Join(" ", value.Trim().Split(" ".ToArray())
+                .Where(i => !string.IsNullOrWhiteSpace(i))).Trim();
         }
 
         private ExceptionStage GetNextException(Stage stage, IEnumerable<StageAnalysisUnit> units)

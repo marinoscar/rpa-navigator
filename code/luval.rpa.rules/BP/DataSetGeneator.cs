@@ -56,6 +56,7 @@ namespace luval.rpa.rules.bp
                     Name = ((ExceptionStage)i.Stage).Name,
                     Detail = ((ExceptionStage)i.Stage).Details.Detail,
                     Type = ((ExceptionStage)i.Stage).Details.Type,
+                    UseCurrent = ((ExceptionStage)i.Stage).Details.UseCurrent
                 });
         }
 
