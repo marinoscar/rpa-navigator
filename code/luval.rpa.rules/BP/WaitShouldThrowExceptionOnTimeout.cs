@@ -26,7 +26,7 @@ namespace luval.rpa.rules.bp
                     res.Add(FromStageAnalysis(wait, ResultType.Error,
                         string.Format("Unable to find a exception after the timeout")
                         , ""));
-                else if (IsSystemException(ex))
+                else if (!IsSystemException(ex))
                     res.Add(FromStageAnalysis(wait, ResultType.Error,
                         string.Format("Exception type after timeout should be a System Exception, current exception type is {0} with message {1}", ex.Details.Type, ex.Details.Detail)
                         , ""));
