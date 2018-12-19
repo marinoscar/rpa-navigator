@@ -30,6 +30,7 @@ namespace luval.rpa.rules.bp
                 }),
                 Elements = GetElements(release),
                 Exceptions = GetExceptionDetails(units),
+                Navigations = GetNavigateStages(units),
                 Results =groupRuleResult ? GetGroupedRules(rules, results) : results.Select(i => new {
                     RuleName = i.RuleName, 
                     Type = i.Type,
@@ -57,6 +58,29 @@ namespace luval.rpa.rules.bp
                     Detail = ((ExceptionStage)i.Stage).Details.Detail,
                     Type = ((ExceptionStage)i.Stage).Details.Type,
                     UseCurrent = ((ExceptionStage)i.Stage).Details.UseCurrent
+                });
+        }
+
+        private IEnumerable<object> GetNavigateStages(IEnumerable<StageAnalysisUnit> units)
+        {
+            return units.Where(i => !string.IsNullOrWhiteSpace(i.Stage.Type) && i.Stage.Type == "Navigate")
+                .Select(i => {
+                    var stage = ((NavigateStage)i.Stage);
+                    var step = default(NavigateStep);
+                    if (stage.Actions == null || !stage.Actions.Any())
+                        step = stage.Actions.First();
+                    var res = new
+                    {
+                        Parent = i.ParentName,
+                        ParentType = i.ParentType,
+                        Page = i.Page,
+                        Name = stage.Name,
+                        Action = step != null ? step.Action : "",
+                        ElementId = step != null ? step.ElementId : "",
+                        Expression = step != null ? step.Expression : "",
+                        Arguments = step == null ? "" : string.Join("|", step.Arguments.Select(j => string.Format("{0}={1}", j.Name, j.Value))) 
+                    };
+                    return res;
                 });
         }
 
