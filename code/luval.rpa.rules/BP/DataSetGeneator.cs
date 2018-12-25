@@ -67,7 +67,7 @@ namespace luval.rpa.rules.bp
                 .Select(i => {
                     var stage = ((NavigateStage)i.Stage);
                     var step = default(NavigateStep);
-                    if (stage.Actions == null || !stage.Actions.Any())
+                    if (stage.Actions != null && stage.Actions.Any())
                         step = stage.Actions.First();
                     var res = new
                     {
