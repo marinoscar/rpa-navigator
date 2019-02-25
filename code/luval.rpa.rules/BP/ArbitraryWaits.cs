@@ -8,7 +8,7 @@ using luval.rpa.common.rules.attributes;
 using luval.rpa.common.rules;
 using luval.rpa.common.model.bp;
 
-namespace luval.rpa.rules.bp
+namespace luval.rpa.rules.bp    
 {
     [Name("Arbitrary Waits"),
      Description("Checks if there are arbitrary waits in the release")]
