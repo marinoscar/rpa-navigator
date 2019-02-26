@@ -33,7 +33,7 @@ namespace luval.rpa.rules.bp
                     
                 });
                 if (!tagFound)
-                    res.Add(FromStageAnalysis(units.Single(i => i.Stage.Id == ac.Id),
+                    res.Add(FromStageAnalysis(units.First(i => i.Stage.Id == ac.Id),
                         ResultType.Error, string.Format(@"Mark exception stage ""{0}"" requires that item has the exception labeled", ac.Name),
                         ""
                         ));
