@@ -18,6 +18,19 @@ namespace luval.rpa.rules.bp
 {
     public class ExcelOutputGenerator
     {
+        public void CreateReport(string fileName, IEnumerable<ExcelDataSheet> sheets)
+        {
+            using (var p = new ExcelPackage())
+            {
+                foreach (var sheet in sheets)
+                {
+                    var ws = p.Workbook.Worksheets.Add(sheet.SheetName);
+                    LoadCollection(sheet.Data, ws, sheet.TableName, 0);
+                }
+                p.SaveAs(new FileInfo(fileName));
+            }
+        }
+
         public void CreateReport(string fileName, RuleProfile profile, IEnumerable<IRule> rules, IEnumerable<Result> results, Release release)
         {
             var ds = (new DataSetGeneator()).Create(profile, rules, results, release, false);
@@ -72,11 +85,19 @@ namespace luval.rpa.rules.bp
             {
                 foreach (var prop in props)
                 {
-                    if (!isFirst)
-                        ws.Cells[row, colIdx].Value = TryConvert(prop.GetValue(item), tryCast);
-                    else
-                        ws.Cells[row, colIdx].Value = prop.Name;
-                    colIdx++;
+                    try
+                    {
+                        var itemProp = item.GetType().GetProperty(prop.Name);
+                        if (!isFirst)
+                            ws.Cells[row, colIdx].Value = TryConvert(itemProp.GetValue(item, null), tryCast);
+                        else
+                            ws.Cells[row, colIdx].Value = prop.Name;
+                        colIdx++;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new InvalidOperationException(string.Format("Failed to enter value for {0}", prop.Name), ex);
+                    }
                 }
                 if (isFirst) isFirst = false;
                 colIdx = 1;
@@ -101,8 +122,8 @@ namespace luval.rpa.rules.bp
             range.AutoFitColumns(9, 80);
             for (int i = 0; i < range.Columns; i++)
             {
-                ws.Column(i+1).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
-                ws.Column(i+1).Style.WrapText = true;
+                ws.Column(i + 1).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                ws.Column(i + 1).Style.WrapText = true;
             }
             var table = ws.Tables.Add(range, name);
         }
@@ -110,5 +131,12 @@ namespace luval.rpa.rules.bp
         {
             return obj.GetType().GetProperties().ToList();
         }
+    }
+
+    public class ExcelDataSheet
+    {
+        public string SheetName { get; set; }
+        public string TableName { get; set; }
+        public IEnumerable<object> Data { get; set; }
     }
 }

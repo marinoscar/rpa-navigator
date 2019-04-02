@@ -52,6 +52,8 @@
     <Compile Include="Model\BP\ActionStage.cs" />
     <Compile Include="Model\BP\ApplicationDefinition.cs" />
     <Compile Include="Model\BP\ApplicationElement.cs" />
+    <Compile Include="Model\BP\ApplicationTypeInfo.cs" />
+    <Compile Include="Model\BP\ApplicationTypeInfoParameter.cs" />
     <Compile Include="Model\BP\Argument.cs" />
     <Compile Include="Model\BP\Choice.cs" />
     <Compile Include="Model\BP\CodeStage.cs" />

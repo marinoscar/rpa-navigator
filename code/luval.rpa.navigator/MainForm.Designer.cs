@@ -64,6 +64,7 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.mnuNonInvasiveReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -167,20 +168,20 @@
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.undoToolStripMenuItem.Text = "&Undo";
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.redoToolStripMenuItem.Text = "&Redo";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(178, 6);
             // 
             // cutToolStripMenuItem
             // 
@@ -188,7 +189,7 @@
             this.cutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.cutToolStripMenuItem.Text = "Cu&t";
             // 
             // copyToolStripMenuItem
@@ -197,7 +198,7 @@
             this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.copyToolStripMenuItem.Text = "&Copy";
             // 
             // pasteToolStripMenuItem
@@ -206,24 +207,25 @@
             this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.pasteToolStripMenuItem.Text = "&Paste";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(178, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.selectAllToolStripMenuItem.Text = "Select &All";
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRunCodeReview});
+            this.mnuRunCodeReview,
+            this.mnuNonInvasiveReport});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -232,7 +234,7 @@
             // 
             this.mnuRunCodeReview.Name = "mnuRunCodeReview";
             this.mnuRunCodeReview.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.mnuRunCodeReview.Size = new System.Drawing.Size(223, 26);
+            this.mnuRunCodeReview.Size = new System.Drawing.Size(246, 26);
             this.mnuRunCodeReview.Text = "Run Code Review";
             this.mnuRunCodeReview.Click += new System.EventHandler(this.mnuRunCodeReview_Click);
             // 
@@ -369,6 +371,13 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
+            // mnuNonInvasiveReport
+            // 
+            this.mnuNonInvasiveReport.Name = "mnuNonInvasiveReport";
+            this.mnuNonInvasiveReport.Size = new System.Drawing.Size(246, 26);
+            this.mnuNonInvasiveReport.Text = "Run Non Invasive Report";
+            this.mnuNonInvasiveReport.Click += new System.EventHandler(this.mnuNonInvasiveReport_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -431,6 +440,7 @@
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuRules;
+        private System.Windows.Forms.ToolStripMenuItem mnuNonInvasiveReport;
     }
 }
 

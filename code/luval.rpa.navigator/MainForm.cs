@@ -25,7 +25,8 @@ namespace luval.rpa.navigator
 
         private void mnuOpen_Click(object sender, EventArgs e)
         {
-            this.ExecuteAction(() => {
+            this.ExecuteAction(() =>
+            {
                 var openDlg = new OpenFileDialog()
                 {
                     Filter = "(*.bprelease)|*.bprelease",
@@ -43,7 +44,8 @@ namespace luval.rpa.navigator
                 _fileName = file;
                 _release = extractor.Release;
                 return null;
-            }, null, (ex) => {
+            }, null, (ex) =>
+            {
                 _fileName = null;
                 treeView.Nodes.Clear();
             });
@@ -212,6 +214,15 @@ namespace luval.rpa.navigator
 
         private string SaveReport(RuleProfile profile, IEnumerable<IRule> rules, IEnumerable<Result> results, Release release)
         {
+            var fileName = GetExcelFileName();
+            if (string.IsNullOrWhiteSpace(fileName)) return null;
+            var fileInfo = new FileInfo(fileName);
+            new ExcelOutputGenerator().CreateReport(fileInfo.FullName, profile, rules, results, release);
+            return fileName;
+        }
+
+        private string GetExcelFileName()
+        {
             var dialog = new SaveFileDialog()
             {
                 Title = "Save Results",
@@ -219,8 +230,6 @@ namespace luval.rpa.navigator
                 Filter = "Excel (*.xlsx)|*.xlsx"
             };
             if (dialog.ShowDialog() != DialogResult.OK) return null;
-            var fileInfo = new FileInfo(dialog.FileName);
-            new ExcelOutputGenerator().CreateReport(fileInfo.FullName, profile, rules, results, release);
             return dialog.FileName;
         }
 
@@ -308,6 +317,100 @@ namespace luval.rpa.navigator
         {
             var rules = new RulesDialog();
             rules.ShowDialog();
+        }
+
+        private void mnuNonInvasiveReport_Click(object sender, EventArgs e)
+        {
+            if (!IsFileLoaded()) return;
+            this.ExecuteAction(ExecuteNonInvasiveReport, null, null);
+        }
+
+        private object ExecuteNonInvasiveReport()
+        {
+            if (_release == null) return null;
+            var result = new List<dynamic>();
+            foreach (var obj in _release.Objects)
+            {
+                var item = GetNonIvasiveReportItem(obj);
+                if (item != null) result.Add(item);
+            }
+            var generator = new ExcelOutputGenerator();
+            var fileName = GetExcelFileName();
+            if (string.IsNullOrWhiteSpace(fileName)) return null;
+            RunReport(() => {
+                generator.CreateReport(fileName, new[] {
+                new ExcelDataSheet() { SheetName = "Report", TableName = "ReportTable", Data = result } });
+                return fileName;
+            });
+            return null;
+        }
+
+        private dynamic GetNonIvasiveReportItem(ObjectStage obj)
+        {
+            if (obj.ApplicationDefinition == null)
+            {
+                return new
+                {
+                    ObjectName = obj.Name,
+                    AppDefinitionType = string.Empty,
+                    AppTypeInfoId = string.Empty,
+                    IsNonInvasive = string.Empty,
+                    Description = obj.Description,
+                    Id = obj.Id
+                };
+            };
+            if (obj.ApplicationDefinition.ApplicationTypeInfo == null)
+            {
+                return new
+                {
+                    ObjectName = obj.Name,
+                    AppDefinitionType = string.Empty,
+                    AppTypeInfoId = string.Empty,
+                    IsNonInvasive = string.Empty,
+                    Description = obj.Description,
+                    Id = obj.Id
+                };
+            }
+            if (!obj.ApplicationDefinition.ApplicationTypeInfo.Parameters.Any())
+            {
+                return new
+                {
+                    ObjectName = obj.Name,
+                    AppDefinitionType = obj.ApplicationDefinition.Type,
+                    AppTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
+                    IsNonInvasive = string.Empty,
+                    Description = obj.Description,
+                    Id = obj.Id
+                };
+            }
+            if (!obj.ApplicationDefinition.ApplicationTypeInfo.Parameters.Any(i => !string.IsNullOrWhiteSpace(i.Parameter) &&
+                                    i.Parameter == "NonInvasive" &&
+                                    !string.IsNullOrWhiteSpace(i.Value)))
+            {
+                return new
+                {
+                    ObjectName = obj.Name,
+                    AppDefinitionType = obj.ApplicationDefinition.Type,
+                    AppTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
+                    IsNonInvasive = string.Empty,
+                    Description = obj.Description,
+                    Id = obj.Id
+                };
+            }
+            else
+            {
+                return new
+                {
+                    ObjectName = obj.Name,
+                    AppDefinitionType = obj.ApplicationDefinition.Type,
+                    AppTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
+                    IsNonInvasive = obj.ApplicationDefinition
+                    .ApplicationTypeInfo
+                    .Parameters.First(i => i.Parameter.ToLowerInvariant().Equals("noninvasive")).Value.ToLowerInvariant().Equals("true"),
+                    Description = obj.Description,
+                    Id = obj.Id
+                };
+            }
         }
     }
 }
