@@ -17,6 +17,8 @@ namespace luval.rpa.navigator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+			//Comment: Showing to the team
+			//Added a new line
         }
     }
 }
