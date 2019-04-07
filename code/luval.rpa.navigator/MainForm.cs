@@ -442,6 +442,8 @@ namespace luval.rpa.navigator
                     {
                         Id = obj.Id,
                         ObjectName = obj.Name,
+                        PageId = stage.PageId,
+                        PageName = string.IsNullOrWhiteSpace(stage.PageName) ? "Main" : stage.PageName,
                         StageId = stage.Id,
                         StageName = stage.Name,
                         StageType = stage.Type,
