@@ -41,6 +41,8 @@ namespace luval.rpa.common.model.bp
             set { TrySetElValue("subsheetid", value); }
         }
 
+        public virtual string PageName { get; set; }
+
         public virtual string Description
         {
             get { return GetElementValue("narrative"); }
