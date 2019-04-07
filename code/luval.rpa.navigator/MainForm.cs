@@ -345,7 +345,8 @@ namespace luval.rpa.navigator
             return null;
         }
 
-        private dynamic GetNonIvasiveReportItem(ObjectStage obj)
+
+        private dynamic GetNonInvasiveReportItemFromAppStage(ObjectStage obj)
         {
             if (obj.ApplicationDefinition == null)
             {
@@ -411,6 +412,12 @@ namespace luval.rpa.navigator
                     Id = obj.Id
                 };
             }
+        }
+
+        private dynamic GetNonIvasiveReportItem(ObjectStage obj)
+        {
+            var item = GetNonInvasiveReportItemFromAppStage(obj);
+            return item;
         }
     }
 }
