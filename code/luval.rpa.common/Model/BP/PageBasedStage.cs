@@ -34,5 +34,10 @@ namespace luval.rpa.common.model.bp
             get { return GetAttributeValue(ProcessXML, "bpversion"); }
             set { TrySetAttValue(ProcessXML, "bpversion", value); }
         }
+
+        public IEnumerable<Stage> GetAllStages()
+        {
+            return MainPage.Union(Pages.SelectMany(i => i.Stages));
+        }
     }
 }
