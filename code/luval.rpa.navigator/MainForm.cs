@@ -138,10 +138,10 @@ namespace luval.rpa.navigator
                 return;
             }
             propertyGrid.SelectedObject = e.Node.Tag;
-            if (typeof(Stage).IsAssignableFrom(e.Node.Tag.GetType()))
+            if (typeof(common.model.XmlItem).IsAssignableFrom(e.Node.Tag.GetType()))
             {
-                txtArea.Clear();
-                txtArea.Text = Convert.ToString(((Stage)e.Node.Tag).Xml);
+                txtArea.Clear();                
+                txtArea.Text = Convert.ToString(((common.model.XmlItem)(e.Node.Tag)).Xml);
             }
         }
 
