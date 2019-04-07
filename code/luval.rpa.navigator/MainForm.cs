@@ -140,7 +140,7 @@ namespace luval.rpa.navigator
             propertyGrid.SelectedObject = e.Node.Tag;
             if (typeof(common.model.XmlItem).IsAssignableFrom(e.Node.Tag.GetType()))
             {
-                txtArea.Clear();                
+                txtArea.Clear();
                 txtArea.Text = Convert.ToString(((common.model.XmlItem)(e.Node.Tag)).Xml);
             }
         }
@@ -328,18 +328,24 @@ namespace luval.rpa.navigator
         private object ExecuteNonInvasiveReport()
         {
             if (_release == null) return null;
-            var result = new List<dynamic>();
+            var appModelerResult = new List<dynamic>();
+            var stagesResult = new List<dynamic>();
             foreach (var obj in _release.Objects)
             {
                 var item = GetNonIvasiveReportItem(obj);
-                if (item != null) result.Add(item);
+                if (item != null) appModelerResult.Add(item);
+                var stages = GetNonInvasiveReportItemFromStages(obj);
+                if (stages.Any()) stagesResult.AddRange(stages);
             }
             var generator = new ExcelOutputGenerator();
             var fileName = GetExcelFileName();
             if (string.IsNullOrWhiteSpace(fileName)) return null;
-            RunReport(() => {
+            RunReport(() =>
+            {
                 generator.CreateReport(fileName, new[] {
-                new ExcelDataSheet() { SheetName = "Report", TableName = "ReportTable", Data = result } });
+                    new ExcelDataSheet() { SheetName = "AppModeler", TableName = "AppModelerTable", Data = appModelerResult },
+                    new ExcelDataSheet() { SheetName = "NavigateStages", TableName = "NavigateStagesTable", Data = stagesResult }
+                });
                 return fileName;
             });
             return null;
@@ -418,6 +424,33 @@ namespace luval.rpa.navigator
         {
             var item = GetNonInvasiveReportItemFromAppStage(obj);
             return item;
+        }
+
+        private IEnumerable<dynamic> GetNonInvasiveReportItemFromStages(ObjectStage obj)
+        {
+            var result = new List<dynamic>();
+            var stages = obj.GetAllStages()
+                .Where(i => typeof(NavigateStage)
+                .IsAssignableFrom(i.GetType())).Cast<NavigateStage>().ToList();
+            foreach (var stage in stages)
+            {
+                var invasive = stage.Actions.SelectMany(i => i.Arguments)
+                    .Where(a => !string.IsNullOrWhiteSpace(a.Name) && a.Name.ToLowerInvariant().Equals("noninvasive")).ToList();
+                foreach (var inv in invasive)
+                {
+                    result.Add(new
+                    {
+                        Id = obj.Id,
+                        ObjectName = obj.Name,
+                        StageId = stage.Id,
+                        StageName = stage.Name,
+                        StageType = stage.Type,
+                        AttributeName = inv.Name,
+                        AttributeValue = inv.Value
+                    });
+                }
+            }
+            return result;
         }
     }
 }
