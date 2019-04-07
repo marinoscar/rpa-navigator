@@ -44,7 +44,10 @@ namespace luval.rpa.common.extractors.bp
             {
                 var stageExtractor = new StageExtractor(obj, sheet.Attribute("subsheetid").Value);
                 stageExtractor.Load();
-                res.Add(new PageStage(sheet) { Stages = stageExtractor.Stages });
+                var page = new PageStage(sheet);
+                stageExtractor.Stages.ForEach(i => i.PageName = page.Name);
+                page.Stages = stageExtractor.Stages;
+                res.Add(page);
             }
             return res;
         }
