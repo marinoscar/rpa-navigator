@@ -79,7 +79,14 @@ namespace luval.rpa.rules.bp
             var start = row;
             var colIdx = 1;
             var props = GetProperties(items.First());
-            bool isFirst = true;
+            colIdx = 1;
+            //headers
+            foreach (var prop in props)
+            {
+                ws.Cells[row, colIdx].Value = prop.Name;
+                colIdx++;
+            }
+            row++;
             colIdx = 1;
             foreach (var item in items)
             {
@@ -88,10 +95,7 @@ namespace luval.rpa.rules.bp
                     try
                     {
                         var itemProp = item.GetType().GetProperty(prop.Name);
-                        if (!isFirst)
-                            ws.Cells[row, colIdx].Value = TryConvert(itemProp.GetValue(item, null), tryCast);
-                        else
-                            ws.Cells[row, colIdx].Value = prop.Name;
+                        ws.Cells[row, colIdx].Value = TryConvert(itemProp.GetValue(item, null), tryCast);
                         colIdx++;
                     }
                     catch (Exception ex)
@@ -99,7 +103,6 @@ namespace luval.rpa.rules.bp
                         throw new InvalidOperationException(string.Format("Failed to enter value for {0}", prop.Name), ex);
                     }
                 }
-                if (isFirst) isFirst = false;
                 colIdx = 1;
                 row++;
             }
