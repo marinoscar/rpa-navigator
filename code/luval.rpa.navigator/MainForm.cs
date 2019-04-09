@@ -94,12 +94,13 @@ namespace luval.rpa.navigator
             var root = new TreeNode("App Definition");
             parent.Nodes.Add(root);
             if (obj.ApplicationDefinition == null) return;
-            var app = new TreeNode(string.Format("{0} - {1}", obj.ApplicationDefinition.Name, obj.ApplicationDefinition.Type)) { Tag = obj.ApplicationDefinition };
+            var app = new TreeNode(string.Format("{0} - {1}", obj.ApplicationDefinition.Name, obj.ApplicationDefinition.Type)) { Tag = obj.ApplicationDefinition.ApplicationTypeInfo };
             root.Nodes.Add(app);
             foreach (var el in obj.ApplicationDefinition.Elements)
             {
                 var elNode = new TreeNode(string.Format("{0} - {1}", el.Name, el.Type)) { Tag = el };
                 app.Nodes.Add(elNode);
+                elNode.Tag = el;
                 var attNode = new TreeNode("Attributes");
                 elNode.Nodes.Add(attNode);
                 foreach (var att in el.Attributes.OrderByDescending(i => i.InUse))
@@ -193,17 +194,8 @@ namespace luval.rpa.navigator
             ruleEngine.RuleRun += RuleEngine_RuleRun;
             var rules = ruleEngine.GetRulesFromProfile(profile);
             var results = ruleEngine.RunRules(profile, _release, rules.ToList());
-            RunReport(() => { return SaveReport(profile, rules, results, _release); });
+            Reports.RunReport(() => { return SaveReport(profile, rules, results, _release); });
             return null;
-        }
-
-        private void RunReport(Func<string> runReport)
-        {
-            var fileName = runReport();
-            if (string.IsNullOrWhiteSpace(fileName)) return;
-            var res = MessageBox.Show("Report Succesfully Saved. Do you want to open the file?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (res == DialogResult.No) return;
-            Process.Start(fileName);
         }
 
         private void RuleEngine_RuleRun(object sender, RunnerMessageEventArgs e)
@@ -322,139 +314,12 @@ namespace luval.rpa.navigator
         private void mnuNonInvasiveReport_Click(object sender, EventArgs e)
         {
             if (!IsFileLoaded()) return;
-            this.ExecuteAction(ExecuteNonInvasiveReport, null, null);
-        }
-
-        private object ExecuteNonInvasiveReport()
-        {
-            if (_release == null) return null;
-            var appModelerResult = new List<dynamic>();
-            var stagesResult = new List<dynamic>();
-            foreach (var obj in _release.Objects)
-            {
-                var item = GetNonIvasiveReportItem(obj);
-                if (item != null) appModelerResult.Add(item);
-                var stages = GetNonInvasiveReportItemFromStages(obj);
-                if (stages.Any()) stagesResult.AddRange(stages);
-            }
-            var generator = new ExcelOutputGenerator();
             var fileName = GetExcelFileName();
-            if (string.IsNullOrWhiteSpace(fileName)) return null;
-            RunReport(() =>
-            {
-                generator.CreateReport(fileName, new[] {
-                    new ExcelDataSheet() { SheetName = "AppModeler", TableName = "AppModelerTable", Data = appModelerResult },
-                    new ExcelDataSheet() { SheetName = "NavigateStages", TableName = "NavigateStagesTable", Data = stagesResult }
-                });
-                return fileName;
-            });
-            return null;
+            var reports = new Reports();
+            this.ExecuteAction(() => reports.ExecuteNonInvasiveReport(_release, fileName), null, null);
         }
 
-
-        private dynamic GetNonInvasiveReportItemFromAppStage(ObjectStage obj)
-        {
-            if (obj.ApplicationDefinition == null)
-            {
-                return new
-                {
-                    ObjectName = obj.Name,
-                    AppDefinitionType = string.Empty,
-                    AppTypeInfoId = string.Empty,
-                    IsNonInvasive = string.Empty,
-                    Description = obj.Description,
-                    Id = obj.Id
-                };
-            };
-            if (obj.ApplicationDefinition.ApplicationTypeInfo == null)
-            {
-                return new
-                {
-                    ObjectName = obj.Name,
-                    AppDefinitionType = string.Empty,
-                    AppTypeInfoId = string.Empty,
-                    IsNonInvasive = string.Empty,
-                    Description = obj.Description,
-                    Id = obj.Id
-                };
-            }
-            if (!obj.ApplicationDefinition.ApplicationTypeInfo.Parameters.Any())
-            {
-                return new
-                {
-                    ObjectName = obj.Name,
-                    AppDefinitionType = obj.ApplicationDefinition.Type,
-                    AppTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
-                    IsNonInvasive = string.Empty,
-                    Description = obj.Description,
-                    Id = obj.Id
-                };
-            }
-            if (!obj.ApplicationDefinition.ApplicationTypeInfo.Parameters.Any(i => !string.IsNullOrWhiteSpace(i.Parameter) &&
-                                    i.Parameter == "NonInvasive" &&
-                                    !string.IsNullOrWhiteSpace(i.Value)))
-            {
-                return new
-                {
-                    ObjectName = obj.Name,
-                    AppDefinitionType = obj.ApplicationDefinition.Type,
-                    AppTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
-                    IsNonInvasive = string.Empty,
-                    Description = obj.Description,
-                    Id = obj.Id
-                };
-            }
-            else
-            {
-                return new
-                {
-                    ObjectName = obj.Name,
-                    AppDefinitionType = obj.ApplicationDefinition.Type,
-                    AppTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
-                    IsNonInvasive = obj.ApplicationDefinition
-                    .ApplicationTypeInfo
-                    .Parameters.First(i => i.Parameter.ToLowerInvariant().Equals("noninvasive")).Value.ToLowerInvariant().Equals("true"),
-                    Description = obj.Description,
-                    Id = obj.Id
-                };
-            }
-        }
-
-        private dynamic GetNonIvasiveReportItem(ObjectStage obj)
-        {
-            var item = GetNonInvasiveReportItemFromAppStage(obj);
-            return item;
-        }
-
-        private IEnumerable<dynamic> GetNonInvasiveReportItemFromStages(ObjectStage obj)
-        {
-            var result = new List<dynamic>();
-            var stages = obj.GetAllStages()
-                .Where(i => typeof(NavigateStage)
-                .IsAssignableFrom(i.GetType())).Cast<NavigateStage>().ToList();
-            foreach (var stage in stages)
-            {
-                var invasive = stage.Actions.SelectMany(i => i.Arguments)
-                    .Where(a => !string.IsNullOrWhiteSpace(a.Name) && a.Name.ToLowerInvariant().Equals("noninvasive")).ToList();
-                foreach (var inv in invasive)
-                {
-                    result.Add(new
-                    {
-                        Id = obj.Id,
-                        ObjectName = obj.Name,
-                        PageId = stage.PageId,
-                        PageName = string.IsNullOrWhiteSpace(stage.PageName) ? "Main" : stage.PageName,
-                        StageId = stage.Id,
-                        StageName = stage.Name,
-                        StageType = stage.Type,
-                        AttributeName = inv.Name,
-                        AttributeValue = inv.Value
-                    });
-                }
-            }
-            return result;
-        }
-
+        
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(txtArea.SelectedText);
