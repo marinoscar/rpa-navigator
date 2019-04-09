@@ -454,5 +454,15 @@ namespace luval.rpa.navigator
             }
             return result;
         }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtArea.SelectedText);
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtArea.SelectAll();
+        }
     }
 }
