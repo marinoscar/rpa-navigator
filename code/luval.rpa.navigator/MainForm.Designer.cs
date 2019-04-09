@@ -65,6 +65,7 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.mnuHookingBugReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -231,7 +232,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRunCodeReview,
-            this.mnuNonInvasiveReport});
+            this.mnuNonInvasiveReport,
+            this.mnuHookingBugReport});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -240,14 +242,14 @@
             // 
             this.mnuRunCodeReview.Name = "mnuRunCodeReview";
             this.mnuRunCodeReview.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.mnuRunCodeReview.Size = new System.Drawing.Size(246, 26);
+            this.mnuRunCodeReview.Size = new System.Drawing.Size(249, 26);
             this.mnuRunCodeReview.Text = "Run Code Review";
             this.mnuRunCodeReview.Click += new System.EventHandler(this.mnuRunCodeReview_Click);
             // 
             // mnuNonInvasiveReport
             // 
             this.mnuNonInvasiveReport.Name = "mnuNonInvasiveReport";
-            this.mnuNonInvasiveReport.Size = new System.Drawing.Size(246, 26);
+            this.mnuNonInvasiveReport.Size = new System.Drawing.Size(249, 26);
             this.mnuNonInvasiveReport.Text = "Run Non Invasive Report";
             this.mnuNonInvasiveReport.Click += new System.EventHandler(this.mnuNonInvasiveReport_Click);
             // 
@@ -384,6 +386,13 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
+            // mnuHookingBugReport
+            // 
+            this.mnuHookingBugReport.Name = "mnuHookingBugReport";
+            this.mnuHookingBugReport.Size = new System.Drawing.Size(249, 26);
+            this.mnuHookingBugReport.Text = "Run Hooking Bug Report";
+            this.mnuHookingBugReport.Click += new System.EventHandler(this.mnuHookingBugReport_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -447,6 +456,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuOptions;
         private System.Windows.Forms.ToolStripMenuItem mnuRules;
         private System.Windows.Forms.ToolStripMenuItem mnuNonInvasiveReport;
+        private System.Windows.Forms.ToolStripMenuItem mnuHookingBugReport;
     }
 }
 

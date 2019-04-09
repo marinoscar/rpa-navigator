@@ -12,6 +12,8 @@ namespace luval.rpa.navigator
 {
     public class Reports
     {
+        #region Non-Invasive
+
         public object ExecuteNonInvasiveReport(Release release, string fileName)
         {
             if (release == null) return null;
@@ -36,7 +38,6 @@ namespace luval.rpa.navigator
             });
             return null;
         }
-
 
         private dynamic GetNonInvasiveReportItemFromAppStage(ObjectStage obj)
         {
@@ -139,6 +140,37 @@ namespace luval.rpa.navigator
                 }
             }
             return result;
+        }
+        #endregion
+
+        public object ExecuteHookingBug(Release release, string fileName)
+        {
+            if (release == null) return null;
+            if (string.IsNullOrWhiteSpace(fileName)) return null;
+            var win32Objects = release.Objects.Where(i => i.ApplicationDefinition != null &&
+                                                i.ApplicationDefinition.ApplicationTypeInfo != null &&
+                                                !string.IsNullOrWhiteSpace(i.ApplicationDefinition.ApplicationTypeInfo.Id) &&
+                                                i.ApplicationDefinition.ApplicationTypeInfo.Id.ToLowerInvariant().StartsWith("win32")).ToList();
+            var result = new List<dynamic>();
+            foreach(var obj in win32Objects)
+            {
+                if (!obj.ApplicationDefinition.ApplicationTypeInfo.Parameters.Any(i => i.Parameter == "Path")) continue;
+                result.Add(new {
+                    ObjectName = obj.Name,
+                    ApplicationTypeInfoId = obj.ApplicationDefinition.ApplicationTypeInfo.Id,
+                    Path = obj.ApplicationDefinition.ApplicationTypeInfo.Parameters.FirstOrDefault(i => i.Parameter.Equals("Path")).Value
+                });
+            }
+            var generator = new ExcelOutputGenerator();
+            if (string.IsNullOrWhiteSpace(fileName)) return null;
+            RunReport(() =>
+            {
+                generator.CreateReport(fileName, new[] {
+                    new ExcelDataSheet() { SheetName = "HookReport", TableName = "HookReportTable", Data = result }
+                });
+                return fileName;
+            });
+            return null;
         }
 
         public static void RunReport(Func<string> runReport)

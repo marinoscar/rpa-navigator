@@ -329,5 +329,13 @@ namespace luval.rpa.navigator
         {
             txtArea.SelectAll();
         }
+
+        private void mnuHookingBugReport_Click(object sender, EventArgs e)
+        {
+            if (!IsFileLoaded()) return;
+            var fileName = GetExcelFileName();
+            var reports = new Reports();
+            this.ExecuteAction(() => reports.ExecuteHookingBug(_release, fileName), null, null);
+        }
     }
 }
