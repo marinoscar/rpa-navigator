@@ -48,7 +48,9 @@ namespace luval.rpa.rules.bp
                 {
                     if (stage.Actions
                         .SelectMany(i => i.Arguments)
-                        .Any(i => i.Name == "NonInvasive" && i.Name.ToLowerInvariant().Equals("false")))
+                        .Any(i => i.Name == "NonInvasive" &&
+                        !string.IsNullOrWhiteSpace(i.Value) &&
+                        i.Value.ToLowerInvariant().Equals("false")))
                         res.Add(new Result() {
                             StageId = stage.Id,
                             Stage = stage.Name,
@@ -81,5 +83,6 @@ namespace luval.rpa.rules.bp
                 StageType = null,
                 Message = message
             };
+        }
     }
 }

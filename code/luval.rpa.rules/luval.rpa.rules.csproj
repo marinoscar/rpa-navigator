@@ -65,6 +65,7 @@
     <Compile Include="BP\NavigateShouldFollowWait.cs" />
     <Compile Include="BP\NoBusinessLogicInObject.cs" />
     <Compile Include="BP\NoDefaultNameOnStages.cs" />
+    <Compile Include="BP\InvasiveTechniqueBeingUsed.cs" />
     <Compile Include="BP\PageBlockGroup.cs" />
     <Compile Include="BP\ParentURLNotInUse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
