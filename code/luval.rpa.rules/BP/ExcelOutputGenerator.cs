@@ -8,6 +8,7 @@ using OfficeOpenXml.Table;
 using OfficeOpenXml.Table.PivotTable;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -106,7 +107,14 @@ namespace luval.rpa.rules.bp
                 colIdx = 1;
                 row++;
             }
-            CreateTable(start, row - 1, props.Count, tableName, ws);
+            try
+            {
+                CreateTable(start, row - 1, props.Count, tableName, ws);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Problem creating the table. Exception Message: {0}", ex); 
+            }
             return row;
         }
 
