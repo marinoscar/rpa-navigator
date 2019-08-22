@@ -96,6 +96,7 @@
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BPRunner.cs" />
+    <Compile Include="DuplicateProcessesInRelease.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
