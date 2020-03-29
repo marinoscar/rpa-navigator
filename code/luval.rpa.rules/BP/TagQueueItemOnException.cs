@@ -25,19 +25,28 @@ namespace luval.rpa.rules.bp
             foreach (var ac in mark)
             {
                 //no tag for the mark exception
-                var tagFound = tag.Any(i => {
+                var tagFound = tag.Any(i =>
+                {
                     var next = helper.GetNextStage(i.OnSuccess, stages);
                     return
                         !string.IsNullOrWhiteSpace(i.OnSuccess)
-                        &&  next != null && next.Id == ac.Id;
-                    
+                        && next != null && next.Id == ac.Id;
+
                 });
+                //look on the inverse order
+                if (!tagFound)
+                    tagFound = tag.Any(i =>
+                    {
+                        var prev = helper.GetPreviousStage(i.Id, stages);
+                        return prev != null && prev.Id == ac.Id;
+
+                    });
                 if (!tagFound)
                     res.Add(FromStageAnalysis(units.First(i => i.Stage.Id == ac.Id),
                         ResultType.Error, string.Format(@"Mark exception stage ""{0}"" requires that item has the exception labeled", ac.Name),
                         ""
                         ));
-            }            
+            }
             return res;
         }
 

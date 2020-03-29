@@ -48,6 +48,21 @@ namespace luval.rpa.rules.bp
         }
 
         /// <summary>
+        /// Gets the next valid stage for the current stage
+        /// </summary>
+        /// <param name="nextId">The id of the next stage</param>
+        /// <param name="stages">Stages to check</param>
+        /// <returns></returns>
+        public Stage GetPreviousStage(string currentStage, IEnumerable<Stage> stages)
+        {
+            if (string.IsNullOrWhiteSpace(currentStage)) return null;
+            var stage = stages.FirstOrDefault(i => i.OnSuccess == currentStage);
+            if (stage == null) return null;
+            if (stage.Type == "Anchor") return GetPreviousStage(stage.Id, stages);
+            return stage;
+        }
+
+        /// <summary>
         /// Filters the stages by page
         /// </summary>
         /// <param name="unit">The unit to check</param>
