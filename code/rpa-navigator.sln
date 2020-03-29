@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.common", "luval.r
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.rules", "luval.rpa.rules\luval.rpa.rules.csproj", "{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.terminal", "luval.rpa.terminal\luval.rpa.terminal.csproj", "{47D3ED90-1E1D-4192-8B53-44240CAC5334}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47D3ED90-1E1D-4192-8B53-44240CAC5334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47D3ED90-1E1D-4192-8B53-44240CAC5334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47D3ED90-1E1D-4192-8B53-44240CAC5334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47D3ED90-1E1D-4192-8B53-44240CAC5334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

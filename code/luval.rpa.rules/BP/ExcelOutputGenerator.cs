@@ -32,7 +32,7 @@ namespace luval.rpa.rules.bp
             }
         }
 
-        public void CreateReport(string fileName, RuleProfile profile, IEnumerable<IRule> rules, IEnumerable<Result> results, Release release)
+        public void CreateReport(Stream stream, RuleProfile profile, IEnumerable<IRule> rules, IEnumerable<Result> results, Release release)
         {
             var ds = (new DataSetGeneator()).Create(profile, rules, results, release, false);
             using (var p = new ExcelPackage())
@@ -55,8 +55,13 @@ namespace luval.rpa.rules.bp
                 LoadCollection(ds.Navigations, navigationsWs, "NavigationTable", 0);
                 var exceptionsWs = p.Workbook.Worksheets.Add("Exceptions");
                 LoadCollection(ds.Exceptions, exceptionsWs, "ExceptionsTable", 0);
-                p.SaveAs(new FileInfo(fileName));
+                p.SaveAs(stream);
             }
+        }
+
+        public void CreateReport(string fileName, RuleProfile profile, IEnumerable<IRule> rules, IEnumerable<Result> results, Release release)
+        {
+            CreateReport((new StreamWriter(fileName)).BaseStream, profile, rules, results, release);
         }
 
         private void CreateResultsPivot(ExcelWorksheet ws, ExcelTable table)
