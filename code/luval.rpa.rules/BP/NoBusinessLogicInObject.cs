@@ -58,7 +58,7 @@ namespace luval.rpa.rules.bp
 
         private int GetMaxCount()
         {
-            return GetSetting<int>("MaxCount", 7);
+            return 7;
         }
     }
 }

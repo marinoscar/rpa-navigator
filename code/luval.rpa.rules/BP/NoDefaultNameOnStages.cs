@@ -29,7 +29,7 @@ namespace luval.rpa.rules.bp
 
         private string GetExlusions()
         {
-            return GetSetting<string>("Exclusions", "Anchor,Start,End,Note,Recover,Resume");
+            return "Anchor,Start,End,Note,Recover,Resume";
         }
     }
 }

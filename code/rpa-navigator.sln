@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.49
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.common", "luval.rpa.common\luval.rpa.common.csproj", "{75447BFB-966F-4A04-BEAD-44E41270340C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{A049F4E4-1A2A-4874-8B7E-2709AFBCA76B}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\sample.xml = ..\docs\sample.xml
@@ -12,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{A049F4E4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.navigator", "luval.rpa.navigator\luval.rpa.navigator.csproj", "{78C5144D-D7E8-4591-982F-846DAF9CBE2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.rules", "luval.rpa.rules\luval.rpa.rules.csproj", "{739CD132-13D9-4A0D-8180-08487F9B0E14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.common", "luval.rpa.common\luval.rpa.common.csproj", "{E27FC362-3C77-4C8F-9FFC-CA4357595611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "luval.rpa.rules", "luval.rpa.rules\luval.rpa.rules.csproj", "{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,20 +20,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{75447BFB-966F-4A04-BEAD-44E41270340C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75447BFB-966F-4A04-BEAD-44E41270340C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75447BFB-966F-4A04-BEAD-44E41270340C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75447BFB-966F-4A04-BEAD-44E41270340C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78C5144D-D7E8-4591-982F-846DAF9CBE2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{739CD132-13D9-4A0D-8180-08487F9B0E14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{739CD132-13D9-4A0D-8180-08487F9B0E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{739CD132-13D9-4A0D-8180-08487F9B0E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{739CD132-13D9-4A0D-8180-08487F9B0E14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E27FC362-3C77-4C8F-9FFC-CA4357595611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27FC362-3C77-4C8F-9FFC-CA4357595611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27FC362-3C77-4C8F-9FFC-CA4357595611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27FC362-3C77-4C8F-9FFC-CA4357595611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B410379-1BFD-40A4-9B40-7F4B9A73FDB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {451D45D5-4B00-4D84-A57F-06E9D9856160}
 	EndGlobalSection
 EndGlobal

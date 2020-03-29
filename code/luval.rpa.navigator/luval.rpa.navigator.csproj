@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>luval.rpa.navigator</RootNamespace>
     <AssemblyName>Luval Navigator</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -36,6 +36,7 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -70,7 +71,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>signature.snk</AssemblyOriginatorKeyFile>
@@ -124,6 +125,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RulesDialog.resx">
       <DependentUpon>RulesDialog.cs</DependentUpon>
@@ -158,16 +160,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">
-      <Project>{75447bfb-966f-4a04-bead-44e41270340c}</Project>
-      <Name>luval.rpa.common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\luval.rpa.rules\luval.rpa.rules.csproj">
-      <Project>{739cd132-13d9-4a0d-8180-08487f9b0e14}</Project>
-      <Name>luval.rpa.rules</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="profile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -194,6 +186,16 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj">
+      <Project>{e27fc362-3c77-4c8f-9ffc-ca4357595611}</Project>
+      <Name>luval.rpa.common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\luval.rpa.rules\luval.rpa.rules.csproj">
+      <Project>{6b410379-1bfd-40a4-9b40-7f4b9a73fdb8}</Project>
+      <Name>luval.rpa.rules</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

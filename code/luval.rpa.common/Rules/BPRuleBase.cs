@@ -55,13 +55,5 @@ namespace luval.rpa.rules.bp
                 Description = description
             };
         }
-
-        protected virtual T GetSetting<T>(string name, T defaultValue)
-        {
-            var settingName = string.Format("{0}.{1}", GetType().Name, name);
-            var value = ConfigurationManager.AppSettings[settingName];
-            if (string.IsNullOrWhiteSpace(value)) return defaultValue;
-            return ((T)Convert.ChangeType(value, typeof(T)));
-        }
     }
 }

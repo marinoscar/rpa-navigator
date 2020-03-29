@@ -74,7 +74,7 @@ namespace luval.rpa.rules.bp
         private string GetActionExlusionSetting()
         {
             var defaultVal = "IsConnected,Snapshot,HTML Snapshot,Get Document URL,Get Document URL Domain,Get Screen Bounds,Get Bounds";
-            return GetSetting<string>("Exclusions", defaultVal);
+            return defaultVal;
         }
     }
 }
