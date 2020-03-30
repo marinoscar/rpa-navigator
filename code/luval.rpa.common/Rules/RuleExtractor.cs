@@ -1,4 +1,5 @@
 ﻿using luval.rpa.common.rules.configuration;
+using luval.rpa.rules.bp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,11 @@ namespace luval.rpa.common.rules
                 rules.AddRange(GetAllRules(ass));
             }
             return rules;
+        }
+
+        public IEnumerable<IRule> GetRulesFromAssembly(Assembly assembly)
+        {
+            return GetAllRules(assembly);
         }
 
         private string GetAbsolutePath(string fileName)

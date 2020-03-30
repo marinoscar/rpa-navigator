@@ -39,6 +39,34 @@ namespace luval.rpa.common.rules.configuration
             return res;
         }
 
+        public static RuleProfile LoadDefault()
+        {
+            return new RuleProfile()
+            {
+                Rules = new List<RuleInfo>(new[] { new RuleInfo() { AssemblyFile = "luval.rpa.rules.dll" } }),
+                Exclusions = new List<Exclusion>(new[] {
+                    new Exclusion() { Name = "MS Excel VBO" },
+                    new Exclusion() { Name = "Utility - Environment" },
+                    new Exclusion() { Name = "Utility - General" },
+                    new Exclusion() { Name = "Utility - Collection Manipulation" },
+                    new Exclusion() { Name = "Email - POP3/SMTP" },
+                    new Exclusion() { Name = "Calendars" },
+                    new Exclusion() { Name = "Data - OLEDB" },
+                    new Exclusion() { Name = "Data - SQL Server" },
+                    new Exclusion() { Name = "MS Outlook Email VBO" },
+                    new Exclusion() { Name = "MS Word VBO" },
+                    new Exclusion() { Name = "System - Active Directory" },
+                    new Exclusion() { Name = "" },
+                    new Exclusion() { Name = "" },
+                    new Exclusion() { Name = "" },
+                    new Exclusion() { Name = "" },
+                    new Exclusion() { Name = "" },
+                    new Exclusion() { Name = "" },
+                    new Exclusion() { Name = "" },
+                })
+            };
+        }
+
         public void Save()
         {
             Save(nameOfFile);

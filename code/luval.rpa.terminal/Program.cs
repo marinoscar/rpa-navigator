@@ -44,6 +44,11 @@ namespace luval.rpa.terminal
             extractor.Load();
             var bpRunner = new BPRunner();
             bpRunner.RuleRun += BpRunner_RuleRun;
+            GetReport(arguments, extractor, bpRunner);
+        }
+
+        private static void GetReport(ConsoleSwitches arguments, ReleaseExtractor extractor, BPRunner bpRunner)
+        {
             var profile = RuleProfile.LoadFromFile();
             var rules = bpRunner.GetRulesFromProfile(profile);
             var results = bpRunner.RunProfile(profile, extractor.Release);

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="profile.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="profile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\luval.rpa.common\luval.rpa.common.csproj" />
+    <ProjectReference Include="..\luval.rpa.rules\luval.rpa.rules.csproj" />
+  </ItemGroup>
+
+
+
+</Project>

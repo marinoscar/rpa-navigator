@@ -2,6 +2,7 @@
 using luval.rpa.common.model.bp;
 using luval.rpa.common.rules;
 using luval.rpa.common.rules.configuration;
+using luval.rpa.rules.bp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace luval.rpa.rules.BP
 
         public IEnumerable<Result> RunProfile(RuleProfile profile, Release release)
         {
-            return RunRules(profile, release, GetRulesFromProfile(profile).ToList());
+            return RunRules(profile, release, new RuleExtractor().GetRulesFromAssembly(typeof(StageHelper).Assembly).ToList());
         }
 
 

@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "RPA Code Review";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Upload Blue Prism Release File</h1>
+    <p>The software reads the XML in the release file and checks on certain rules, an Excel file is generated with the results</p>
+    <p>More information on the rules implemented can be seen <a href="https://github.com/marinoscar/rpa-navigator/wiki" target="#">here</a></p>
+    <p> </p>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form id="file-upload" method="post" action="home/upload" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fileUpload">Release file *.bprelease</label>
+                <input type="file" name="fileUpload" class="form-control-file" id="fileUpload">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" name="termsCheck" id="check-box">
+                <label class="form-check-label" for="check-box">
+                    Check to accept the <a href="/Home/TermsOfService" target="_">Terms of Service</a> and <a href="/Home/Privacy" target="_">Privacy Policy</a>
+                </label>
+            </div>
+            <button type="submit" disabled class="btn btn-primary" id="upload-button">Upload</button>
+        </form>
+    </div>
+</div>
